@@ -82,11 +82,43 @@ needvarsT1 <-
     "MC1.1_1"
     )
 
-cc <- complete.cases(d[needvarsT1])
-m <- prcomp(d[cc, needvarsT1], scale. = T)
+cc <- complete.cases(d0[needvarsT1])
+m <- prcomp(d0[cc, needvarsT1], scale. = T)
 
-d$PC1t1 <- NA
-d$PC1t1[cc] <- m$x[,1]
+d0$PC1t1 <- NA
+d0$PC1t1[cc] <- m$x[,1]
+
+pca_loadings_plot(m)
+
+autoplot(
+  m, 
+  loadings = T, 
+  loadings.label = T, 
+  data = d0[cc,], 
+  colour = 'conflict', 
+  frame.type = 'norm'
+) +
+  theme_bw()
+
+autoplot(
+  m, 
+  loadings = T, 
+  loadings.label = T, 
+  data = d0[cc,], 
+  colour = 'p_info', 
+  frame.type = 'norm'
+  ) +
+  theme_bw()
+
+# Effect of t1 conflict and private info on perceived need and PC1t1
+
+m <- lm(delta_money ~ conflict + p_info, d0)
+Anova(m)
+plot(allEffects(m))
+
+m <- lm(-PC1t1 ~ conflict + p_info, d0)
+Anova(m)
+plot(allEffects(m))
 
 # PCA of t2 vars
 
@@ -107,11 +139,11 @@ needvarsT2 <-
     "MC2.1_1"
   )
 
-cc <- complete.cases(d[needvarsT2])
-m <- prcomp(d[cc, needvarsT2], scale. = T)
+cc <- complete.cases(d0[needvarsT2])
+m <- prcomp(d0[cc, needvarsT2], scale. = T)
 
-d$PC1t2 <- NA
-d$PC1t2[cc] <- -m$x[,1]
+d0$PC1t2 <- NA
+d0$PC1t2[cc] <- -m$x[,1]
 
 # PCA of all need vars
 
