@@ -1,0 +1,179 @@
+---
+title: "504 Paper"
+author: "Michael Gaffney"
+date: "December 14, 2018"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r, echo=FALSE}
+library(signalingdata2018)
+library(car)
+library(effects)
+#do in processing
+library(tidyverse)
+library(stringr)
+#library(jtools)
+library(kableExtra)
+# library(officer)
+# library(flextable)
+# library(huxtable)
+library(sjPlot)
+library(stargazer)
+
+
+signalingdata2018$signal <- str_replace(signalingdata2018$signal, pattern = ":Sister", replacement = "")
+#d<- signalingdata2018[!signalingdata2018$exclusionopt1,]
+signalingdata2018$conflict <- as.factor(signalingdata2018$conflict)
+signalingdata2018$p_info <- ordered(signalingdata2018$p_info, levels = c("Cheating", "PrivateInformation", "Honest"))
+signalingdata2018$signal <- as.factor(signalingdata2018$signal)
+signalingdata2018$Sex <- as.factor(signalingdata2018$Sex)
+d<- signalingdata2018[!signalingdata2018$exclusionopt1,]
+e <- 
+  d %>% 
+  group_by(conflict, p_info, signal) %>% 
+  summarize(n = n())
+#hist(e$n)
+
+########### 504 paper ############
+#Effects of conflict and p_info pre-signal: comfortable lending
+#Effect plot of each and a table with the combined summary statistics
+cp1glm <- glm(likelylendmoneyt1/100 ~ conflict + p_info, family = binomial, d)
+summary(cp1glm)
+#plot(allEffects(cp1glm), xlab= (""), ylab = "likelihood of lending money")
+
+cp2glm <- glm(comfortablelendingt1/50000 ~ conflict + p_info, family = binomial, d)
+summary(cp2glm)
+#plot(allEffects(cp2glm), xlab= (""), ylab = "proportion of maximum possible offer")
+library(xtable)
+options(xtable.floating = FALSE)
+options(xtable.timestamp = "")
+
+#xtable(cp1glm)
+
+#tab_model(cp1glm, cp2glm ,file="sjt_linear.doc")
+
+# stargazer(cp1glm, cp2glm, type="html", out="star_linear_3.doc", 
+#           intercept.bottom = F, intercept.top = T, digits=2)
+stargazer(cp1glm, cp2glm, title="Results", align=TRUE, type = "html", ci = TRUE, omit.stat = c("aic", "ll"), report =  "csvp", out = 'foo3.html')
+
+stargazer(mainLikely, mainLend, title="Results", align=TRUE, type = "html", ci = TRUE, omit.stat = c("aic", "ll"), report =  "csvp", out = 'foo4.html')
+# #Main Effects of signals
+# #show plots for signals and controls for both types
+# cp4glm <- glm(likelylendmoneyt2/100 ~ I(likelylendmoneyt1/100) + signal, family = binomial, d)
+# library(visreg)
+# library(forcats)
+# summary(cp4glm)
+# p <- visreg(cp4glm, xvar= "signal", gg = FALSE, scale = "response")
+# p$fit$signal <- fct_reorder(p$fit$signal, p$fit$visregFit)
+# ggplot(p$fit, aes(visregFit, signal)) + geom_point() +geom_errorbarh(aes(xmin = visregLwr, xmax = visregUpr)) +theme_bw() +labs(x = "Proportion of maximum possible offer", y = "Signal")
+# # p + coord_flip()
+# 
+# cp5glm <- glm(comfortablelendingt2/50000 ~ I(comfortablelendingt1/5000) + signal, family = binomial, d)
+# p5 <- visreg(cp5glm, xvar= "signal", gg = FALSE, scale = "response")
+# p5$fit$signal <- fct_reorder(p5$fit$signal, p5$fit$visregFit)
+# ggplot(p5$fit, aes(visregFit, signal)) + geom_point() +geom_errorbarh(aes(xmin = visregLwr, xmax = visregUpr)) +theme_bw() +labs(x = "Proportion of maximum amount comfortable lending", y = "Signal")
+# 
+mainLend <- #originally just the 3
+  d %>%
+  filter(signal %in% c("Depression", "VerbalRequest", "FacialSadnesswithCrying", "DepressionwithSuicideThreat", "SuicideAttempt")) %>%
+  mutate(comfortablelendingt1 = comfortablelendingt1/50000,
+         comfortablelendingt2 = comfortablelendingt2/50000,
+         signal = factor(signal, levels = c("VerbalRequest", "FacialSadnesswithCrying", "Depression", "DepressionwithSuicideThreat", "SuicideAttempt"))) %>%
+  glm(comfortablelendingt2 ~ comfortablelendingt1 + signal, family = binomial, data =.)
+summary(mainLend)
+Anova(mfmain, type = 2)
+library(xtable)
+xtable(anova(mainLend), type="html", file="foo4.html")
+plot(allEffects(mainLend))
+p2 <- visreg(mainLend, xvar = "signal", scale = "response", gg = TRUE)
+p2 + labs(y = "proportion of maximum offer") + theme_bw()
+#include anova table
+#show p2 plus model summary
+
+mainLikely <- #originally just the 3
+  d %>%
+  filter(signal %in% c("Depression", "VerbalRequest", "FacialSadnesswithCrying", "DepressionwithSuicideThreat", "SuicideAttempt")) %>%
+  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
+         likelylendmoneyt2 = likelylendmoneyt2/100,
+         signal = factor(signal, levels = c("VerbalRequest", "FacialSadnesswithCrying", "Depression", "DepressionwithSuicideThreat", "SuicideAttempt"))) %>%
+  glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal, family = binomial, data =.)
+summary(mainLikely)
+Anova(mfmain, type = 2)
+plot(allEffects(mainLikely))
+p7 <- visreg(mainLikely, xvar = "signal", scale = "response", gg = TRUE)
+p7 + labs(y = "proportion of maximum offer") + theme_bw()
+
+
+
+
+
+#Depression and weaker signals interactions
+mfint2 <-
+  d %>%
+  filter(signal %in% c("Depression", "VerbalRequest", "FacialSadnesswithCrying")) %>%
+  filter(p_info == "PrivateInformation") %>%
+  mutate(comfortablelendingt1 = comfortablelendingt1/50000,
+         comfortablelendingt2 = comfortablelendingt2/50000,
+         signal = ordered(signal, levels = c("VerbalRequest", "FacialSadnesswithCrying", "Depression"))) %>%
+  glm(comfortablelendingt2 ~ comfortablelendingt1 + conflict * signal, family = binomial, data =.)
+summary(mfint2)
+Anova(mfint2, type = 3)
+plot(allEffects(mfint2))
+#use this
+p3 <- visreg(mfint2, xvar = "signal", by = "conflict", gg = TRUE, scale = "response")
+p3 + labs(y = "proportion of maximum offer") + theme_bw() + coord_flip()
+# 
+# mfint3 <- 
+#   d %>% 
+#   filter(signal %in% c("Depression", "VerbalRequest", "FacialSadnesswithCrying")) %>% 
+#   filter(p_info == "PrivateInformation") %>% 
+#   mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
+#          likelylendmoneyt2 = likelylendmoneyt2/100, 
+#          signal = ordered(signal, levels = c("VerbalRequest", "FacialSadnesswithCrying", "Depression"))) %>% 
+#   glm(likelylendmoneyt2 ~ likelylendmoneyt1 + conflict * signal, family = binomial, data =.)
+# summary(mfint3)
+# Anova(mfint3, type = 3)
+# plot(allEffects(mfint3))
+# #show as well
+# 
+# p4 <- visreg(mfint3, xvar = "signal", by = "conflict", gg = TRUE, scale = "response")
+# p4 + labs(y = "proportion of maximum offer") + theme_bw() + coord_flip()
+
+
+
+
+
+
+```
+
+```{r}
+summary(cp1glm)
+summary(cp2glm)
+```
+

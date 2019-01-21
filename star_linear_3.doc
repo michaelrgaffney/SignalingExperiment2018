@@ -1,0 +1,22 @@
+
+<table style="text-align:center"><tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="2"><em>Dependent variable:</em></td></tr>
+<tr><td></td><td colspan="2" style="border-bottom: 1px solid black"></td></tr>
+<tr><td style="text-align:left"></td><td>likelylendmoneyt1/100</td><td>comfortablelendingt1/50000</td></tr>
+<tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Constant</td><td>-0.16<sup>**</sup></td><td>-0.54<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.08)</td><td>(0.08)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">conflictSupport</td><td>0.49<sup>***</sup></td><td>0.50<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.11)</td><td>(0.11)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">p_info.L</td><td>0.87<sup>***</sup></td><td>0.83<sup>***</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.10)</td><td>(0.10)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td style="text-align:left">p_info.Q</td><td>-0.25<sup>***</sup></td><td>-0.23<sup>**</sup></td></tr>
+<tr><td style="text-align:left"></td><td>(0.09)</td><td>(0.09)</td></tr>
+<tr><td style="text-align:left"></td><td></td><td></td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Observations</td><td>1,442</td><td>1,449</td></tr>
+<tr><td style="text-align:left">Log Likelihood</td><td>-913.17</td><td>-887.45</td></tr>
+<tr><td style="text-align:left">Akaike Inf. Crit.</td><td>1,834.33</td><td>1,782.90</td></tr>
+<tr><td colspan="3" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Note:</em></td><td colspan="2" style="text-align:right"><sup>*</sup>p<0.1; <sup>**</sup>p<0.05; <sup>***</sup>p<0.01</td></tr>
+</table>
