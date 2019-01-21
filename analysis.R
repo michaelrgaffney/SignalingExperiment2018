@@ -9,8 +9,9 @@ library(stringr)
 # library(flextable)
 # library(huxtable)
 library(devtools)
+library(git2r)
 setwd("C:/Users/Michael/Desktop/WSU/MA Research/Vignette Study/SignalingExperiment2018")
-use_github(auth_token = "1e4e1cc9d93d0e5058e40b022324dc6b9ad7e8d3")
+use_github(auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a")
 
 signalingdata2018$signal <- str_replace(signalingdata2018$signal, pattern = ":Sister", replacement = "")
 #d<- signalingdata2018[!signalingdata2018$exclusionopt1,]
