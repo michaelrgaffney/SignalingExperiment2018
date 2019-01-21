@@ -11,6 +11,7 @@ library(glmnet)
 library(MASS)
 library(ggmosaic)
 library(ggcorrplot)
+library(ggfortify)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
@@ -105,43 +106,6 @@ m <- prcomp(df[cc, c(needvarsT1, needvarsT2)], scale. = T)
 # pca_loadings_plot(m)
 autoplot(m, loadings = T, loadings.label = T, data = df[cc,], colour = 'signal', frame.type = 'norm') + theme_bw()
 
-# Scatterplots
-
-ggplot(d2, aes(needsmoneyt1, needsmoneyt2, colour = signal)) +
-  geom_point() +
-  geom_smooth(span = 2) +
-  scale_color_discrete() +
-  facet_wrap(~conflict) +
-  theme_bw()
-
-ggplot(df, aes(-PC1t1, PC1t2, colour = signal)) +
-  geom_point() +
-  geom_smooth(span = 2) +
-  scale_color_discrete() +
-  facet_wrap(~conflict) +
-  theme_bw()
-
-d %>%
-  filter(!signal %in% c('Anger', 'Depression&Suicidal')) %>%
-  ggplot(aes(needsmoneyt1, needsmoneyt2)) +
-  geom_point() +
-  geom_density2d() +
-  scale_color_discrete() +
-  coord_fixed() +
-  facet_grid(conflict~signal) +
-  theme_bw()
-
-d %>%
-  filter(!signal %in% c('Anger', 'Depression&Suicidal')) %>%
-  ggplot(aes(-PC1t1, PC1t2)) +
-    geom_point() +
-    geom_density2d() +
-    scale_color_discrete() +
-    coord_fixed() +
-    facet_grid(conflict~signal) +
-    theme_bw()
-
-
 # Models
 
 m <- lm(PC1t2 ~ PC1t1 + signal, d)
@@ -184,6 +148,42 @@ d2 <-
     delta_need2 = ordered(delta_need2)
   ) %>%
   na.omit
+
+# Scatterplots
+
+ggplot(d2, aes(needsmoneyt1, needsmoneyt2, colour = signal)) +
+  geom_point() +
+  geom_smooth(span = 2) +
+  scale_color_discrete() +
+  facet_wrap(~conflict) +
+  theme_bw()
+
+ggplot(df, aes(-PC1t1, PC1t2, colour = signal)) +
+  geom_point() +
+  geom_smooth(span = 2) +
+  scale_color_discrete() +
+  facet_wrap(~conflict) +
+  theme_bw()
+
+d %>%
+  filter(!signal %in% c('Anger', 'Depression&Suicidal')) %>%
+  ggplot(aes(needsmoneyt1, needsmoneyt2)) +
+  geom_point() +
+  geom_density2d() +
+  scale_color_discrete() +
+  coord_fixed() +
+  facet_grid(conflict~signal) +
+  theme_bw()
+
+d %>%
+  filter(!signal %in% c('Anger', 'Depression&Suicidal')) %>%
+  ggplot(aes(-PC1t1, PC1t2)) +
+  geom_point() +
+  geom_density2d() +
+  scale_color_discrete() +
+  coord_fixed() +
+  facet_grid(conflict~signal) +
+  theme_bw()
 
 # Mediation
 
