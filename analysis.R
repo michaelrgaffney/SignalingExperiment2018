@@ -9,7 +9,7 @@ library(stringr)
 # library(flextable)
 # library(huxtable)
 library(devtools)
-#setwd("C:/Users/Michael/Desktop/WSU/MA Research/Vignette Study/SignalingExperiment2018")
+setwd("C:/Users/Michael/Desktop/WSU/MA Research/Vignette Study/SignalingExperiment2018")
 use_github(auth_token = "1e4e1cc9d93d0e5058e40b022324dc6b9ad7e8d3")
 
 signalingdata2018$signal <- str_replace(signalingdata2018$signal, pattern = ":Sister", replacement = "")
