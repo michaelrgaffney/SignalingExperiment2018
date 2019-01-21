@@ -10,8 +10,10 @@ library(stringr)
 # library(huxtable)
 library(devtools)
 library(git2r)
-setwd("C:/Users/Michael/Desktop/WSU/MA Research/Vignette Study/SignalingExperiment2018")
-use_github(auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a")
+#setwd("C:/Users/Michael/Desktop/WSU/MA Research/Vignette Study/SignalingExperiment2018")
+#use_github(auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a")
+cred <- cred_ssh_key(publickey = "~/../.ssh/id_rsa.pub", privatekey = "~/../.ssh/id_rsa")
+use_github(credentials = cred, auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a",host = https://github.com/michaelrgaffney/2018-Signal-Anaylsis.git)
 
 signalingdata2018$signal <- str_replace(signalingdata2018$signal, pattern = ":Sister", replacement = "")
 #d<- signalingdata2018[!signalingdata2018$exclusionopt1,]
