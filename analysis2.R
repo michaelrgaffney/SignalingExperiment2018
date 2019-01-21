@@ -15,36 +15,53 @@ library(ggfortify)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
+# All signals and conditions
+
 signaldict <-
   c(
+    'Schizophrenia:Sister' = 'Schizophrenia',
     'VerbalRequest:Sister' = 'VerbalRequest',
     'Anger:Sister' = 'Anger',
     'FacialSadnesswithCrying:Sister' = 'Crying',
     'Depression:Sister' = 'Depression',
     'DepressionwithSuicideThreat:Sister' = 'Depression&Suicidal',
-    'SuicideAttempt:Sister' = 'Suicidal'
+    'SuicideAttempt:Sister' = 'Suicidal',
+    'Control:Sister' = 'Control'
   )
 
-d <-
+d0 <-
   signalingdata2018 %>%
-  filter(
-    !exclusionopt1,
-    signal %in% c(
-      'Anger:Sister',
-      'Depression:Sister',
-      'VerbalRequest:Sister',
-      'FacialSadnesswithCrying:Sister',
-      'DepressionwithSuicideThreat:Sister',
-      'SuicideAttempt:Sister')
-  ) %>%
+  filter(!exclusionopt1) %>%
   mutate(
-    signal = factor(signaldict[signal], levels = signaldict),
-    likelylendmoneyt2 = likelylendmoneyt2/100,
-    needsmoneyt1 = needsmoneyt1/100,
-    needsmoneyt2 = needsmoneyt2/100,
+    signal = factor(signaldict[signal]),
+    delta_money = needsmoneyt2 - 50,
     p_info = ordered(p_info, levels = c('Cheating', 'PrivateInformation', 'Honest')),
     conflict = factor(conflict, levels = c('Conflict', 'Support'))
   )
+
+m <- lm(delta_money ~ signal - 1, d0)
+mc <- names(sort(coef(m)))
+mc <- str_remove(mc, 'signal')
+d0$signal2 <- factor(d0$signal, levels = mc)
+m <- lm(delta_money ~ signal2 - 1, d0)
+p <- visreg(m, partial=F, gg = T, rug = F)
+
+p <-
+  p +
+  geom_hline(yintercept = 0, linetype = 'dotted') + 
+  labs(
+    title = "Mean change in perceived need across all conditions",
+    subtitle = paste('N =', nobs(m)),
+    x = '', 
+    y = 'Change in perceived need') +
+  coord_flip() + 
+  theme_bw()
+p
+
+# likelylendmoneyt2 = likelylendmoneyt2/100,
+# needsmoneyt1 = needsmoneyt1/100,
+# needsmoneyt2 = needsmoneyt2/100,
+
 
 # PCA of t1 vars
 
@@ -105,6 +122,14 @@ cc <- complete.cases(df[c(needvarsT1, needvarsT2)])
 m <- prcomp(df[cc, c(needvarsT1, needvarsT2)], scale. = T)
 # pca_loadings_plot(m)
 autoplot(m, loadings = T, loadings.label = T, data = df[cc,], colour = 'signal', frame.type = 'norm') + theme_bw()
+
+# Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
+d <-
+  d0 %>% 
+  dplyr::filter(
+    ! signal %in% c('Schizophrenia', 'Anger', 'Control', 'Depression&Suicidal'),
+    p_info != 'Cheating'
+  )
 
 # Models
 
@@ -168,22 +193,22 @@ ggplot(df, aes(-PC1t1, PC1t2, colour = signal)) +
 d %>%
   filter(!signal %in% c('Anger', 'Depression&Suicidal')) %>%
   ggplot(aes(needsmoneyt1, needsmoneyt2)) +
-  geom_point() +
-  geom_density2d() +
-  scale_color_discrete() +
-  coord_fixed() +
-  facet_grid(conflict~signal) +
-  theme_bw()
+    geom_point() +
+    geom_density2d() +
+    scale_color_discrete() +
+    coord_fixed() +
+    facet_grid(conflict~signal) +
+    theme_bw()
 
 d %>%
   filter(!signal %in% c('Anger', 'Depression&Suicidal')) %>%
   ggplot(aes(-PC1t1, PC1t2)) +
-  geom_point() +
-  geom_density2d() +
-  scale_color_discrete() +
-  coord_fixed() +
-  facet_grid(conflict~signal) +
-  theme_bw()
+    geom_point() +
+    geom_density2d() +
+    scale_color_discrete() +
+    coord_fixed() +
+    facet_grid(conflict~signal) +
+    theme_bw()
 
 # Mediation
 
