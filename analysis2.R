@@ -12,15 +12,14 @@ library(MASS)
 library(ggmosaic)
 library(ggcorrplot)
 library(ggfortify)
-library(hagenutils)
+# library(hagenutils)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
 # Recoding MC2.3: How does your sister feel?
 
-d_feel <- 
-  signalingdata2018 %>% 
-  dplyr::select(ResponseId, MC2.3) %>% 
+signalingdata2018 <- 
+  signalingdata2018 %>%
   mutate(
     MC2.3 = ifelse(is.na(MC2.3), 'None', MC2.3),
     Angry = ifelse(str_detect(MC2.3, 'Angry'), 1, 0),
@@ -54,7 +53,6 @@ signaldict <-
 
 d0 <-
   signalingdata2018 %>%
-  left_join(d_feel)
   filter(!exclusionopt1) %>%
   mutate(
     signal = factor(signaldict[signal]),
@@ -69,15 +67,15 @@ d0 <-
     believeneedt2 = ifelse(is.na(believeneedt2), 50, believeneedt2),
     sisterbenefitt2 = ifelse(is.na(sisterbenefitt2), 50, sisterbenefitt2),
     trustrepayt2 = ifelse(is.na(trustrepayt2), 50, trustrepayt2),
-    delta_need = needsmoneyt2 - 50,
+    delta_money = needsmoneyt2 - 50,
     delta_lend = likelylendmoneyt2 - 50
   )
 
-m <- lm(delta_need ~ signal - 1, d0)
+m <- lm(delta_money ~ signal - 1, d0)
 mc <- names(sort(coef(m)))
 mc <- str_replace(mc, 'signal', '')
 d0$signal2 <- factor(d0$signal, levels = mc)
-m <- lm(delta_need ~ signal2 - 1, d0)
+m <- lm(delta_money ~ signal2 - 1, d0)
 p <- visreg(m, partial=F, gg = T, rug = F)
 
 p <-
@@ -122,7 +120,7 @@ m <- prcomp(d0[cc, needvarsT1], scale. = T)
 d0$PC1t1 <- NA
 d0$PC1t1[cc] <- m$x[,1]
 
-pca_loadings_plot(m)
+# pca_loadings_plot(m)
 
 autoplot(
   m, 
@@ -146,7 +144,7 @@ autoplot(
 
 # Effect of t1 conflict and private info on perceived need and PC1t1
 
-m <- lm(delta_need ~ conflict + p_info, d0)
+m <- lm(delta_money ~ conflict + p_info, d0)
 Anova(m)
 plot(allEffects(m))
 
@@ -212,7 +210,7 @@ d2 <-
     conflict,
     signal,
     needsmoneyt1,
-    delta_need,
+    delta_money,
     delta_lend,
     PC1t1,
     PC1t2
@@ -228,8 +226,8 @@ d2 <-
     p_info = ordered(as.character(p_info), levels = c('PrivateInformation', 'Honest')),
     signal = ordered(signal, levels = c('VerbalRequest', 'Crying', 'Depression')),
     delta_need = case_when(
-      delta_need < -1 ~ -1,
-      delta_need > 1 ~ 1,
+      delta_money < -1 ~ -1,
+      delta_money > 1 ~ 1,
       TRUE ~ 0
     ),
     delta_need2 = case_when(
@@ -244,7 +242,7 @@ d2 <-
 
 # Scatterplots
 
-ggplot(d2, aes(needsmoneyt1, needsmoneyt2, colour = signal)) +
+ggplot(d2, aes(needsmoneyt1, delta_money, colour = signal)) +
   geom_point() +
   geom_smooth(span = 2) +
   scale_color_discrete() +
@@ -260,11 +258,11 @@ ggplot(d2, aes(-PC1t1, PC1t2, colour = signal)) +
 
 # Mediation
 
-model.y <- glm(likelylendmoneyt2 ~ needsmoneyt1 + needsmoneyt2 + signal, family = gaussian, data = d2)
-model.m <- lm(needsmoneyt2 ~ needsmoneyt1 + signal, data = d2)
+model.y <- glm(delta_lend ~ needsmoneyt1 + delta_money + signal, family = gaussian, data = d2)
+model.m <- lm(delta_money ~ needsmoneyt1 + signal, data = d2)
 
-m <- mediate(model.m, model.y, treat = 'signal', mediator = 'needsmoneyt2', boot = T)
-plot(m)
+# m <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_money', boot = T)
+# plot(m)
 
 # Exploratory models
 
@@ -362,19 +360,14 @@ x <- as.matrix(na.omit(x))
 cv <- cv.glmnet(x[,1:11], x[,12])
 coef(cv)
 
-d_feel %>% 
-  left_join(signalingdata2018[c('ResponseId', 'exclusionopt1')]) %>% 
-  dplyr::filter(!exclusionopt1) %>% 
-  dplyr::select(-ResponseId, -exclusionopt1) %>% 
+d0 %>% 
+  dplyr::select(Angry:NoneOfAbove) %>% 
   cor(use = 'pairwise.complete.obs') %>%
   ggcorrplot(hc.order = T, hc.method = 'ward')
 
 d_mean_feel <-
-  d_feel %>% 
-  left_join(signalingdata2018[c('ResponseId', 'signal', 'exclusionopt1')]) %>% 
-  mutate(signal = signaldict[signal]) %>% 
-  dplyr::filter(!exclusionopt1) %>% 
-  dplyr::select(-ResponseId, -exclusionopt1) %>% 
+  d0 %>% 
+  dplyr::select(signal, Angry:NoneOfAbove) %>% 
   group_by(signal) %>% 
   summarise_all(mean, na.rm=T) #%>% 
   # gather(key = Emotion, value = Mean, -signal)
