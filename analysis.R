@@ -10,10 +10,10 @@ library(stringr)
 # library(huxtable)
 library(devtools)
 library(git2r)
-setwd("C:/Users/Michael/Desktop/WSU/MA Research/Vignette Study/SignalingExperiment2018")
-use_github(auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a")
+#setwd("C:/Users/Michael/Desktop/WSU/MA Research/Vignette Study/SignalingExperiment2018")
+#use_github(auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a")
 #cred <- cred_ssh_key(publickey = "~/../.ssh/id_rsa.pub", privatekey = "~/../.ssh/id_rsa")
-use_github(credentials = cred, auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a")
+#use_github(credentials = cred, auth_token = "87e63dd6ab3e26c55ac1989b9330e3b3043a302a")
 #host = "https://github.com/michaelrgaffney/2018-Signal-Anaylsis.git")
 
 signalingdata2018$signal <- str_replace(signalingdata2018$signal, pattern = ":Sister", replacement = "")
@@ -651,3 +651,5 @@ e6 <-
   lm(needsmoneyt2 ~ MC2.1_1 + believeneedt2 + believehealtht2, data =.) #w/o signal .637
 summary(e6)
 plot(allEffects(e6))
+
+
