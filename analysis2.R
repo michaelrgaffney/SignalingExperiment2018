@@ -369,12 +369,37 @@ d_mean_feel <-
   d0 %>% 
   dplyr::select(signal, Angry:NoneOfAbove) %>% 
   group_by(signal) %>% 
-  summarise_all(mean, na.rm=T) #%>% 
-  # gather(key = Emotion, value = Mean, -signal)
-
-# ggplot(d_mean_feel, aes(signal, Emotion, fill = Mean)) + geom_tile()
+  summarise_all(mean, na.rm=T) 
 
 mat <- as.matrix(d_mean_feel[-1])
 rownames(mat) <- d_mean_feel$signal
 
 heatmap(mat, scale = 'none')
+
+d_mean_long <-
+  d_mean_feel %>% 
+  gather(key = Emotion, value = Mean, -signal)
+
+ggplot(d_mean_long, aes(Emotion, Mean, group = signal)) + 
+  geom_line() + 
+  facet_wrap(~signal, ncol=1)
+
+# PCA of perceived emotions
+
+emotions <-
+  d0 %>% 
+  dplyr::select(signal,Angry:NoneOfAbove)
+
+m <- prcomp(emotions[-1], scale. = F)
+plot(m)
+# pca_loadings_plot(m)
+
+autoplot(
+  m, 
+  loadings = T, 
+  loadings.label = T, 
+  data = emotions, 
+  colour = 'signal',
+  frame.type = 'norm'
+) +
+  theme_bw()
