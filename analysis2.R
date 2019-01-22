@@ -376,9 +376,14 @@ rownames(mat) <- d_mean_feel$signal
 
 heatmap(mat, scale = 'none')
 
+lvls = names(d_mean_feel[-1])[order(as.numeric(d_mean_feel[2,-1]))]
+
 d_mean_long <-
   d_mean_feel %>% 
-  gather(key = Emotion, value = Mean, -signal)
+  gather(key = Emotion, value = Mean, -signal) %>% 
+  mutate(
+    Emotion = factor(Emotion, levels = lvls)
+  )
 
 ggplot(d_mean_long, aes(Emotion, Mean, group = signal)) + 
   geom_line() + 
