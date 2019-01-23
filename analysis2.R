@@ -160,9 +160,18 @@ Anova(m, type = 3)
 m_eff <- visreg(m, xvar = 'p_info', by = 'conflict')
 
 p_t1_helping <-
-  ggplot(m_eff$fit, aes(p_info, visregFit, ymin = visregLwr, ymax=visregUpr, colour = conflict, group = conflict)) + 
+  ggplot(
+    m_eff$fit, 
+    aes(p_info, visregFit, ymin = visregLwr, ymax=visregUpr, colour = conflict, group = conflict)
+    ) + 
   geom_line() + 
   geom_pointrange() +
+  annotate(
+    'text',
+    x = c(3.2,3.2),
+    y = c(0.57, 1.7),
+    label = c('Conflict', 'Support')
+    ) +
   labs(
     x = '', 
     y = 'PC1 of helping variables (time 1)\n', 
@@ -170,10 +179,6 @@ p_t1_helping <-
     ) +
   theme_bw()
 p_t1_helping
-
-m <- lm(delta_money ~ conflict * p_info, d0)
-Anova(m, type = 3)
-plot(allEffects(m))
 
 # PCA of t2 vars
 
