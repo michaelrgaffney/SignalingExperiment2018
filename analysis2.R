@@ -153,12 +153,26 @@ autoplot(
 
 # Effect of t1 conflict and private info on perceived need and PC1t1
 
-m <- lm(delta_money ~ conflict + p_info, d0)
-Anova(m)
-plot(allEffects(m))
+m <- lm(-PC1t1 ~ conflict * p_info, d0)
+m_sum <- summary(m)
+Anova(m, type = 3)
 
-m <- lm(-PC1t1 ~ conflict + p_info, d0)
-Anova(m)
+m_eff <- visreg(m, xvar = 'p_info', by = 'conflict')
+
+p_t1_helping <-
+  ggplot(m_eff$fit, aes(p_info, visregFit, ymin = visregLwr, ymax=visregUpr, colour = conflict, group = conflict)) + 
+  geom_line() + 
+  geom_pointrange() +
+  labs(
+    x = '', 
+    y = 'PC1 of helping variables (time 1)\n', 
+    caption = paste('Adj. R-sq =', round(m_sum$adj.r.squared, 2))
+    ) +
+  theme_bw()
+p_t1_helping
+
+m <- lm(delta_money ~ conflict * p_info, d0)
+Anova(m, type = 3)
 plot(allEffects(m))
 
 # PCA of t2 vars
