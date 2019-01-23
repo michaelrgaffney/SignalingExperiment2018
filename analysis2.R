@@ -12,6 +12,7 @@ library(MASS)
 library(ggmosaic)
 library(ggcorrplot)
 library(ggfortify)
+library(naniar)
 # library(hagenutils)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
@@ -54,6 +55,12 @@ signaldict <-
 d0 <-
   signalingdata2018 %>%
   filter(!exclusionopt1) %>%
+  dplyr::select(
+    -starts_with('Recipient'), 
+    -ExternalReference,
+    -starts_with('AC'),
+    -starts_with('FL_')
+    ) %>% 
   mutate(
     signal = factor(signaldict[signal]),
     p_info = ordered(p_info, levels = c('Cheating', 'PrivateInformation', 'Honest')),
@@ -67,6 +74,8 @@ d0 <-
     believeneedt2 = ifelse(is.na(believeneedt2), 50, believeneedt2),
     sisterbenefitt2 = ifelse(is.na(sisterbenefitt2), 50, sisterbenefitt2),
     trustrepayt2 = ifelse(is.na(trustrepayt2), 50, trustrepayt2),
+    daughterharmt2 = ifelse(is.na(daughterharmt2), 50, daughterharmt2),
+    howsadt2 = ifelse(is.na(howsadt2), 50, howsadt2),
     delta_money = needsmoneyt2 - 50,
     delta_lend = likelylendmoneyt2 - 50
   )
@@ -152,14 +161,6 @@ m <- lm(-PC1t1 ~ conflict + p_info, d0)
 Anova(m)
 plot(allEffects(m))
 
-# Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
-d <-
-  d0 %>% 
-  dplyr::filter(
-    ! signal %in% c('Schizophrenia', 'Anger', 'Control', 'Depression&Suicidal', 'Suicidal')
-  ) %>% 
-  mutate(signal = fct_drop(signal))
-
 # PCA of t2 vars
 
 needvarsT2 <-
@@ -178,6 +179,20 @@ needvarsT2 <-
     "comfortablelendingt2",
     "MC2.1_1"
   )
+
+cc <- complete.cases(d0[needvarsT2])
+m <- prcomp(d0[cc, needvarsT2], scale. = T)
+
+d0$PC1t2all <- NA
+d0$PC1t2all[cc] <- -m$x[,1]
+
+# Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
+d <-
+  d0 %>% 
+  dplyr::filter(
+    ! signal %in% c('Schizophrenia', 'Anger', 'Control', 'Depression&Suicidal', 'Suicidal')
+  ) %>% 
+  mutate(signal = fct_drop(signal))
 
 cc <- complete.cases(d[needvarsT2])
 m <- prcomp(d[cc, needvarsT2], scale. = T)
@@ -408,3 +423,13 @@ autoplot(
   frame.type = 'norm'
 ) +
   theme_bw()
+
+# Perceived emotions vs. PC1t2
+
+d3 <-
+  d0 %>% 
+  mutate_at(vars(Angry:NoneOfAbove), factor)
+
+m <- lm(PC1t2all ~ Depressed + Sad + MentallyIll, d3)
+Anova(m)
+plot(allEffects(m))
