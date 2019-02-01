@@ -153,32 +153,13 @@ autoplot(
 
 # Effect of t1 conflict and private info on perceived need and PC1t1
 
-m <- lm(-PC1t1 ~ conflict * p_info, d0)
-m_sum <- summary(m)
-Anova(m, type = 3)
+m <- lm(-PC1t1 ~ conflict + p_info, d0)
+Anova(m)
+plot(allEffects(m))
 
-m_eff <- visreg(m, xvar = 'p_info', by = 'conflict')
-
-p_t1_helping <-
-  ggplot(
-    m_eff$fit, 
-    aes(p_info, visregFit, ymin = visregLwr, ymax=visregUpr, colour = conflict, group = conflict)
-    ) + 
-  geom_line() + 
-  geom_pointrange() +
-  annotate(
-    'text',
-    x = c(3.2,3.2),
-    y = c(0.57, 1.7),
-    label = c('Conflict', 'Support')
-    ) +
-  labs(
-    x = '', 
-    y = 'PC1 of helping variables (time 1)\n', 
-    caption = paste('Adj. R-sq =', round(m_sum$adj.r.squared, 2))
-    ) +
-  theme_bw()
-p_t1_helping
+m <- lm(delta_money ~ conflict + p_info, d0)
+Anova(m)
+plot(allEffects(m))
 
 # PCA of t2 vars
 
@@ -274,6 +255,43 @@ d2 <-
   ) %>% 
   na.omit
 
+# Retain only Control, Depression
+d2b <-
+  d0 %>%
+  dplyr::select(
+    p_info,
+    conflict,
+    signal,
+    needsmoneyt1,
+    delta_money,
+    delta_lend,
+    PC1t1,
+    PC1t2all
+  ) %>%
+  dplyr::filter(
+    # p_info != 'Cheating',
+    signal %in% c(
+      'Control',
+      'Depression')
+  ) %>%
+  mutate(
+    p_info = ordered(as.character(p_info), levels = c('Cheating', 'PrivateInformation', 'Honest')),
+    signal = factor(signal, levels = c('Control', 'Depression')),
+    delta_need = case_when(
+      delta_money < -1 ~ -1,
+      delta_money > 1 ~ 1,
+      TRUE ~ 0
+    ),
+    delta_need2 = case_when(
+      PC1t2all < (mean(PC1t2all, na.rm=T) - sd(PC1t2all, na.rm=T)/2) ~ -1,
+      PC1t2all > mean(PC1t2all, na.rm=T) + sd(PC1t2all, na.rm=T)/2 ~ 1,
+      TRUE ~ 0
+    ),
+    delta_need = ordered(delta_need),
+    delta_need2 = ordered(delta_need2)
+  ) %>% 
+  na.omit
+
 # Scatterplots
 
 ggplot(d2, aes(needsmoneyt1, delta_money, colour = signal)) +
@@ -325,6 +343,10 @@ plot(Effect(c("signal", "conflict", "p_info"), m))
 # p_info main effect only
 
 m <- lm(PC1t2 ~ signal * conflict + p_info, data = d2)
+Anova(m, type = 3)
+plot(allEffects(m))
+
+m <- lm(PC1t2all ~ signal * conflict, data = d2b)
 Anova(m, type = 3)
 plot(allEffects(m))
 
