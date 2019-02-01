@@ -576,24 +576,24 @@ plot(allEffects(e1))
 
 e2 <- 
   d %>% 
-  filter(signal %in% c("Depression", "VerbalRequest")) %>% 
+  filter(signal %in% c("Depression", "VerbalRequest", )) %>% 
   mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
          likelylendmoneyt2 = likelylendmoneyt2/100,
          needsmoneyt1 = needsmoneyt1/100,
          needsmoneyt2 = needsmoneyt2/100,
-         signal = factor(signal, levels = c("VerbalRequest", "Depression"))) %>% 
-  lm(likelylendmoneyt2 ~ needsmoneyt2, family = binomial, data =.)
+         signal = factor(signal, levels = c("VerbalRequest", "Depression", "Crying"))) %>% 
+  lm(likelylendmoneyt2 ~ needsmoneyt2 + signal, family = binomial, data =.)
 summary(e2)
 plot(allEffects(e2))
 
 e3 <- 
   d %>% 
-  filter(signal %in% c("Depression", "VerbalRequest")) %>% 
+  filter(signal %in% c("Depression", "VerbalRequest", "Crying")) %>% 
   mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
          likelylendmoneyt2 = likelylendmoneyt2/100,
          needsmoneyt1 = needsmoneyt1/100,
          needsmoneyt2 = needsmoneyt2/100,
-         signal = factor(signal, levels = c("VerbalRequest", "Depression"))) %>% 
+         signal = factor(signal, levels = c("VerbalRequest", "Depression", "Crying"))) %>% 
   lm(needsmoneyt2 ~ needsmoneyt1 + signal + MC2.1_1, family = binomial, data =.)
 summary(e3)
 plot(allEffects(e3))
