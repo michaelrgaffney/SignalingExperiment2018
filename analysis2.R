@@ -12,6 +12,7 @@ library(MASS)
 library(ggmosaic)
 library(ggcorrplot)
 library(ggfortify)
+library(naniar)
 # library(hagenutils)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
@@ -54,6 +55,12 @@ signaldict <-
 d0 <-
   signalingdata2018 %>%
   filter(!exclusionopt1) %>%
+  dplyr::select(
+    -starts_with('Recipient'), 
+    -ExternalReference,
+    -starts_with('AC'),
+    -starts_with('FL_')
+    ) %>% 
   mutate(
     signal = factor(signaldict[signal]),
     p_info = ordered(p_info, levels = c('Cheating', 'PrivateInformation', 'Honest')),
@@ -67,6 +74,8 @@ d0 <-
     believeneedt2 = ifelse(is.na(believeneedt2), 50, believeneedt2),
     sisterbenefitt2 = ifelse(is.na(sisterbenefitt2), 50, sisterbenefitt2),
     trustrepayt2 = ifelse(is.na(trustrepayt2), 50, trustrepayt2),
+    daughterharmt2 = ifelse(is.na(daughterharmt2), 50, daughterharmt2),
+    howsadt2 = ifelse(is.na(howsadt2), 50, howsadt2),
     delta_money = needsmoneyt2 - 50,
     delta_lend = likelylendmoneyt2 - 50
   )
@@ -144,21 +153,27 @@ autoplot(
 
 # Effect of t1 conflict and private info on perceived need and PC1t1
 
-m <- lm(delta_money ~ conflict + p_info, d0)
-Anova(m)
-plot(allEffects(m))
+m <- lm(-PC1t1 ~ conflict * p_info, d0)
+m_sum <- summary(m)
+Anova(m, type = 3)
 
-m <- lm(-PC1t1 ~ conflict + p_info, d0)
-Anova(m)
-plot(allEffects(m))
+m_eff <- visreg(m, xvar = 'p_info', by = 'conflict')
 
-# Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
-d <-
-  d0 %>% 
-  dplyr::filter(
-    ! signal %in% c('Schizophrenia', 'Anger', 'Control', 'Depression&Suicidal', 'Suicidal')
-  ) %>% 
-  mutate(signal = fct_drop(signal))
+p_t1_helping <-
+  ggplot(m_eff$fit, aes(p_info, visregFit, ymin = visregLwr, ymax=visregUpr, colour = conflict, group = conflict)) + 
+  geom_line() + 
+  geom_pointrange() +
+  labs(
+    x = '', 
+    y = 'PC1 of helping variables (time 1)\n', 
+    caption = paste('Adj. R-sq =', round(m_sum$adj.r.squared, 2))
+    ) +
+  theme_bw()
+p_t1_helping
+
+m <- lm(delta_money ~ conflict * p_info, d0)
+Anova(m, type = 3)
+plot(allEffects(m))
 
 # PCA of t2 vars
 
@@ -178,6 +193,20 @@ needvarsT2 <-
     "comfortablelendingt2",
     "MC2.1_1"
   )
+
+cc <- complete.cases(d0[needvarsT2])
+m <- prcomp(d0[cc, needvarsT2], scale. = T)
+
+d0$PC1t2all <- NA
+d0$PC1t2all[cc] <- -m$x[,1]
+
+# Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
+d <-
+  d0 %>% 
+  dplyr::filter(
+    ! signal %in% c('Schizophrenia', 'Anger', 'Control', 'Depression&Suicidal', 'Suicidal')
+  ) %>% 
+  mutate(signal = fct_drop(signal))
 
 cc <- complete.cases(d[needvarsT2])
 m <- prcomp(d[cc, needvarsT2], scale. = T)
@@ -665,4 +694,14 @@ LG3 <-
   lm(comfortablelendingt2 ~ needsmoneyt2 + signal, data =.) 
 summary(LG3)
 plot(allEffects(LG3))
+
+# Perceived emotions vs. PC1t2
+
+d3 <-
+  d0 %>% 
+  mutate_at(vars(Angry:NoneOfAbove), factor)
+
+m <- lm(PC1t2all ~ Depressed + Sad + MentallyIll, d3)
+Anova(m)
+plot(allEffects(m))
 
