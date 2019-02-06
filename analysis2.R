@@ -22,6 +22,7 @@ library(naniar)
 signalingdata2018 <- 
   signalingdata2018 %>%
   mutate(
+    closesistert1 = MC1.1_1,
     MC2.3 = ifelse(is.na(MC2.3), 'None', MC2.3),
     Angry = ifelse(str_detect(MC2.3, 'Angry'), 1, 0),
     Sad = ifelse(str_detect(MC2.3, 'Sad'), 1, 0),
@@ -34,9 +35,42 @@ signalingdata2018 <-
     Scared = ifelse(str_detect(MC2.3, 'Scared'), 1, 0),
     Tired = ifelse(str_detect(MC2.3, 'Tired'), 1, 0),
     Distressed = ifelse(str_detect(MC2.3, 'Distressed'), 1, 0),
-    NoneOfAbove = ifelse(str_detect(MC2.3, 'None'), 1, 0)
+    NoneOfAbove = ifelse(str_detect(MC2.3, 'None'), 1, 0),
+    Siblings2 = as.numeric(ifelse(Siblings == "More than 10", "11", Siblings)),
+    Ed2 <- ordered(
+      Ed,
+      levels = c(
+        "Some high school (secondary school), no diploma",
+        "GED",
+        "High school (secondary school)",
+        "Associate degree",
+        "Bachelor's degree",
+        "Professional degree",
+        "Master's degree",
+        "Doctorate"
+      )
+    ),
+    angryt1 = 100 - angryt1,
+    howsadt1 = 100 - howsadt1,
+    daughterharmt1 = 100 - daughterharmt1
   ) %>% 
   dplyr::select(-MC2.3)
+
+# Years of education
+
+ed2years <-
+  c(
+  "Some high school (secondary school), no diploma" = 11,
+  "GED" = 13,
+  "High school (secondary school)" = 13,
+  "Associate degree" = 15,
+  "Bachelor's degree" = 17,
+  "Professional degree" = 19,
+  "Master's degree" = 19,
+  "Doctorate" = 24
+)
+
+signalingdata2018$years_education <- ed2years[signalingdata2018$Ed]
 
 # All signals and conditions
 
@@ -112,7 +146,7 @@ needvarsT1 <-
     "likelylendmoneyt1",
     "angryt1",
     "satisfactiont1",
-    # "howsadt1",
+    "howsadt1",
     "howreasonablet1",
     "believehealtht1",
     # "daughterharmt1",
@@ -120,19 +154,29 @@ needvarsT1 <-
     "sisterbenefitt1",
     "trustrepayt1",
     "comfortablelendingt1",
-    "MC1.1_1"
+    "closesistert1"
     )
 
 cc <- complete.cases(d0[needvarsT1])
-m <- prcomp(d0[cc, needvarsT1], scale. = T)
+pcaT1 <- prcomp(d0[cc, needvarsT1], scale. = T)
 
 d0$PC1t1 <- NA
-d0$PC1t1[cc] <- m$x[,1]
+d0$PC1t1[cc] <- pcaT1$x[,1]
 
 # pca_loadings_plot(m)
 
+biplotT1 <- 
+  autoplot(
+    pcaT1, 
+    loadings = T, 
+    loadings.label = T, 
+    data = d0[cc,], 
+    alpha = 0.25
+  ) +
+  theme_bw()
+
 autoplot(
-  m, 
+  pcaT1, 
   loadings = T, 
   loadings.label = T, 
   data = d0[cc,], 
@@ -142,7 +186,7 @@ autoplot(
   theme_bw()
 
 autoplot(
-  m, 
+  pcaT1, 
   loadings = T, 
   loadings.label = T, 
   data = d0[cc,], 
