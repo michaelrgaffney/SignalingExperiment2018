@@ -13,6 +13,7 @@ library(ggmosaic)
 library(ggcorrplot)
 library(ggfortify)
 library(naniar)
+library(broom)
 # library(hagenutils)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
@@ -119,19 +120,41 @@ mc <- names(sort(coef(m)))
 mc <- str_replace(mc, 'signal', '')
 d0$signal2 <- factor(d0$signal, levels = mc)
 m <- lm(delta_money ~ signal2 - 1, d0)
-p <- visreg(m, partial=F, gg = T, rug = F)
+pT2need <- visreg(m, partial=F, gg = T, rug = F)
 
-p <-
-  p +
+pT2need <-
+  pT2need +
   geom_hline(yintercept = 0, linetype = 'dotted') + 
   labs(
-    title = "Mean change in perceived need across all conditions",
-    subtitle = paste('N =', nobs(m)),
+    title = "A. Change in perception of sister's need",
+    # subtitle = paste('N =', nobs(m)),
     x = '', 
-    y = 'Change in perceived need') +
+    y = "Change in perception of sister's need for money") +
   coord_flip() + 
   theme_bw()
-p
+pT2need
+
+m <- lm(delta_lend ~ signal2 - 1, d0)
+# mc <- names(sort(coef(m)))
+# mc <- str_replace(mc, 'signal', '')
+# d0$signal2 <- factor(d0$signal, levels = mc)
+# m <- lm(delta_lend ~ signal2 - 1, d0)
+pT2lend <- visreg(m, partial=F, gg = T, rug = F)
+
+pT2lend <-
+  pT2lend +
+  geom_hline(yintercept = 0, linetype = 'dotted') + 
+  labs(
+    title = "B. Change in likelihood of lending money",
+    # subtitle = paste('N =', nobs(m)),
+    x = '', 
+    y = "Change in likelihood of lending money") +
+  coord_flip() +  
+  theme_bw() +
+  theme(axis.title.y = element_blank(), axis.text.y=element_blank())
+pT2lend
+
+
 
 # likelylendmoneyt2 = likelylendmoneyt2/100,
 # needsmoneyt1 = needsmoneyt1/100,
@@ -197,9 +220,19 @@ autoplot(
 
 # Effect of t1 conflict and private info on perceived need and PC1t1
 
-m <- lm(-PC1t1 ~ conflict + p_info, d0)
-Anova(m)
-plot(allEffects(m))
+mT1manipulation <- lm(-PC1t1 ~ conflict + p_info, d0)
+Anova(mT1manipulation)
+
+pT1a <- visreg(mT1manipulation, xvar = 'conflict', gg = T) + 
+  scale_y_continuous(limits = c(-8, 5)) +
+  labs(title = 'Conflict effect', x = '', y = 'PC1 (time 1)') +
+  theme_bw()
+
+pT1b <- visreg(mT1manipulation, xvar = 'p_info', gg = T) + 
+  scale_y_continuous(limits = c(-8, 5)) +
+  labs(title = 'Information effect', x = '', y = '') +
+  theme_bw()
+
 
 m <- lm(delta_money ~ conflict + p_info, d0)
 Anova(m)
@@ -776,3 +809,7 @@ m <- lm(PC1t2all ~ Depressed + Sad + MentallyIll, d3)
 Anova(m)
 plot(allEffects(m))
 
+# Summary of correlation of all T1 outcome vars except anger
+
+cm <- cm <- cor(d0[needvarsT1[-c(3,5)]], use = 'pairwise.complete.obs')
+cmu <- cm[upper.tri(cm)]
