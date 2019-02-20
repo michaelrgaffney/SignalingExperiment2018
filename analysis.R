@@ -652,4 +652,9 @@ e6 <-
 summary(e6)
 plot(allEffects(e6))
 
+mfint <- lm(believeneedt2 ~ believeneedt1 + conflict * signal * p_info, family = binomial, data = d0)
+summary(mfint)
+Anova(mfint, type = 3)
+plot(allEffects(mfint))
+
 

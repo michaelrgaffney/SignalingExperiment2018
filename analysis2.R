@@ -14,7 +14,7 @@ library(ggcorrplot)
 library(ggfortify)
 library(naniar)
 library(broom)
-# library(hagenutils)
+ library(hagenutils)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
@@ -813,3 +813,46 @@ plot(allEffects(m))
 
 cm <- cm <- cor(d0[needvarsT1[-c(3,5)]], use = 'pairwise.complete.obs')
 cmu <- cm[upper.tri(cm)]
+
+
+# discussion explorations
+
+# It is also a possibility that conflict might increase one’s suspicion of cheating in others, 
+# however, because our measure for this is so closely correlated to our other pc1 variables.....
+# something which is seen pre-signal with and without controlling for the level of information (c in analysis 2). 
+
+c1 <- glm(believeneedt1 ~ conflict + p_info, data = d0)
+summary(c1)
+plot(allEffects(c1))
+
+c2 <- glm(believeneedt1 ~ conflict, data = d0)
+summary(c2)
+plot(allEffects(c2))
+
+# Although we did not ask if participants viewed the sister’s request to be manipulative directly, 
+# those in the suicide attempt condition perceived the request as more indicative of an attempt to get 
+# the money for other purposes than those who saw less costly signals.
+bm <- glm(believeneedt2/100 ~ conflict * signal * p_info, family = binomial, data = d0)
+summary(bm)
+Anova(bm, type = 3)
+plot(allEffects(bm))
+
+#importance of percieved need on instrumental outcomes
+# going for r-squards. Is this viable? Should anything else be included?
+nm <- lm(likelylendmoneyt2 ~ needsmoneyt2 + conflict + p_info + signal, data = d0)
+summary(nm)
+plot(allEffects(nm))
+
+nm2 <- lm(comfortablelendingt2 ~ needsmoneyt2, data = d0)
+summary(nm2)
+
+#then mention the effect of signal in prediciting needsmoney is small
+nm3 <- lm(needsmoneyt2 ~ signal, data = d0)
+summary(nm3)
+plot(allEffects(nm3))
+
+
+
+
+
+
