@@ -22,6 +22,7 @@ library(broom)
 
 signalingdata2018 <- 
   signalingdata2018 %>%
+  dplyr::filter(State != 'I do not reside in the United States') %>% 
   mutate(
     closesistert1 = MC1.1_1,
     MC2.3 = ifelse(is.na(MC2.3), 'None', MC2.3),
