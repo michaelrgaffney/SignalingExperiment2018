@@ -248,6 +248,8 @@ pT1b <- visreg(mT1manipulation, xvar = 'p_info', gg = T) +
   labs(title = 'Information effect', x = '', y = '') +
   theme_bw()
 
+mT1interaction <- lm(-PC1t1 ~ conflict * p_info, d0[d0$p_info != 'Cheating',])
+mT1interaction_anova <- Anova(mT1interaction, type = 3)
 
 m <- lm(delta_needs_money ~ conflict + p_info, d0)
 Anova(m)
