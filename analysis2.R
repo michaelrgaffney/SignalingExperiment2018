@@ -84,7 +84,7 @@ signaldict <-
     'FacialSadnesswithCrying:Sister' = 'Crying',
     'Depression:Sister' = 'Depression',
     'DepressionwithSuicideThreat:Sister' = 'Depression&Suicidal',
-    'SuicideAttempt:Sister' = 'Suicidal',
+    'SuicideAttempt:Sister' = 'Suicide attempt',
     'Control:Sister' = 'Control'
   )
 
