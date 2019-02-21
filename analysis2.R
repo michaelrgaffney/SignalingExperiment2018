@@ -113,8 +113,7 @@ d0 <-
     daughterharmt2 = ifelse(is.na(daughterharmt2), 50, daughterharmt2),
     howsadt2 = ifelse(is.na(howsadt2), 50, howsadt2),
     delta_needs_money = needsmoneyt2 - 50,
-    delta_lend = likelylendmoneyt2 - 50,
-    delta_comfort
+    delta_lend = likelylendmoneyt2 - 50
   )
 
 m <- lm(delta_needs_money ~ signal - 1, d0)
@@ -128,7 +127,7 @@ pT2need <-
   pT2need +
   geom_hline(yintercept = 0, linetype = 'dotted') + 
   labs(
-    title = "A. Change in perception of sister's need",
+    title = "C. Change in perception of sister's need",
     # subtitle = paste('N =', nobs(m)),
     x = '', 
     y = "Change in perception of sister's need for money") +
@@ -155,6 +154,20 @@ pT2lend <-
   theme_bw() +
   theme(axis.title.y = element_blank(), axis.text.y=element_blank())
 pT2lend
+
+mT2comfort <- lm(comfortablelendingt2 ~ comfortablelendingt1 + signal2 - 1, d0)
+pT2comfort <- visreg(mT2comfort, xvar = 'signal2', partial=F, gg = T, rug = F)
+pT2comfort <-
+  pT2comfort +
+  geom_hline(yintercept = mean(d0$comfortablelendingt1, na.rm=T), linetype = 'dotted') + 
+  labs(
+    title = "A. Amount of money comfortable lending",
+    # subtitle = paste('N =', nobs(m)),
+    x = '',
+    y = "Amount comofortable lending in US dollars") +
+  coord_flip() +  
+  theme_bw()
+pT2comfort
 
 
 
@@ -265,6 +278,21 @@ m <- prcomp(d0[cc, needvarsT2], scale. = T)
 d0$PC1t2all <- NA
 d0$PC1t2all[cc] <- -m$x[,1]
 
+mT2pc1 <- lm(PC1t2all ~ PC1t1 + signal2, d0)
+pT2pc1 <- visreg(mT2pc1, xvar = 'signal2', partial=F, gg = T, rug = F)
+pT2pc1 <-
+  pT2pc1 +
+  # geom_hline(yintercept = mean(d0$comfortablelendingt1, na.rm=T), linetype = 'dotted') + 
+  labs(
+    title = "D. Signal effect on PC1",
+    # subtitle = paste('N =', nobs(m)),
+    x = '',
+    y = "") +
+  coord_flip() +  
+  theme_bw() +
+  theme(axis.title.y = element_blank(), axis.text.y=element_blank())
+pT2pc1
+
 # Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
 d <-
   d0 %>% 
@@ -292,9 +320,6 @@ m <- prcomp(df[cc, c(needvarsT1, needvarsT2)], scale. = T)
 autoplot(m, loadings = T, loadings.label = T, data = df[cc,], colour = 'signal', frame.type = 'norm') + theme_bw()
 
 # Models
-
-m <- lm(PC1t2 ~ PC1t1 + signal, d)
-plot(Effect('signal', m), main = 'PC1t1 + signal')
 
 # Retain only VerbalRequest, Crying, Depression
 d2 <-

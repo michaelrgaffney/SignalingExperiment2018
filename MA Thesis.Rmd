@@ -248,12 +248,26 @@ pT1a + pT1b
 kable(tidy(Anova(mT1manipulation)), digits = 1, caption="Anova of linear regression of PC1 as a function of the conflict and information conditions.")
 ```
 
-## Time 2 
+## Time 2 Signal Effects
 
-```{r T2signaleffects, fig.cap="The effect of time 2 signals on changes in (A) participants' perception of the sister's need for money, and (B) the likelihood of lending the sister money. Effects are averaged across all time 1 conditions."}
-pT2need + pT2lend
+## Preregistered tests
+
+Our predicted main effects of signals were:
+
+> We predict that stronger signals  will result in higher levels of both emotional and instrumental social support towards the signaler. Specifically,  we predict that the signals have the following rank order form low to high: 
+no signal (control), verbal request, sad face, sad face with crying, depression, depression with display of suicidal ideation, and suicide attempt.
+
+This prediction was not upheld (Figure X).
+
+
+```{r T2signaleffects, fig.cap="The effect of time 2 signals on changes in (A) the amount of money the participant is comfortable lending the sister, (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
+(pT2comfort + pT2lend) / (pT2need + pT2pc1)
 ```
 
+
+> We also predict that anger will have a positive impact on helping with a similar magnitude to the depression condition.
+
+> Unlike the hypothesized signals of need, we predict that schizophrenia, which also comes with great fitness costs, will decrease the likelihood of help relative to the control since it indicates cognitive dysfunction.
 
 ## Discussion
 
