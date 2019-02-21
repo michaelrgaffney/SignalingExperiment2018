@@ -112,16 +112,17 @@ d0 <-
     trustrepayt2 = ifelse(is.na(trustrepayt2), 50, trustrepayt2),
     daughterharmt2 = ifelse(is.na(daughterharmt2), 50, daughterharmt2),
     howsadt2 = ifelse(is.na(howsadt2), 50, howsadt2),
-    delta_money = needsmoneyt2 - 50,
-    delta_lend = likelylendmoneyt2 - 50
+    delta_needs_money = needsmoneyt2 - 50,
+    delta_lend = likelylendmoneyt2 - 50,
+    delta_comfort
   )
 
-m <- lm(delta_money ~ signal - 1, d0)
+m <- lm(delta_needs_money ~ signal - 1, d0)
 mc <- names(sort(coef(m)))
 mc <- str_replace(mc, 'signal', '')
 d0$signal2 <- factor(d0$signal, levels = mc)
-m <- lm(delta_money ~ signal2 - 1, d0)
-pT2need <- visreg(m, partial=F, gg = T, rug = F)
+mT2need <- lm(delta_needs_money ~ signal2 - 1, d0)
+pT2need <- visreg(mT2need, partial=F, gg = T, rug = F)
 
 pT2need <-
   pT2need +
@@ -135,12 +136,12 @@ pT2need <-
   theme_bw()
 pT2need
 
-m <- lm(delta_lend ~ signal2 - 1, d0)
+mT2lend <- lm(delta_lend ~ signal2 - 1, d0)
 # mc <- names(sort(coef(m)))
 # mc <- str_replace(mc, 'signal', '')
 # d0$signal2 <- factor(d0$signal, levels = mc)
 # m <- lm(delta_lend ~ signal2 - 1, d0)
-pT2lend <- visreg(m, partial=F, gg = T, rug = F)
+pT2lend <- visreg(mT2lend, partial=F, gg = T, rug = F)
 
 pT2lend <-
   pT2lend +
@@ -235,7 +236,7 @@ pT1b <- visreg(mT1manipulation, xvar = 'p_info', gg = T) +
   theme_bw()
 
 
-m <- lm(delta_money ~ conflict + p_info, d0)
+m <- lm(delta_needs_money ~ conflict + p_info, d0)
 Anova(m)
 plot(allEffects(m))
 
@@ -303,7 +304,7 @@ d2 <-
     conflict,
     signal,
     needsmoneyt1,
-    delta_money,
+    delta_needs_money,
     delta_lend,
     PC1t1,
     PC1t2
@@ -319,8 +320,8 @@ d2 <-
     p_info = ordered(as.character(p_info), levels = c('PrivateInformation', 'Honest')),
     signal = ordered(signal, levels = c('VerbalRequest', 'Crying', 'Depression')),
     delta_need = case_when(
-      delta_money < -1 ~ -1,
-      delta_money > 1 ~ 1,
+      delta_needs_money < -1 ~ -1,
+      delta_needs_money > 1 ~ 1,
       TRUE ~ 0
     ),
     delta_need2 = case_when(
@@ -341,7 +342,7 @@ d2b <-
     conflict,
     signal,
     needsmoneyt1,
-    delta_money,
+    delta_needs_money,
     delta_lend,
     PC1t1,
     PC1t2all
@@ -356,8 +357,8 @@ d2b <-
     p_info = ordered(as.character(p_info), levels = c('Cheating', 'PrivateInformation', 'Honest')),
     signal = factor(signal, levels = c('Control', 'Depression')),
     delta_need = case_when(
-      delta_money < -1 ~ -1,
-      delta_money > 1 ~ 1,
+      delta_needs_money < -1 ~ -1,
+      delta_needs_money > 1 ~ 1,
       TRUE ~ 0
     ),
     delta_need2 = case_when(
@@ -372,7 +373,7 @@ d2b <-
 
 # Scatterplots
 
-ggplot(d2, aes(needsmoneyt1, delta_money, colour = signal)) +
+ggplot(d2, aes(needsmoneyt1, delta_needs_money, colour = signal)) +
   geom_point() +
   geom_smooth(span = 2) +
   scale_color_discrete() +
@@ -388,10 +389,10 @@ ggplot(d2, aes(-PC1t1, PC1t2, colour = signal)) +
 
 # Mediation
 
-model.y <- glm(delta_lend ~ needsmoneyt1 + delta_money + signal, family = gaussian, data = d2)
-model.m <- lm(delta_money ~ needsmoneyt1 + signal, data = d2)
+model.y <- glm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, family = gaussian, data = d2)
+model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2)
 
-# m <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_money', boot = T)
+# m <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
 # plot(m)
 
 # Exploratory models
