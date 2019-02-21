@@ -268,7 +268,7 @@ Contrary to our prediction, there was no significant interaction between conflic
 
 ## Time 2 Signal Effects
 
-## Preregistered tests
+### Preregistered tests
 
 Our predicted main effects of signals were:
 
@@ -277,7 +277,7 @@ no signal (control), verbal request, sad face, sad face with crying, depression,
 
 This prediction was not upheld. The Control condition (no signal) was ranked relatively high rather than the lowest, Suicide attempt was ranked relatively low rather than the highest, and Anger was consistently ranked lower than Depression. In partial support, however, Depression was consistently higher than Crying, which was consistently higher than Verbal request. See Figure X.
 
-```{r T2signaleffects, fig.cap="Signal effets. The effect of signals on changes in (A) the amount of money the participant is comfortable lending the sister (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
+```{r T2signaleffects, fig.cap="Signal effets. The effect of signals on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
 (pT2comfort + pT2lend) / (pT2need + pT2pc1)
 ```
 
