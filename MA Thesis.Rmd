@@ -220,7 +220,19 @@ kable(
 
 ### Time 1 manipulation checks
 
-At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (conflict vs. support), and 1 of 3 information conditions (cheating, private information, honest), for a total of 6 conditions. Our study was based on the expectation that participants would exhibit less support for the sister in the conflict vs. support conditions, and less support in the cheating vs. private information condition, and more support in the honest vs. private information condition.
+At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (conflict vs. support), and 1 of 3 information conditions (cheating, private information, honest), for a total of 6 conditions. Our study was based on the expectation that participants would exhibit less support for the sister in the conflict vs. support conditions, and less support in the cheating vs. private information condition, and more support in the honest vs. private information condition. As we said in our preregistration:
+
+> Amount and type of information:
+>
+> We predict that information that the character in the vignette is honest will result in more favorable reactions than the no information condition, which should receive more favorable reactions than conditions where there is information that indicates cheating. 
+>
+> Conflict:
+>
+> We also predict that the conflict conditions will result in less favorable reactions than the non-conflict condition.
+>
+> Relationship between emotional and instrumental responses:
+>
+> In every condition, we predict that emotional responses will track instrumental responses.
 
 To confirm that our manipulations had the desired effects, we analyzed our T1 outcome variables. All 11 T1 outcome variables regarding the sister were strongly positively correlated with each other, except for anger, which was negatively correlated, and sadness about the niece's health problem, which was about the niece and not the sister (and was weakly positively correlated). Among the positively correlated sister variables, correlation coefficients ranged from `r signif(min(cmu), 2)` to `r signif(max(cmu), 2)`, with a mean of `r signif(mean(cmu), 2)`. We therefore conducted a Principle Components Analysis (PCA) of our T1 vars. PC1 accounted for `r signif(100*summary(pcaT1)$importance[2,1], 2)`% of the variance, and all T1 variables loaded equally on this component except for sadness about the sister's daughter's health problem, which loaded primarily on PC2. See Table X and Figure X.
 
@@ -248,12 +260,32 @@ pT1a + pT1b
 kable(tidy(Anova(mT1manipulation)), digits = 1, caption="Anova of linear regression of PC1 as a function of the conflict and information conditions.")
 ```
 
-## Time 2 
+We predicted the following interaction between conflict and information:
 
-```{r T2signaleffects, fig.cap="The effect of time 2 signals on changes in (A) participants' perception of the sister's need for money, and (B) the likelihood of lending the sister money. Effects are averaged across all time 1 conditions."}
-pT2need + pT2lend
+> We also predict that in the private information and cheating vignettes there will be an interaction between the amount of information and levels of conflict such that private information will have a greater negative impact on helping in the conflict condition than the no conflict condition.
+
+Contrary to our prediction, there was no significant interaction between conflict and information in their effects on PC1 at time 1 ($p = `r signif(mT1interaction_anova['conflict:p_info', 'Pr(>F)'], 2)`$).
+
+## Time 2 Signal Effects
+
+### Preregistered tests
+
+Our predicted main effects of signals were:
+
+> We predict that stronger signals  will result in higher levels of both emotional and instrumental social support towards the signaler. Specifically,  we predict that the signals have the following rank order form low to high: 
+no signal (control), verbal request, sad face, sad face with crying, depression, depression with display of suicidal ideation, and suicide attempt. We also predict that anger will have a positive impact on helping with a similar magnitude to the depression condition.
+
+This prediction was not upheld. The Control condition (no signal) was ranked relatively high rather than the lowest, Suicide attempt was ranked relatively low rather than the highest, and Anger was consistently ranked lower than Depression. In partial support, however, Depression was consistently higher than Crying, which was consistently higher than Verbal request. See Figure X.
+
+```{r T2signaleffects, fig.cap="Signal effets. The effect of signals on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
+(pT2comfort + pT2lend) / (pT2need + pT2pc1)
 ```
 
+We also predicted:
+
+> Unlike the hypothesized signals of need, we predict that schizophrenia, which also comes with great fitness costs, will decrease the likelihood of help relative to the control since it indicates cognitive dysfunction.
+
+This prediction was strongly supported: Schizophrenia had far and away the strongest negative impact on participants' emotional attitudes towards, and instrumental support for the sister.
 
 ## Discussion
 

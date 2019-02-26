@@ -84,7 +84,7 @@ signaldict <-
     'FacialSadnesswithCrying:Sister' = 'Crying',
     'Depression:Sister' = 'Depression',
     'DepressionwithSuicideThreat:Sister' = 'Depression&Suicidal',
-    'SuicideAttempt:Sister' = 'Suicidal',
+    'SuicideAttempt:Sister' = 'Suicide attempt',
     'Control:Sister' = 'Control'
   )
 
@@ -112,22 +112,22 @@ d0 <-
     trustrepayt2 = ifelse(is.na(trustrepayt2), 50, trustrepayt2),
     daughterharmt2 = ifelse(is.na(daughterharmt2), 50, daughterharmt2),
     howsadt2 = ifelse(is.na(howsadt2), 50, howsadt2),
-    delta_money = needsmoneyt2 - 50,
+    delta_needs_money = needsmoneyt2 - 50,
     delta_lend = likelylendmoneyt2 - 50
   )
 
-m <- lm(delta_money ~ signal - 1, d0)
+m <- lm(delta_needs_money ~ signal - 1, d0)
 mc <- names(sort(coef(m)))
 mc <- str_replace(mc, 'signal', '')
 d0$signal2 <- factor(d0$signal, levels = mc)
-m <- lm(delta_money ~ signal2 - 1, d0)
-pT2need <- visreg(m, partial=F, gg = T, rug = F)
+mT2need <- lm(delta_needs_money ~ signal2 - 1, d0)
+pT2need <- visreg(mT2need, partial=F, gg = T, rug = F)
 
 pT2need <-
   pT2need +
   geom_hline(yintercept = 0, linetype = 'dotted') + 
   labs(
-    title = "A. Change in perception of sister's need",
+    title = "C. Change in perception of sister's need",
     # subtitle = paste('N =', nobs(m)),
     x = '', 
     y = "Change in perception of sister's need for money") +
@@ -135,12 +135,12 @@ pT2need <-
   theme_bw()
 pT2need
 
-m <- lm(delta_lend ~ signal2 - 1, d0)
+mT2lend <- lm(delta_lend ~ signal2 - 1, d0)
 # mc <- names(sort(coef(m)))
 # mc <- str_replace(mc, 'signal', '')
 # d0$signal2 <- factor(d0$signal, levels = mc)
 # m <- lm(delta_lend ~ signal2 - 1, d0)
-pT2lend <- visreg(m, partial=F, gg = T, rug = F)
+pT2lend <- visreg(mT2lend, partial=F, gg = T, rug = F)
 
 pT2lend <-
   pT2lend +
@@ -154,6 +154,20 @@ pT2lend <-
   theme_bw() +
   theme(axis.title.y = element_blank(), axis.text.y=element_blank())
 pT2lend
+
+mT2comfort <- lm(comfortablelendingt2 ~ comfortablelendingt1 + signal2 - 1, d0)
+pT2comfort <- visreg(mT2comfort, xvar = 'signal2', partial=F, gg = T, rug = F)
+pT2comfort <-
+  pT2comfort +
+  geom_hline(yintercept = mean(d0$comfortablelendingt1, na.rm=T), linetype = 'dotted') + 
+  labs(
+    title = "A. Amount of money comfortable lending",
+    # subtitle = paste('N =', nobs(m)),
+    x = '',
+    y = "Amount comofortable lending in US dollars") +
+  coord_flip() +  
+  theme_bw()
+pT2comfort
 
 
 
@@ -234,8 +248,10 @@ pT1b <- visreg(mT1manipulation, xvar = 'p_info', gg = T) +
   labs(title = 'Information effect', x = '', y = '') +
   theme_bw()
 
+mT1interaction <- lm(-PC1t1 ~ conflict * p_info, d0[d0$p_info != 'Cheating',])
+mT1interaction_anova <- Anova(mT1interaction, type = 3)
 
-m <- lm(delta_money ~ conflict + p_info, d0)
+m <- lm(delta_needs_money ~ conflict + p_info, d0)
 Anova(m)
 plot(allEffects(m))
 
@@ -263,6 +279,21 @@ m <- prcomp(d0[cc, needvarsT2], scale. = T)
 
 d0$PC1t2all <- NA
 d0$PC1t2all[cc] <- -m$x[,1]
+
+mT2pc1 <- lm(PC1t2all ~ PC1t1 + signal2, d0)
+pT2pc1 <- visreg(mT2pc1, xvar = 'signal2', partial=F, gg = T, rug = F)
+pT2pc1 <-
+  pT2pc1 +
+  # geom_hline(yintercept = mean(d0$comfortablelendingt1, na.rm=T), linetype = 'dotted') + 
+  labs(
+    title = "D. Signal effect on PC1",
+    # subtitle = paste('N =', nobs(m)),
+    x = '',
+    y = "") +
+  coord_flip() +  
+  theme_bw() +
+  theme(axis.title.y = element_blank(), axis.text.y=element_blank())
+pT2pc1
 
 # Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
 d <-
@@ -292,9 +323,6 @@ autoplot(m, loadings = T, loadings.label = T, data = df[cc,], colour = 'signal',
 
 # Models
 
-m <- lm(PC1t2 ~ PC1t1 + signal, d)
-plot(Effect('signal', m), main = 'PC1t1 + signal')
-
 # Retain only VerbalRequest, Crying, Depression
 d2 <-
   d %>%
@@ -303,7 +331,7 @@ d2 <-
     conflict,
     signal,
     needsmoneyt1,
-    delta_money,
+    delta_needs_money,
     delta_lend,
     PC1t1,
     PC1t2
@@ -319,8 +347,8 @@ d2 <-
     p_info = ordered(as.character(p_info), levels = c('PrivateInformation', 'Honest')),
     signal = ordered(signal, levels = c('VerbalRequest', 'Crying', 'Depression')),
     delta_need = case_when(
-      delta_money < -1 ~ -1,
-      delta_money > 1 ~ 1,
+      delta_needs_money < -1 ~ -1,
+      delta_needs_money > 1 ~ 1,
       TRUE ~ 0
     ),
     delta_need2 = case_when(
@@ -341,7 +369,7 @@ d2b <-
     conflict,
     signal,
     needsmoneyt1,
-    delta_money,
+    delta_needs_money,
     delta_lend,
     PC1t1,
     PC1t2all
@@ -356,8 +384,8 @@ d2b <-
     p_info = ordered(as.character(p_info), levels = c('Cheating', 'PrivateInformation', 'Honest')),
     signal = factor(signal, levels = c('Control', 'Depression')),
     delta_need = case_when(
-      delta_money < -1 ~ -1,
-      delta_money > 1 ~ 1,
+      delta_needs_money < -1 ~ -1,
+      delta_needs_money > 1 ~ 1,
       TRUE ~ 0
     ),
     delta_need2 = case_when(
@@ -372,7 +400,7 @@ d2b <-
 
 # Scatterplots
 
-ggplot(d2, aes(needsmoneyt1, delta_money, colour = signal)) +
+ggplot(d2, aes(needsmoneyt1, delta_needs_money, colour = signal)) +
   geom_point() +
   geom_smooth(span = 2) +
   scale_color_discrete() +
@@ -388,10 +416,10 @@ ggplot(d2, aes(-PC1t1, PC1t2, colour = signal)) +
 
 # Mediation
 
-model.y <- glm(delta_lend ~ needsmoneyt1 + delta_money + signal, family = gaussian, data = d2)
-model.m <- lm(delta_money ~ needsmoneyt1 + signal, data = d2)
+model.y <- glm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, family = gaussian, data = d2)
+model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2)
 
-# m <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_money', boot = T)
+# m <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
 # plot(m)
 
 # Exploratory models
