@@ -169,7 +169,13 @@ pT2comfort <-
   theme_bw()
 pT2comfort
 
+# Preregistered interaction models
 
+mPreInt <- lm(delta_needs_money ~ signal2 * p_info - 1, d0)
+Anova(mPreInt)
+vdf <- visreg(mPreInt, xvar='signal2', by = 'p_info')
+
+ggplot(vdf$fit, aes(visregFit, signal2, colour = p_info)) + geom_point()
 
 # likelylendmoneyt2 = likelylendmoneyt2/100,
 # needsmoneyt1 = needsmoneyt1/100,
