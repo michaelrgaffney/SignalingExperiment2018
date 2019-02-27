@@ -929,7 +929,11 @@ summary(nm3)
 plot(allEffects(nm3))
 
 
-
-
-
+#testing for demographic effects at time on
+d0$Sex <- as.factor(d0$Sex)
+d0$Ed <- as.factor(d0$Ed)
+d0$Siblings <- as.factor(d0$Siblings)
+mdem <- lm(-PC1t1 ~ Sex * conflict + Sex * p_info + Sex * years_education + Sex * Age + Sex * Children + Sex * Siblings2, d0)
+summary(mdem)
+plot(allEffects(mdem))
 
