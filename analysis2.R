@@ -123,107 +123,6 @@ d0$signal2 <- factor(d0$signal, levels = mc)
 mT2need <- lm(delta_needs_money ~ signal2 - 1, d0)
 pT2need <- visreg(mT2need, partial=F, gg = T, rug = F)
 
-pT2need <-
-  pT2need +
-  geom_hline(yintercept = 0, linetype = 'dotted') + 
-  labs(
-    title = "C. Change in perception of sister's need",
-    # subtitle = paste('N =', nobs(m)),
-    x = '', 
-    y = "Change in perception of sister's need for money") +
-  coord_flip() + 
-  theme_bw()
-pT2need
-
-mT2lend <- lm(delta_lend ~ signal2 - 1, d0)
-# mc <- names(sort(coef(m)))
-# mc <- str_replace(mc, 'signal', '')
-# d0$signal2 <- factor(d0$signal, levels = mc)
-# m <- lm(delta_lend ~ signal2 - 1, d0)
-pT2lend <- visreg(mT2lend, partial=F, gg = T, rug = F)
-
-pT2lend <-
-  pT2lend +
-  geom_hline(yintercept = 0, linetype = 'dotted') + 
-  labs(
-    title = "B. Change in likelihood of lending money",
-    # subtitle = paste('N =', nobs(m)),
-    x = '', 
-    y = "Change in likelihood of lending money") +
-  coord_flip() +  
-  theme_bw() +
-  theme(axis.title.y = element_blank(), axis.text.y=element_blank())
-pT2lend
-
-mT2comfort <- lm(comfortablelendingt2 ~ comfortablelendingt1 + signal2 - 1, d0)
-pT2comfort <- visreg(mT2comfort, xvar = 'signal2', partial=F, gg = T, rug = F)
-pT2comfort <-
-  pT2comfort +
-  geom_hline(yintercept = mean(d0$comfortablelendingt1, na.rm=T), linetype = 'dotted') + 
-  labs(
-    title = "A. Amount of money comfortable lending",
-    # subtitle = paste('N =', nobs(m)),
-    x = '',
-    y = "Amount comofortable lending in US dollars") +
-  coord_flip() +  
-  theme_bw()
-pT2comfort
-
-# Preregistered interaction models
-
-interactplot <- function(f, trm, ylab, removeLegend = F, removeY = F){
-  m <- lm(formula = f, d0)
-  vdf <- visreg(m, xvar='signal2', by = trm, plot = F)
-  
-  trm <- sym(trm)
-  
-  p <- ggplot(vdf$fit, aes(signal2, visregFit, colour = !!trm)) + 
-    geom_point(position = position_dodge(width = 0.3)) +
-    geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.3)) +
-    geom_hline(yintercept = 0, linetype = 'dotted') +
-    labs(title = ylab, x = '', y = '') +
-    coord_flip() +
-    theme_bw()
-  
-  if (removeLegend) {
-    p <- p + theme(legend.position = "none")
-  }
-  if (removeY){
-    p <- p + theme(axis.title.y = element_blank(), axis.text.y=element_blank())
-  }
-  return(p)
-}
-
-# signal X p_info interactios
-p_comfort_signal_pinfo <- 
-  interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * p_info - 1, 'p_info', '\nA. Amount comfortable lending at T2', removeLegend=T)
-p_lend_signal_pinfo <- 
-  interactplot(delta_lend ~ signal2 * p_info - 1, 'p_info', '\nB. Change in likelihood of lending money', removeY = T)
-p_pc1_signal_pinfo <- 
-  interactplot(PC1t2all ~ signal2 * p_info - 1, 'p_info', '\nC. PC1 at T2', removeLegend = T)
-p_money_signal_pinfo <- 
-  interactplot(delta_needs_money ~ signal2 * p_info - 1, 'p_info', '\nD. Change in perceived need for money', removeY = T)
-
-# (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
-
-# signal X conflict interactios
-p_comfort_signal_conflict <- 
-  interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * conflict - 1, 'conflict', '\nA. Amount comfortable lending at T2', removeLegend=T)
-p_lend_signal_conflict <- 
-  interactplot(delta_lend ~ signal2 * conflict - 1, 'conflict', '\nB. Change in likelihood of lending money', removeY = T)
-p_pc1_signal_conflict <- 
-  interactplot(PC1t2all ~ signal2 * conflict - 1, 'conflict', '\nC. PC1 at T2', removeLegend = T)
-p_money_signal_conflict <- 
-  interactplot(delta_needs_money ~ signal2 * conflict - 1, 'conflict', '\nD. Change in perceived need for money', removeY = T)
-
-# (p_comfort_signal_conflict + p_lend_signal_conflict + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict + p_money_signal_conflict + scale_y_continuous(limits = c(-40, 20)))
-
-
-# likelylendmoneyt2 = likelylendmoneyt2/100,
-# needsmoneyt1 = needsmoneyt1/100,
-# needsmoneyt2 = needsmoneyt2/100,
-
-
 # PCA of t1 vars
 
 needvarsT1 <-
@@ -241,13 +140,17 @@ needvarsT1 <-
     "trustrepayt1",
     "comfortablelendingt1",
     "closesistert1"
-    )
+  )
 
 cc <- complete.cases(d0[needvarsT1])
 pcaT1 <- prcomp(d0[cc, needvarsT1], scale. = T)
 
 d0$PC1t1 <- NA
 d0$PC1t1[cc] <- pcaT1$x[,1]
+
+# likelylendmoneyt2 = likelylendmoneyt2/100,
+# needsmoneyt1 = needsmoneyt1/100,
+# needsmoneyt2 = needsmoneyt2/100,
 
 # pca_loadings_plot(m)
 
@@ -342,6 +245,103 @@ pT2pc1 <-
   theme_bw() +
   theme(axis.title.y = element_blank(), axis.text.y=element_blank())
 pT2pc1
+
+# Main effects plots
+
+pT2need <-
+  pT2need +
+  geom_hline(yintercept = 0, linetype = 'dotted') + 
+  labs(
+    title = "C. Change in perception of sister's need",
+    # subtitle = paste('N =', nobs(m)),
+    x = '', 
+    y = "Change in perception of sister's need for money") +
+  coord_flip() + 
+  theme_bw()
+pT2need
+
+mT2lend <- lm(delta_lend ~ signal2 - 1, d0)
+# mc <- names(sort(coef(m)))
+# mc <- str_replace(mc, 'signal', '')
+# d0$signal2 <- factor(d0$signal, levels = mc)
+# m <- lm(delta_lend ~ signal2 - 1, d0)
+pT2lend <- visreg(mT2lend, partial=F, gg = T, rug = F)
+
+pT2lend <-
+  pT2lend +
+  geom_hline(yintercept = 0, linetype = 'dotted') + 
+  labs(
+    title = "B. Change in likelihood of lending money",
+    # subtitle = paste('N =', nobs(m)),
+    x = '', 
+    y = "Change in likelihood of lending money") +
+  coord_flip() +  
+  theme_bw() +
+  theme(axis.title.y = element_blank(), axis.text.y=element_blank())
+pT2lend
+
+mT2comfort <- lm(comfortablelendingt2 ~ comfortablelendingt1 + signal2 - 1, d0)
+pT2comfort <- visreg(mT2comfort, xvar = 'signal2', partial=F, gg = T, rug = F)
+pT2comfort <-
+  pT2comfort +
+  geom_hline(yintercept = mean(d0$comfortablelendingt1, na.rm=T), linetype = 'dotted') + 
+  labs(
+    title = "A. Amount of money comfortable lending",
+    # subtitle = paste('N =', nobs(m)),
+    x = '',
+    y = "Amount comofortable lending in US dollars") +
+  coord_flip() +  
+  theme_bw()
+pT2comfort
+
+# Preregistered interaction models
+
+interactplot <- function(f, trm, ylab, removeLegend = F, removeY = F){
+  m <- lm(formula = f, d0)
+  vdf <- visreg(m, xvar='signal2', by = trm, plot = F)
+  
+  trm <- sym(trm)
+  
+  p <- ggplot(vdf$fit, aes(signal2, visregFit, colour = !!trm)) + 
+    geom_point(position = position_dodge(width = 0.3)) +
+    geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.3)) +
+    geom_hline(yintercept = 0, linetype = 'dotted') +
+    labs(title = ylab, x = '', y = '') +
+    coord_flip() +
+    theme_bw()
+  
+  if (removeLegend) {
+    p <- p + theme(legend.position = "none")
+  }
+  if (removeY){
+    p <- p + theme(axis.title.y = element_blank(), axis.text.y=element_blank())
+  }
+  return(p)
+}
+
+# signal X p_info interactios
+p_comfort_signal_pinfo <- 
+  interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * p_info - 1, 'p_info', '\nA. Amount comfortable lending at T2', removeLegend=T)
+p_lend_signal_pinfo <- 
+  interactplot(delta_lend ~ signal2 * p_info - 1, 'p_info', '\nB. Change in likelihood of lending money', removeY = T)
+p_pc1_signal_pinfo <- 
+  interactplot(PC1t2all ~ PC1t1 +signal2 * p_info - 1, 'p_info', '\nC. PC1 at T2', removeLegend = T)
+p_money_signal_pinfo <- 
+  interactplot(delta_needs_money ~ signal2 * p_info - 1, 'p_info', '\nD. Change in perceived need for money', removeY = T)
+
+# (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
+
+# signal X conflict interactios
+p_comfort_signal_conflict <- 
+  interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * conflict - 1, 'conflict', '\nA. Amount comfortable lending at T2', removeLegend=T)
+p_lend_signal_conflict <- 
+  interactplot(delta_lend ~ signal2 * conflict - 1, 'conflict', '\nB. Change in likelihood of lending money', removeY = T)
+p_pc1_signal_conflict <- 
+  interactplot(PC1t2all ~ PC1t1 + signal2 * conflict - 1, 'conflict', '\nC. PC1 at T2', removeLegend = T)
+p_money_signal_conflict <- 
+  interactplot(delta_needs_money ~ signal2 * conflict - 1, 'conflict', '\nD. Change in perceived need for money', removeY = T)
+
+# (p_comfort_signal_conflict + p_lend_signal_conflict + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict + p_money_signal_conflict + scale_y_continuous(limits = c(-40, 20)))
 
 # Filter out Schizophrenia, Anger, Control, Depression&Suicidal, Cheating
 d <-
