@@ -287,6 +287,21 @@ We also predicted:
 
 This prediction was strongly supported: Schizophrenia had far and away the strongest negative impact on participants' emotional attitudes towards, and instrumental support for the sister.
 
+Our predicted interactions were:
+
+> In addition to these main effects, we also predict that the signals will have the greatest impact on the participant's emotional state and likelihood to help when a participant has no information about whether the character is lying or telling the truth. Specifically, we expect the coefficient for signal strength to increase in the private information condition relative to the public information conditions.
+>
+> We also predict that when the most severe signals, i.e., depression and suicidality,  are paired with information that the character in the vignette is likely to be lying, responses will be more aversive than when the signal is weaker.
+
+```{r pinfoInteractions, fig.cap=""}
+(p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
+```
+
+```{r conflictInteractions. fig.cap=""}
+(p_comfort_signal_conflict + p_lend_signal_conflict + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict + p_money_signal_conflict + scale_y_continuous(limits = c(-40, 20)))
+```
+
+
 ## Discussion
 
 ## Limitations
