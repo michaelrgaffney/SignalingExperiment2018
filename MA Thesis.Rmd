@@ -332,7 +332,7 @@ Our predicted interactions were:
 (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
 ```
 
-```{r conflictInteractions. fig.cap=""}
+```{r conflictInteractions, fig.cap=""}
 (p_comfort_signal_conflict + p_lend_signal_conflict + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict + p_money_signal_conflict + scale_y_continuous(limits = c(-40, 20)))
 ```
 
