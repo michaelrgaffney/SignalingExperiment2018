@@ -330,6 +330,10 @@ p_money_signal_pinfo <-
   interactplot(delta_needs_money ~ signal2 * p_info - 1, 'p_info', '\nD. Change in perceived need for money', removeY = T)
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
+p_ease <- interactplot(delta_needs_money ~ signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+  
+
+
 
 # signal X conflict interactios
 p_comfort_signal_conflict <- 
@@ -936,4 +940,15 @@ d0$Siblings <- as.factor(d0$Siblings)
 mdem <- lm(-PC1t1 ~ Sex * conflict + Sex * p_info + Sex * years_education + Sex * Age + Sex * Children + Sex * Siblings2, d0)
 summary(mdem)
 plot(allEffects(mdem))
+
+# (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
+p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+p_ease
+
+p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+p_anger
+
+p_believeneed <- interactplot(believeneedt2 ~ believeneedt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+p_believeneed
+
 
