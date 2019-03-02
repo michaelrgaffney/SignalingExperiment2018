@@ -455,7 +455,8 @@ ggplot(d2, aes(needsmoneyt1, delta_needs_money, colour = signal)) +
   facet_wrap(~conflict) +
   theme_bw()
 
-ggplot(d2, aes(-PC1t1, PC1t2, colour = signal)) +
+p_pc1_t1t2 <- 
+  ggplot(d2, aes(-PC1t1, PC1t2, colour = signal)) +
   geom_point() +
   geom_smooth(span = 2) +
   scale_color_discrete() +
@@ -582,10 +583,10 @@ d_mean_feel <-
   group_by(signal) %>% 
   summarise_all(mean, na.rm=T) 
 
-mat <- as.matrix(d_mean_feel[-1])
-rownames(mat) <- d_mean_feel$signal
+signalmat <- as.matrix(d_mean_feel[-1])
+rownames(signalmat) <- d_mean_feel$signal
 
-heatmap(mat, scale = 'none')
+heatmap(signalmat, scale = 'none')
 
 ## my attempt
 distxy <- dist(mat)

@@ -191,9 +191,9 @@ Unfortunately, it became clear after the study was completed that our no signal 
 
 ### Sampling
 
-	Participants for this study were recruited from Amazon Mechanical Turk, a crowdsourcing platform that allows for the creation of Human Intelligence Tasks (HITs) that workers can complete for pay. As Amazon provides the infrastructure, it allows for a relatively low-cost way of collecting data for academic research at the cost of the data not being representative of any real population. Despite this limitation, it is more diverse than most convenience samples (Kennedy et al. 2018; Dworkin et al. 2016), with turkers in the U.S. mainly differing in being younger, more educated, lower income, and more female biased than the greater U.S. population (Ross et al. 2010). 
+Participants for this study were recruited from Amazon Mechanical Turk, a crowdsourcing platform that allows for the creation of Human Intelligence Tasks (HITs) that workers can complete for pay. As Amazon provides the infrastructure, it allows for a relatively low-cost way of collecting data for academic research at the cost of the data not being representative of any real population. Despite this limitation, it is more diverse than most convenience samples (Kennedy et al. 2018; Dworkin et al. 2016), with turkers in the U.S. mainly differing in being younger, more educated, lower income, and more female biased than the greater U.S. population (Ross et al. 2010). 
 	
-	Overall, the quality of data provided by MTurk workers tends to resemble that of university sample pools, with there being some indication that it might outperform university samples in a few important areas. This is seen in that while both MTurk workers and university students engage in problematic behaviors that might lessen data quality to similar amounts (Necka et al. 2016), workers on MTurk have been shown to be more attentive than samples of university students (Hauser et al. 2018). For this reason, concerns about data quality come primarily from potential bot use and respondents faking their location to take surveys in a language they do not understand well, with the former concern being largely unfounded and the latter able to be corrected for with the tools used in this study (Kennedy et al. 2018)
+Overall, the quality of data provided by MTurk workers tends to resemble that of university sample pools, with there being some indication that it might outperform university samples in a few important areas. This is seen in that while both MTurk workers and university students engage in problematic behaviors that might lessen data quality to similar amounts (Necka et al. 2016), workers on MTurk have been shown to be more attentive than samples of university students (Hauser et al. 2018). For this reason, concerns about data quality come primarily from potential bot use and respondents faking their location to take surveys in a language they do not understand well, with the former concern being largely unfounded and the latter able to be corrected for with the tools used in this study (Kennedy et al. 2018)
 	
 ### Sample
 
@@ -280,6 +280,10 @@ kable(
   )
 ```
 
+```{r pcaT1Loadings}
+pca_loadings_plot(pcaT1)
+```
+
 
 ```{r biplotT1}
 biplotT1
@@ -302,6 +306,11 @@ We predicted the following interaction between conflict and information:
 Contrary to our prediction, there was no significant interaction between conflict and information in their effects on PC1 at time 1 ($p = `r signif(mT1interaction_anova['conflict:p_info', 'Pr(>F)'], 2)`$).
 
 ## Time 2 Signal Effects
+
+```{r signalheatmap, fig.cap="How participants in each signal condition rated the sister's mental state. Participants could check any number of conditions. Colors represent the percent of participants that checked each condition. Red = low, Brown = middle, Yellow and White = high."}
+heatmap(signalmat, scale = 'none')
+```
+
 
 ### Preregistered tests
 
@@ -338,6 +347,14 @@ Our predicted interactions of signals with conflict were:
 
 ```{r conflictInteractions, fig.cap=""}
 (p_comfort_signal_conflict + p_lend_signal_conflict + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict + p_money_signal_conflict + scale_y_continuous(limits = c(-40, 20)))
+```
+
+## Exploratory analyses
+
+For our exploratory analyses, we restricted our attention to three signals: verbal request, crying, and depression, which we ranked in that order, and to two information conditions: private information and honest, which we ranked in that order. We then compared the causal effect of the signal on emotional and instrumental responses towards the sister.
+
+```{r pc1t1t2, fig.cap="PC1 at time 2 as a function of PC1 at time 1, by signal and conflict condition. Each dot is one participant. Lines fit by loess regression."}
+p_pc1_t1t2
 ```
 
 
