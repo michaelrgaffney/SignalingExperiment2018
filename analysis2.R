@@ -330,10 +330,6 @@ p_money_signal_pinfo <-
   interactplot(delta_needs_money ~ signal2 * p_info - 1, 'p_info', '\nD. Change in perceived need for money', removeY = T)
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
-p_ease <- interactplot(delta_needs_money ~ signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
-  
-
-
 
 # signal X conflict interactios
 p_comfort_signal_conflict <- 
@@ -591,6 +587,21 @@ rownames(mat) <- d_mean_feel$signal
 
 heatmap(mat, scale = 'none')
 
+## my attempt
+distxy <- dist(mat)
+hc <- hclust(distxy)
+dend <- as.dendrogram(hc)
+
+
+grey_scale =c("#333333", "#5C5C5C", "#757575", "#8A8A8A", "#9B9B9B", "#AAAAAA", "#B8B8B8", "#C5C5C5", "#D0D0D0", "#DBDBDB", "#E6E6E6")
+blue_red =c("#053061", "#2166AC", "#4393C3", "#92C5DE", "#D1E5F0", "#F7F7F7","#FDDBC7", "#F4A582", "#D6604D", "#B2182B", "#67001F")
+yellow_red =c("#ffff00", "#ffea00", "#ffd400", "#ffbf00", "#ffaa00", "#ff9500", "#ff8000", "#ff6a00", "#ff5500", "#ff4000", "#ff2b00", "#ff1500", "#ff0000")
+navajowhite_navy =c("#000080", "#151284", "#2b2587", "#40388b", "#554a8f", "#6a5d93", "#806f97", "#95819a", "#aa949e", "#bfa7a2", "#d4b9a5", "#eacba9", "#ffdead")
+gapmap(m = as.matrix(hclust), d_row= rev(dend), d_col=dend, col = grey_scale)
+gapmap(m = as.matrix(distxy), d_row= rev(dend), d_col=dend,  mode = "quantitative", mapping="linear", col = navajowhite_navy)
+
+## end my attempt
+
 lvls = names(d_mean_feel[-1])[order(as.numeric(d_mean_feel[2,-1]))]
 
 d_mean_long <-
@@ -623,262 +634,6 @@ autoplot(
   frame.type = 'norm'
 ) +
   theme_bw()
-
-
-#MC2.3 exploration d0
-MCM <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(needsmoneyt2 ~ MC2.1_1 + believeneedt2 + believehealtht2+ OutOfOptions, data =.) 
-summary(MCM)
-plot(allEffects(MCM))
-
-#including all MC2.3 means likelylendmoneyt1 only increased r-squared by .02
-MCM2 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(likelylendmoneyt2 ~ Angry + Sad + Suicidal + MentallyIll + Depressed + OutOfOptions + Happy +
-       Neutral + Scared + Tired + signal, data =.) 
-summary(MCM2)
-plot(allEffects(MCM2))
-
-#MC2.3 better at predicting likelyhood lending than needsmoney
-MCM3 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(needsmoneyt2 ~ Angry + Sad + Suicidal + MentallyIll + Depressed + OutOfOptions + Happy +
-       Neutral + Scared + Tired + signal, data =.) 
-summary(MCM3)
-plot(allEffects(MCM3))
-
-#depressed, sad, and scared all similar across multiple models when only comparing verbal to depression.
-#disappears when crying is in
-MCM4 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         comfortablelendingt1 = comfortablelendingt1/50000,
-         comfortablelendingt2 = comfortablelendingt2/50000,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(comfortablelendingt2 ~ Angry + Sad + Suicidal + MentallyIll + Depressed + OutOfOptions + Happy +
-       Neutral + Scared + Tired + signal, data =.) 
-summary(MCM4)
-plot(allEffects(MCM4))
-
-MCM5 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         comfortablelendingt1 = comfortablelendingt1/50000,
-         comfortablelendingt2 = comfortablelendingt2/50000,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(believeneedt2 ~ Angry + Sad + Suicidal + MentallyIll + Depressed + OutOfOptions + Happy +
-       Neutral + Scared + Tired + signal, data =.) 
-summary(MCM5) #reverse coded
-plot(allEffects(MCM5))
-
-MCM6 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         comfortablelendingt1 = comfortablelendingt1/50000,
-         comfortablelendingt2 = comfortablelendingt2/50000,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(MC2.1_1 ~ Angry + Sad + Suicidal + MentallyIll + Depressed + OutOfOptions + Happy +
-       Neutral + Scared + signal, data =.) 
-summary(MCM6) #reverse coded
-plot(allEffects(MCM6))
-
-MCM7 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         comfortablelendingt1 = comfortablelendingt1/50000,
-         comfortablelendingt2 = comfortablelendingt2/50000,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(MC2.1_1 ~  MentallyIll + Scared + signal, data =.) 
-summary(MCM7) #reverse coded
-plot(allEffects(MCM7))
-
-
-LG <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         comfortablelendingt1 = comfortablelendingt1/50000,
-         comfortablelendingt2 = comfortablelendingt2/50000,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal, data =.) 
-summary(LG)
-plot(allEffects(LG))
-
-LG2 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         comfortablelendingt1 = comfortablelendingt1/50000,
-         comfortablelendingt2 = comfortablelendingt2/50000,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(comfortablelendingt2 ~ comfortablelendingt1 + signal, data =.) 
-summary(LG2)
-plot(allEffects(LG2))
-
-LG3 <- 
-  df %>% 
-  filter(signal %in% c("VerbalRequest", "Crying", "Depression")) %>% 
-  mutate(likelylendmoneyt1 = likelylendmoneyt1/100,
-         likelylendmoneyt2 = likelylendmoneyt2/100,
-         needsmoneyt1 = needsmoneyt1/100,
-         needsmoneyt2 = needsmoneyt2/100,
-         MC1.2_1 = MC1.2_1/100,
-         MC2.2_1 = MC2.2_1/100,
-         believehealtht1 = believehealtht1/100,
-         believehealtht2 = believehealtht2/100,
-         believeneedt1 = believeneedt1/100,
-         believeneedt2 = believeneedt2/100,
-         MC1.1_1 = MC1.1_1/100,
-         MC2.1_1 = MC2.1_1/100,
-         MC2.4_1 = MC2.4_1/100,
-         daughterharmt1 = daughterharmt1/100,
-         daughterharmt2 = daughterharmt2/100,
-         comfortablelendingt1 = comfortablelendingt1/50000,
-         comfortablelendingt2 = comfortablelendingt2/50000,
-         signal = factor(signal, levels = c("VerbalRequest", "Crying", "Depression"))) %>% 
-  lm(comfortablelendingt2 ~ needsmoneyt2 + signal, data =.) 
-summary(LG3)
-plot(allEffects(LG3))
 
 # Perceived emotions vs. PC1t2
 
@@ -951,4 +706,10 @@ p_anger
 p_believeneed <- interactplot(believeneedt2 ~ believeneedt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
 p_believeneed
 
+# for analysis2
+d0$signal2 <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'FacialSadnesswithCrying', 'Anger', 'Depression', 'DepressionwithSuicideThreat', 'SuicideAttempt'))
+full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal2 * conflict * p_info, data = d0)
+plot(allEffects(full_int_overview))
 
+full_int_overview2 <- glm(likelylendmoneyt2 ~ signal2 * conflict * p_info, data = d0)
+plot(allEffects(full_int_overview2))

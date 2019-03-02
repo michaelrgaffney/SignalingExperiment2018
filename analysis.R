@@ -658,3 +658,9 @@ Anova(mfint, type = 3)
 plot(allEffects(mfint))
 
 
+
+# for analysis2
+d$signal <- factor(d$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'FacialSadnesswithCrying', 'Anger', 'Depression', 'DepressionwithSuicideThreat', 'SuicideAttempt'))
+  #d$signal = ordered(signal), levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'FacialSadnesswithCrying', 'Anger', 'Depression', 'DepressionwithSuicideThreat', 'SuicideAttempt'))
+full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal * conflict * p_info, data = d)
+plot(allEffects(full_int_overview))
