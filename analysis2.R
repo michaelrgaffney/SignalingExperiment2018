@@ -724,4 +724,11 @@ d0 %>%
   mutate_if(is.numeric, as.integer) %>% 
   as.data.frame %>%
   upset(order.by = 'freq', nsets = 12)
-  
+
+# Control condition only
+d0 %>%
+  dplyr::select(signal, Angry:NoneOfAbove) %>% 
+  dplyr::filter(signal == 'Control') %>% 
+  mutate_if(is.numeric, as.integer) %>% 
+  as.data.frame %>%
+  upset(order.by = 'freq', nsets = 12)
