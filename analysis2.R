@@ -625,8 +625,37 @@ emotions <-
   dplyr::select(signal,Angry:NoneOfAbove)
 
 m <- prcomp(emotions[-1], scale. = F)
+emotions$PC1 <- m$x[,1]
+emotions$PC2 <- m$x[,2]
+
 plot(m)
-# pca_loadings_plot(m)
+pca_loadings_plot(m)
+
+autoplot(
+  m,
+  loadings = T,
+  loadings.label = T,
+  data = emotions
+) + theme_bw()
+
+# Order signals by median of PC1
+emotions$signal <- fct_reorder(emotions$signal, emotions$PC1)
+autoplot(
+  m,
+  data = emotions,
+  colour = 'signal',
+  frame.type = 'norm'
+) + facet_wrap(~signal) + theme_bw() + labs(title = 'Ordered by PC1')
+
+# Order signals by median of PC2
+emotions$signal <- fct_reorder(emotions$signal, emotions$PC2)
+autoplot(
+  m,
+  data = emotions,
+  colour = 'signal',
+  frame.type = 'norm'
+) + facet_wrap(~signal) + theme_bw() + labs(title = 'Ordered by PC2')
+
 
 autoplot(
   m, 
