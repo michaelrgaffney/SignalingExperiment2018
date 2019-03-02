@@ -15,6 +15,7 @@ library(ggfortify)
 library(naniar)
 library(broom)
 library(hagenutils)
+library(UpSetR)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
@@ -938,3 +939,10 @@ mdem <- lm(-PC1t1 ~ Sex * conflict + Sex * p_info + Sex * years_education + Sex 
 summary(mdem)
 plot(allEffects(mdem))
 
+# Upset plot
+
+d0 %>%
+  dplyr::select(signal, Angry:NoneOfAbove) %>% 
+  mutate_if(is.numeric, as.integer) %>% 
+  as.data.frame %>%
+  upset(order.by = 'freq', nsets = 12)
