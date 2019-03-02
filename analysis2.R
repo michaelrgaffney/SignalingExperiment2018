@@ -647,6 +647,9 @@ autoplot(
   frame.type = 'norm'
 ) + facet_wrap(~signal) + theme_bw() + labs(title = 'Ordered by PC1')
 
+ggplot(emotions, aes(signal, PC1)) + geom_boxplot() + geom_point() + theme_bw() + coord_flip()
+
+
 # Order signals by median of PC2
 emotions$signal <- fct_reorder(emotions$signal, emotions$PC2)
 autoplot(
@@ -655,6 +658,8 @@ autoplot(
   colour = 'signal',
   frame.type = 'norm'
 ) + facet_wrap(~signal) + theme_bw() + labs(title = 'Ordered by PC2')
+
+ggplot(emotions, aes(signal, PC2)) + geom_boxplot() + geom_point() + theme_bw() + coord_flip()
 
 
 autoplot(
