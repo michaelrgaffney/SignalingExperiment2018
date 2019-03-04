@@ -3,6 +3,7 @@ title: "Master's Thesis"
 author: "Michael Gaffney"
 date: "January 26, 2019"
 output: html_document
+bibliography: "Masters_Thesis_Bbib.bib"
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +14,7 @@ library(patchwork)
 
 ## Introduction
 
-Long considered pathological sadness, depression has gained increased attention for its potential to function as a signal of need capable of bringing about positive changes in social relationships (Hagen 2003). Referred to as the bargaining model of depression, this view shares much in common with signaling explanations for crying (Hendriks et al., 2008; Hasson 2009), self-harm (Hagen et al., 2008), suicide attempts (Rosenthal, 1993; Syme et al., 2016), and illness symptoms (Steinkopf, 2015; Tiokhin, 2016), all of which view the costs involved as a key component of eliciting important social support. Based mainly in signaling theory, such approaches have all benefited greatly from economics and game theory, with the result being explanations for the existence of such states that emphasize the causal role of one’s social environment rather than simply focusing on one’s internal state. 
+Long considered pathological sadness, depression has gained increased attention for its potential to function as a signal of need capable of bringing about positive changes in social relationships [@hagenBargainingModelDepression2003](Hagen 2003). Referred to as the bargaining model of depression, this view shares much in common with signaling explanations for crying (Hendriks et al., 2008; Hasson 2009), self-harm (Hagen et al., 2008), suicide attempts (Rosenthal, 1993; Syme et al., 2016), and illness symptoms (Steinkopf, 2015; Tiokhin, 2016), all of which view the costs involved as a key component of eliciting important social support. Based mainly in signaling theory, such approaches have all benefited greatly from economics and game theory, with the result being explanations for the existence of such states that emphasize the causal role of one’s social environment rather than simply focusing on one’s internal state. 
 
 Due to the similarities between the ways in which they are suggested to achieve their hypothesized functions, there is much to be gained by comparing depression to the other proposed signals of need to better understand both the situations that bring them about and what determines differences in how they are responded to. In doing so, it should be possible to identify the fundamental similarities they share and create testable hypotheses that transcend signal type and, therefore, have the potential to further influence costly signaling theory.
 
@@ -408,6 +409,8 @@ Despite these outcomes, our predictions from signaling theory fit the depression
 
 The results of this study suggest a handful of directions future research should take when examining depression as a costly signal of need. As the predicted relationship between signal strength and support was found when examining depression and the less costly signals, the first step would be to replicate these results in a second, more efficient study focusing solely on these signals due to the problems of accepting these findings after one study. Assuming similar results are found, attempting a replication outside of a Western population would be an important next step as if responses to depression are shaped in part by adaptations sensitive to cheating attempts, the underlying mechanisms responsible for our findings should be shared cross-culturally (cite).
 	This study also highlights a few possible directions for the signals outside of depression. In regard to crying, research its costs is critical to examining its chances of being a costly signal of need, something which is even more important with building evidence that crying often results in positive responses (cite). When it comes to suicide attempts, studies which examine more extreme scenarios in which it might be a better fit would be welcome to further test which, if any, situations result in them leading to more support. Regardless of the signal, future research should also be open to the possibility that the costs of the signals may be accomplishing other functions besides simply increasing the believability of need for support. For example, suicide attempts have been suggested to increase the effectiveness of apologies due to its ability to signal honest regret rather than need (cite), and it may be that the conspicuous natures of the displays may be especially useful when the signal does not see the target regularly.
+	
+# References
 	
 # Supplementary information
 
