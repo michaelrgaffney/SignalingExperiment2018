@@ -16,6 +16,7 @@ library(naniar)
 library(broom)
 library(hagenutils)
 library(gapmap)
+library(UpSetR)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
@@ -624,8 +625,42 @@ emotions <-
   dplyr::select(signal,Angry:NoneOfAbove)
 
 m <- prcomp(emotions[-1], scale. = F)
+emotions$PC1 <- m$x[,1]
+emotions$PC2 <- m$x[,2]
+
 plot(m)
-# pca_loadings_plot(m)
+pca_loadings_plot(m)
+
+autoplot(
+  m,
+  loadings = T,
+  loadings.label = T,
+  data = emotions
+) + theme_bw()
+
+# Order signals by median of PC1
+emotions$signal <- fct_reorder(emotions$signal, emotions$PC1)
+autoplot(
+  m,
+  data = emotions,
+  colour = 'signal',
+  frame.type = 'norm'
+) + facet_wrap(~signal) + theme_bw() + labs(title = 'Ordered by PC1')
+
+ggplot(emotions, aes(signal, PC1)) + geom_boxplot() + geom_point() + theme_bw() + coord_flip()
+
+
+# Order signals by median of PC2
+emotions$signal <- fct_reorder(emotions$signal, emotions$PC2)
+autoplot(
+  m,
+  data = emotions,
+  colour = 'signal',
+  frame.type = 'norm'
+) + facet_wrap(~signal) + theme_bw() + labs(title = 'Ordered by PC2')
+
+ggplot(emotions, aes(signal, PC2)) + geom_boxplot() + geom_point() + theme_bw() + coord_flip()
+
 
 autoplot(
   m, 
@@ -715,3 +750,19 @@ plot(allEffects(full_int_overview))
 
 full_int_overview2 <- glm(likelylendmoneyt2 ~ signal2 * conflict * p_info, data = d0)
 plot(allEffects(full_int_overview2))
+
+# Upset plot
+
+d0 %>%
+  dplyr::select(signal, Angry:NoneOfAbove) %>% 
+  mutate_if(is.numeric, as.integer) %>% 
+  as.data.frame %>%
+  upset(order.by = 'freq', nsets = 12)
+
+# Control condition only
+d0 %>%
+  dplyr::select(signal, Angry:NoneOfAbove) %>% 
+  dplyr::filter(signal == 'Control') %>% 
+  mutate_if(is.numeric, as.integer) %>% 
+  as.data.frame %>%
+  upset(order.by = 'freq', nsets = 12)
