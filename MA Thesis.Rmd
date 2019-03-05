@@ -4,6 +4,7 @@ author: "Michael Gaffney"
 date: "January 26, 2019"
 output: html_document
 bibliography: "MTBib.bib"
+csl: "apa.csl"
 ---
 
 ```{r setup, include=FALSE}
