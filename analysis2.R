@@ -15,7 +15,7 @@ library(ggfortify)
 library(naniar)
 library(broom)
 library(hagenutils)
-# library(gapmap)
+library(gapmap)
 library(UpSetR)
 library(patchwork)
 
@@ -762,6 +762,33 @@ overviewa <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = lis
 overviewb <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), partial = F, rug = F, gg = T) +
   theme_bw() + labs(y = "PC1 Time 2", x = "", title = "B. Support") +coord_flip()
 
+
+# Custom ggplot
+vis_conflict <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), plot = F)
+vis_support <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), plot = F)
+vis_overview <- rbind(vis_conflict$fit, vis_support$fit)
+
+p <- 
+  ggplot(vis_overview, aes(signal, visregFit, colour=p_info)) + 
+  geom_point(position = position_dodge(width = 0.3)) +
+  geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.3)) +
+  # geom_hline(yintercept = 0, linetype = 'dotted') +
+  facet_wrap(~conflict) +
+  labs(title = 'Overview', x = '', y = '') +
+  coord_flip() +
+  theme_bw()
+p
+  
+p <- 
+  ggplot(vis_overview, aes(signal, visregFit, colour=p_info, shape=conflict)) + 
+  geom_point(position = position_dodge(width = 0.3), size = 3) +
+  geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.3), size = 1) +
+  labs(title = 'Overview', x = '', y = '') +
+  coord_flip() +
+  theme_bw(20)
+p
+
+  
 #Plot_full_int
 #full_int_overview2 <- glm(likelylendmoneyt2 ~ signal * conflict * p_info, data = d0)
 #plot(allEffects(full_int_overview2))
