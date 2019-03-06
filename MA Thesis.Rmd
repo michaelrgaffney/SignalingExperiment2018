@@ -272,12 +272,12 @@ At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (co
 
 To confirm that our manipulations had the desired effects, we analyzed our T1 outcome variables. All 11 T1 outcome variables regarding the sister were strongly positively correlated with each other, except for anger, which was negatively correlated, and sadness about the niece's health problem, which was about the niece and not the sister (and was weakly positively correlated). Among the positively correlated sister variables, correlation coefficients ranged from `r signif(min(cmu), 2)` to `r signif(max(cmu), 2)`, with a mean of `r signif(mean(cmu), 2)`. We therefore conducted a Principle Components Analysis (PCA) of our T1 vars. PC1 accounted for `r signif(100*summary(pcaT1)$importance[2,1], 2)`% of the variance, and all T1 variables loaded equally on this component except for sadness about the sister's daughter's health problem, which loaded primarily on PC2. See Table X and Figure X.
 
-```{r pcaT1Loadings}
+```{r pcaT1Loadings, fig.asp= "Loadings plot showing how each of the variables included in our T1 PCA load on the first two principle components."}
 pca_loadings_plot(pcaT1, components = 1:2)
 ```
 
 
-```{r biplotT1}
+```{r biplotT1, fig.cap= "Biplot of PC1 and PC2 at T1. The arrows represent the loadings of each variable on the first two prinicpal components. Each dot is one participant."}
 biplotT1
 ```
 
@@ -449,14 +449,14 @@ dotchart(sort(table(signalingdata2018$State)))
 
 ## Appendix 3
 
-```{r Full Interaction Overview, message=FALSE, warning=FALSE}
+```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the self-reported liklihood of lending money to the sister. The x-axis is ordered based on our predictions, with signals expected to result in more support as one moves right."}
 plot(allEffects(full_int_overview2))
 Plot_full_int
 ```
 
 ## Appendix 4
 
-```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higer values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)" }
+```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higer values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
 (p_ease + p_ease2)
 ```
 

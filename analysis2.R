@@ -751,15 +751,20 @@ p_believeneed <- interactplot(believeneedt2 ~ believeneedt1 + signal2 * p_info -
 p_believeneed
 
 # for analysis2
-d0$signal2 <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'FacialSadnesswithCrying', 'Anger', 'Depression', 'DepressionwithSuicideThreat', 'SuicideAttempt'))
-full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal2 * conflict * p_info, data = d0)
+d0$signal <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'Crying', 'Anger', 'Depression', 'Depression&Suicidal', 'Suicide attempt'))
+full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal * conflict * p_info, data = d0)
 plot(allEffects(full_int_overview))
-Plot_full_int <- visreg(full_int_overview, xvar= "signal2", by = "p_info", partial = F, rug = F, gg = T) +
-  theme_bw() + labs(y = "PC1 Time 2", x = "")
-Plot_full_int
 
-full_int_overview2 <- glm(likelylendmoneyt2 ~ signal2 * conflict * p_info, data = d0)
-plot(allEffects(full_int_overview2))
+
+overviewa <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), partial = F, rug = F, gg = T) +
+  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "A. Conflict") + coord_flip()
+
+overviewb <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), partial = F, rug = F, gg = T) +
+  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "B. Support") +coord_flip()
+
+#Plot_full_int
+#full_int_overview2 <- glm(likelylendmoneyt2 ~ signal * conflict * p_info, data = d0)
+#plot(allEffects(full_int_overview2))
 
 # Upset plot
 
