@@ -272,15 +272,6 @@ At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (co
 
 To confirm that our manipulations had the desired effects, we analyzed our T1 outcome variables. All 11 T1 outcome variables regarding the sister were strongly positively correlated with each other, except for anger, which was negatively correlated, and sadness about the niece's health problem, which was about the niece and not the sister (and was weakly positively correlated). Among the positively correlated sister variables, correlation coefficients ranged from `r signif(min(cmu), 2)` to `r signif(max(cmu), 2)`, with a mean of `r signif(mean(cmu), 2)`. We therefore conducted a Principle Components Analysis (PCA) of our T1 vars. PC1 accounted for `r signif(100*summary(pcaT1)$importance[2,1], 2)`% of the variance, and all T1 variables loaded equally on this component except for sadness about the sister's daughter's health problem, which loaded primarily on PC2. See Table X and Figure X.
 
-```{r pcaT1}
-mat <- pcaT1$rotation[,1:2]
-kable(
-  mat, 
-  digits = 2,
-  caption = 'Variables loadings for PCA of  T1 support and emotion variables'
-  )
-```
-
 ```{r pcaT1Loadings}
 pca_loadings_plot(pcaT1, components = 1:2)
 ```
@@ -358,6 +349,17 @@ For our exploratory analyses, we restricted our attention to three signals: verb
 p_pc1_t1t2
 ```
 
+Our favored exploratory model included an interaction between signal and conflict with the information manipulation having only a main effect on PC1 at time 2.#why chosen?
+
+```{r exploratory model, fig.cap= "Effects plot showing the interaction between signal type and conflict in our favored exploratory model."}
+Plot_Exploratory
+```
+
+As changes in perceived need were strongly correlated with our measures of instrumental support, we ran a mediation model to see how this was influenced by signal type. According to this analysis,about two-thirds of the effect of the signal manipulation was mediated by changes in percieved need (ACME), with ADE being the direct effect of signal type. 
+
+```{r mediation plot, fig.cap= "Mediation of signal effect by change in percieved need  (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect"}
+plot(mediation_model)
+```
 
 ## Discussion
 
@@ -377,6 +379,8 @@ Although depression outperformed the other signals when averaged across conditio
 
 Although not explicitly predicted as part of our preregistration and examined only in exploratory analyses, it appears that part of depression’s success in eliciting positive responses relative to the less costly signals came from its ability to increase the perception of honest need in others. This is seen in both the strong correlation  between perceived need and our measures of instrumental support across signals and the finding that about two-thirds of the effect of signal on helping was through signal type’s effect on perceived need in our mediation analysis on depression and the less costly signals. However, the fact that one third of the effect of signal type had a direct effect on the amount participants were willing to lend is not entirely consistent with costly signaling theory, which tends to view the costs involved with a signal solely as a way to increase the perception of honest need in others. This suggests that either the signals may be doing something else or, more likely, that our measure of need is imperfect. 
 
+Despite depression’s relative success in eliciting positive responses relative to the other signals, it did not result in large increases in either our emotional are instrumental outcomes, nor did any other signal. Although we made no predictions to the contrary, this finding is surprising as the perceived likelihood of another’s need being honest (of which costly signals are expected to increase) is expected to play a large role in how one responds to requests for more support. Among the reasons this happened, the most likely is that participants expected depression symptoms before the signal in response to the severity of the imagined sister’s need. This is seen in that the most common combinations of responses to our question about how participants thought the sister included depression and the other emotions that loaded similarly on PC1, suggesting that depression symptoms here largely served to corroborate rather than enhance one’s appearance of need.
+
 Compared to depression, the suicide attempt condition resulted in relatively negative responses across manipulations. Among the reasons for this that still allow for some suicide attempts to be the result of adaptations for bargaining, the most likely is that it was too costly for the situation. Although signal strength is often conceived so that costlier displays invariably increase the honesty of the signal [@Zahavi1993], the believability of need is only one component in deciding if one should provide support and the size of such support. In this scenario, the fact that the niece was very young likely meant the probability of help mattering in the long-term relied heavily on the capability of the mother to provide care, whose display of suicide may have indicated this was in question. In line with this reasoning, those in the suicide condition often reported the mother as being mentally ill, something that was largely absent from those who read the depression condition.
 
 This potential mismatch between signal strength and the severity of one’s situation may also explain why suicide attempts did not result in increased perceptions of need as predicted by its costs alone. One way this might happen is if suicide attempts appear manipulative in times of minor need or situations in which a signal is not needed. Although we did not ask if participants viewed the sister’s request to be manipulative directly, those in the suicide attempt condition perceived the request as more indicative of an attempt to get the money for other purposes than those who saw less costly signals. In line with the manipulation explanation, this pattern was reliably seen across combinations of the information and conflict manipulations except for the private information with conflict condition, when signal strength is expected to matter most. However, the fact that it was so closely correlated with our other outcome variables prevents any firm conclusions about whether this relationship was causal. 
@@ -394,10 +398,11 @@ In addition to this, it is also likely that anger serves to motivate and signal 
 
 ### Limitations
 
-The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for our experimental design. Although this may have affected any part of this study, it likely had the largest impacts with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as expected due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. Despite this uncertainty, it is likely a safe assumption that certain signals came across better in vignette form than others and that this biased our results, something which may have been particularly impactful in the suicide condition due to the likelihood that participants were much more familiar with the other signals. 
+The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for any experimental design involving depression and suicide. Although this may have affected any part of this study, it likely had the largest impact with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as they were designed to due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. This being said, signal type interacted with both the conflict and information conditions had no effect on how difficult participants found it to put themselves in the scenarios presented to them, with the means and standard deviations being similar for each signal (Appendix 4). 
 
-Another key area in which a lack of ecological validity may have affected our results is if the overall scenario activated the relevant mechanisms involved with supporting those in need differently than would happen in a similar real-life scenario. As with the signals, it is extremely unlikely that all the mechanisms involved with the scenarios we created were activated in the same ways they would in real-world settings. For example, being asked to self-report one’s willingness to provide support to a hypothesized sister is likely to differ greatly from experiencing the same request to divert resources from a real daughter towards a real sister and niece, with it being much easier to self-report high levels of helpfulness. In addition to this, it is also far from guaranteed that the sister would be viewed as such, likely biasing our results towards less beneficial responses.
+Although this seems to be evidence in favor of our signal manipulations not biasing our results due to differences in one’s ability to consciously imagine the situations presented, we should not expect such conscious appraisals to have access to the same information that the systems underlying responses to the proposed signals in the real-world use [@NisbettWilson1977; @Nosek2007]. Therefore, despite not differing much in terms of a conscious disconnect from the study, it is likely a safe assumption that certain signals came across better in vignette form than others and biased our results through the nonconscious inferences of participants. 
 
+The lack of ecological validity required by this study was likely also felt when it came to relations with the imagined sister. First and foremost, it is far from guaranteed that the sister would be viewed as such, something which would likely bias our results towards less beneficial responses as more support should be expected to be given to kin all else being equal [@Hamilton1964]. In addition to this, being asked to self-report one’s willingness to provide support to a hypothesized sister is likely to differ greatly from experiencing the same request to divert resources from a real daughter towards a real sister and niece. In particular, it is likely much easier to self-report high levels of helpfulness than to actually engage in helping behavior, especially if participants could not fully act anonymously and were, therefore, influenced by reputation concerns. 
 
 ## Conclusion
 
@@ -413,14 +418,36 @@ The results of this study suggest a handful of directions future research should
 
 This study also highlights a few possible directions for the signals outside of depression. In regard to crying, research its costs is critical to examining its chances of being a costly signal of need, something which is even more important with building evidence that crying often results in positive responses [@VingerhoetsEtAl2009]. When it comes to suicide attempts, studies which examine more extreme scenarios in which it might be a better fit would be welcome to further test which, if any, situations result in them leading to more support. Regardless of the signal, future research should also be open to the possibility that the costs of the signals may be accomplishing other functions besides simply increasing the believability of need for support. For example, suicide attempts have been suggested to increase the effectiveness of apologies due to its ability to signal honest regret rather than need [@SymeHagen2018], and it may be that the conspicuous natures of the displays may be especially useful when the signal does not see the target regularly. 
 	
-# Supplementary information
+# Appendices
+
+## Appendix 1
+
+```{r pcaT1}
+mat <- pcaT1$rotation[,1:2]
+kable(
+  mat, 
+  digits = 2,
+  caption = 'Variables loadings for PCA of  T1 support and emotion variables'
+  )
+```
+
+## Appendix 2
 
 ```{r numbersbystate, fig.height=10}
 dotchart(sort(table(signalingdata2018$State)))
 ```
 
+## Appendix 3
+
 ```{r Full Interaction Overview, message=FALSE, warning=FALSE}
 plot(allEffects(full_int_overview2))
+Plot_full_int
+```
+
+## Appendix 4
+
+```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higer values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)" }
+(p_ease + p_ease2)
 ```
 
 # References

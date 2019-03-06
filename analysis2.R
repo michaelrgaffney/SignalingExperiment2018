@@ -17,6 +17,7 @@ library(broom)
 library(hagenutils)
 library(gapmap)
 library(UpSetR)
+library(patchwork)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
@@ -470,8 +471,8 @@ p_pc1_t1t2 <-
 model.y <- glm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, family = gaussian, data = d2)
 model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2)
 
-# m <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
-# plot(m)
+mediation_model <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
+plot(mediation_model)
 
 # Exploratory models
 
@@ -504,7 +505,6 @@ summary(m)
 Anova(m, type = 3)
 plot(allEffects(m))
 Plot_Exploratory <- visreg(m, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
-Plot_Exploratory
 
 m <- lm(PC1t2all ~ signal * conflict, data = d2b)
 Anova(m, type = 3)
@@ -738,10 +738,13 @@ summary(mdem)
 plot(allEffects(mdem))
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
-p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Reported ease of imagining (signal by information)', removeY = F)
 p_ease
 
-p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Reported ease of imagining (signal by conflict)', removeY = F)
+p_ease2
+
+p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nB. Ease of putting in scenario Reported ease of imagining (signal by conflict)', removeY = F)
 p_anger
 
 p_believeneed <- interactplot(believeneedt2 ~ believeneedt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
@@ -751,6 +754,9 @@ p_believeneed
 d0$signal2 <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'FacialSadnesswithCrying', 'Anger', 'Depression', 'DepressionwithSuicideThreat', 'SuicideAttempt'))
 full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal2 * conflict * p_info, data = d0)
 plot(allEffects(full_int_overview))
+Plot_full_int <- visreg(full_int_overview, xvar= "signal2", by = "p_info", partial = F, rug = F, gg = T) +
+  theme_bw() + labs(y = "PC1 Time 2", x = "")
+Plot_full_int
 
 full_int_overview2 <- glm(likelylendmoneyt2 ~ signal2 * conflict * p_info, data = d0)
 plot(allEffects(full_int_overview2))
