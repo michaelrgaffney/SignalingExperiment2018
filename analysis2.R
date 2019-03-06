@@ -15,7 +15,7 @@ library(ggfortify)
 library(naniar)
 library(broom)
 library(hagenutils)
-library(gapmap)
+# library(gapmap)
 library(UpSetR)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
@@ -601,7 +601,7 @@ blue_red =c("#053061", "#2166AC", "#4393C3", "#92C5DE", "#D1E5F0", "#F7F7F7","#F
 yellow_red =c("#ffff00", "#ffea00", "#ffd400", "#ffbf00", "#ffaa00", "#ff9500", "#ff8000", "#ff6a00", "#ff5500", "#ff4000", "#ff2b00", "#ff1500", "#ff0000")
 navajowhite_navy =c("#000080", "#151284", "#2b2587", "#40388b", "#554a8f", "#6a5d93", "#806f97", "#95819a", "#aa949e", "#bfa7a2", "#d4b9a5", "#eacba9", "#ffdead")
 #gapmap(m = as.matrix(hclust), d_row= rev(dend), d_col=dend, col = grey_scale)
-gapmap(m = as.matrix(distxy), d_row= rev(dend), d_col=dend,  mode = "quantitative", mapping="linear", col = navajowhite_navy)
+# gapmap(m = as.matrix(distxy), d_row= rev(dend), d_col=dend,  mode = "quantitative", mapping="linear", col = navajowhite_navy)
 
 ## end my attempt
 
