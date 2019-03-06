@@ -741,7 +741,7 @@ plot(allEffects(mdem))
 p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Reported ease of imagining (signal by information)', removeY = F)
 p_ease
 
-p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Reported ease of imagining (signal by conflict)', removeY = F)
+p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Signal by conflict', removeY = F)
 p_ease2
 
 p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nB. Ease of putting in scenario Reported ease of imagining (signal by conflict)', removeY = F)
