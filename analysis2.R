@@ -17,6 +17,7 @@ library(broom)
 library(hagenutils)
 # library(gapmap)
 library(UpSetR)
+library(patchwork)
 
 #+ message=F,warning=F,fig.width=10,fig.height=10
 
@@ -470,8 +471,8 @@ p_pc1_t1t2 <-
 model.y <- glm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, family = gaussian, data = d2)
 model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2)
 
-# m <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
-# plot(m)
+mediation_model <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
+plot(mediation_model)
 
 # Exploratory models
 
@@ -499,10 +500,11 @@ plot(Effect(c("signal", "conflict", "p_info"), m))
 # signal * conflict interaction
 # p_info main effect only
 
-m <- lm(PC1t2 ~ signal * conflict + p_info, data = d2)
+m <- lm(PC1t2 ~ signal * conflict + p_info, data = d2) #pca after conditions filtered
 summary(m)
 Anova(m, type = 3)
 plot(allEffects(m))
+Plot_Exploratory <- visreg(m, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
 
 m <- lm(PC1t2all ~ signal * conflict, data = d2b)
 Anova(m, type = 3)
@@ -591,17 +593,19 @@ rownames(signalmat) <- d_mean_feel$signal
 heatmap(signalmat, scale = 'none')
 
 ## my attempt
-distxy <- dist(signalmat)
+distxy <- dist(signalmat) #gets rid of checked answers
 hc <- hclust(distxy)
 dend <- as.dendrogram(hc)
-
+distxy2 <- dist(t(signalmat))
+hc2 <- hclust(distxy2)
+dend2 <- as.dendrogram(hc2)
 
 grey_scale =c("#333333", "#5C5C5C", "#757575", "#8A8A8A", "#9B9B9B", "#AAAAAA", "#B8B8B8", "#C5C5C5", "#D0D0D0", "#DBDBDB", "#E6E6E6")
 blue_red =c("#053061", "#2166AC", "#4393C3", "#92C5DE", "#D1E5F0", "#F7F7F7","#FDDBC7", "#F4A582", "#D6604D", "#B2182B", "#67001F")
 yellow_red =c("#ffff00", "#ffea00", "#ffd400", "#ffbf00", "#ffaa00", "#ff9500", "#ff8000", "#ff6a00", "#ff5500", "#ff4000", "#ff2b00", "#ff1500", "#ff0000")
 navajowhite_navy =c("#000080", "#151284", "#2b2587", "#40388b", "#554a8f", "#6a5d93", "#806f97", "#95819a", "#aa949e", "#bfa7a2", "#d4b9a5", "#eacba9", "#ffdead")
 #gapmap(m = as.matrix(hclust), d_row= rev(dend), d_col=dend, col = grey_scale)
-# gapmap(m = as.matrix(distxy), d_row= rev(dend), d_col=dend,  mode = "quantitative", mapping="linear", col = navajowhite_navy)
+gapmap(m = signalmat, d_row= rev(dend), d_col=dend2,  mode = "quantitative", mapping="linear", col = yellow_red)
 
 ## end my attempt
 
@@ -734,22 +738,33 @@ summary(mdem)
 plot(allEffects(mdem))
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
-p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Reported ease of imagining (signal by information)', removeY = F)
 p_ease
 
-p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
+p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Signal by conflict', removeY = F)
+p_ease2
+
+p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nB. Ease of putting in scenario Reported ease of imagining (signal by conflict)', removeY = F)
 p_anger
 
 p_believeneed <- interactplot(believeneedt2 ~ believeneedt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
 p_believeneed
 
 # for analysis2
-d0$signal2 <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'FacialSadnesswithCrying', 'Anger', 'Depression', 'DepressionwithSuicideThreat', 'SuicideAttempt'))
-full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal2 * conflict * p_info, data = d0)
+d0$signal <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'Crying', 'Anger', 'Depression', 'Depression&Suicidal', 'Suicide attempt'))
+full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal * conflict * p_info, data = d0)
 plot(allEffects(full_int_overview))
 
-full_int_overview2 <- glm(likelylendmoneyt2 ~ signal2 * conflict * p_info, data = d0)
-plot(allEffects(full_int_overview2))
+
+overviewa <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), partial = F, rug = F, gg = T) +
+  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "A. Conflict") + coord_flip()
+
+overviewb <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), partial = F, rug = F, gg = T) +
+  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "B. Support") +coord_flip()
+
+#Plot_full_int
+#full_int_overview2 <- glm(likelylendmoneyt2 ~ signal * conflict * p_info, data = d0)
+#plot(allEffects(full_int_overview2))
 
 # Upset plot
 
@@ -765,4 +780,11 @@ d0 %>%
   dplyr::filter(signal == 'Control') %>% 
   mutate_if(is.numeric, as.integer) %>% 
   as.data.frame %>%
-  upset(order.by = 'freq', nsets = 12)
+  upset(order.by = 'freq', nsets = 12, nintersect = 10)
+
+d0 %>%
+  dplyr::select(signal, Angry:NoneOfAbove) %>% 
+  dplyr::filter(signal == 'Depression&Suicidal') %>% 
+  mutate_if(is.numeric, as.integer) %>% 
+  as.data.frame %>%
+  upset(order.by = 'freq', nsets = 12, nintersect = 10)
