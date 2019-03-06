@@ -499,10 +499,12 @@ plot(Effect(c("signal", "conflict", "p_info"), m))
 # signal * conflict interaction
 # p_info main effect only
 
-m <- lm(PC1t2 ~ signal * conflict + p_info, data = d2)
+m <- lm(PC1t2 ~ signal * conflict + p_info, data = d2) #pca after conditions filtered
 summary(m)
 Anova(m, type = 3)
 plot(allEffects(m))
+Plot_Exploratory <- visreg(m, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
+Plot_Exploratory
 
 m <- lm(PC1t2all ~ signal * conflict, data = d2b)
 Anova(m, type = 3)
@@ -591,17 +593,19 @@ rownames(signalmat) <- d_mean_feel$signal
 heatmap(signalmat, scale = 'none')
 
 ## my attempt
-distxy <- dist(signalmat)
+distxy <- dist(signalmat) #gets rid of checked answers
 hc <- hclust(distxy)
 dend <- as.dendrogram(hc)
-
+distxy2 <- dist(t(signalmat))
+hc2 <- hclust(distxy2)
+dend2 <- as.dendrogram(hc2)
 
 grey_scale =c("#333333", "#5C5C5C", "#757575", "#8A8A8A", "#9B9B9B", "#AAAAAA", "#B8B8B8", "#C5C5C5", "#D0D0D0", "#DBDBDB", "#E6E6E6")
 blue_red =c("#053061", "#2166AC", "#4393C3", "#92C5DE", "#D1E5F0", "#F7F7F7","#FDDBC7", "#F4A582", "#D6604D", "#B2182B", "#67001F")
 yellow_red =c("#ffff00", "#ffea00", "#ffd400", "#ffbf00", "#ffaa00", "#ff9500", "#ff8000", "#ff6a00", "#ff5500", "#ff4000", "#ff2b00", "#ff1500", "#ff0000")
 navajowhite_navy =c("#000080", "#151284", "#2b2587", "#40388b", "#554a8f", "#6a5d93", "#806f97", "#95819a", "#aa949e", "#bfa7a2", "#d4b9a5", "#eacba9", "#ffdead")
 #gapmap(m = as.matrix(hclust), d_row= rev(dend), d_col=dend, col = grey_scale)
-gapmap(m = as.matrix(distxy), d_row= rev(dend), d_col=dend,  mode = "quantitative", mapping="linear", col = navajowhite_navy)
+gapmap(m = signalmat, d_row= rev(dend), d_col=dend2,  mode = "quantitative", mapping="linear", col = yellow_red)
 
 ## end my attempt
 
@@ -765,4 +769,11 @@ d0 %>%
   dplyr::filter(signal == 'Control') %>% 
   mutate_if(is.numeric, as.integer) %>% 
   as.data.frame %>%
-  upset(order.by = 'freq', nsets = 12)
+  upset(order.by = 'freq', nsets = 12, nintersect = 10)
+
+d0 %>%
+  dplyr::select(signal, Angry:NoneOfAbove) %>% 
+  dplyr::filter(signal == 'Depression&Suicidal') %>% 
+  mutate_if(is.numeric, as.integer) %>% 
+  as.data.frame %>%
+  upset(order.by = 'freq', nsets = 12, nintersect = 10)

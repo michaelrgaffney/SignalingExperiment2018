@@ -282,7 +282,7 @@ kable(
 ```
 
 ```{r pcaT1Loadings}
-pca_loadings_plot(pcaT1)
+pca_loadings_plot(pcaT1, components = 1:2)
 ```
 
 
