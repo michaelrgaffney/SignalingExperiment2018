@@ -784,7 +784,7 @@ p <-
   geom_point(position = position_dodge(width = 0.7), size = 3) +
   geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.7), size = 1) +
   geom_hline(yintercept = 0, linetype = 'dotted') +
-  labs(title = 'Overview', x = '', y = '\nΔ Likely to lend money (time 2)') +
+  labs(title = 'Overview', x = '', y = '\nLikely to lend money (time 2)') +
   coord_flip() +
   theme_bw(15)
 p
