@@ -214,6 +214,12 @@ To measure these responses, sliders which functioned as visual analogue scales w
 
 In addition to this, the amount of money participants were comfortable lending to their imagined sisters was also used as a dependent variable and was measured with a slider which ranged from $0 to $50,000 and allowed the participant to see the amount they were selecting. Unlike the previously described measures, it was repeated identically at both time periods and asked on its own page due to the desire to save the only question that allowed for partial support for after those with less flexibility were asked.
 
+Variable | Wording | Coding
+---------|---------|-------
+How is reasonable is the amount requested at T1 | How reasonable do you think the sister's request is? | 0: Very unreasonable; 100: Very reasonable
+How much harm will your daughter suffer at T1 | How much harm will you daughter suffer if you give your sister the money? | 0: No harm; 100: considerable harm
+
+
 #### Manipulation check
 
 To understand if our manipulations had the desired effect two brief manipulation checks were also included, one before the signal and one following it. The first set of checks involved a question about how close participants felt to the one requesting the help in the imagined scenario and a question about how significant of a request the $50,000 was perceived to be. The second set of checks also had these questions plus one examining what emotional state they thought the imagined signaler was experiencing.
@@ -244,9 +250,49 @@ demovars <-
     'years_education' = 'Years of education',
     'Siblings2' = 'Number of siblings',
     'Children' = 'Number of children',
-    "Duration (in seconds)" = 'Time to complete survey (seconds)'
+    "Duration (in seconds)" = 'Time to complete survey (seconds)',
+    "needsmoneyt1" = "Perceived need of money at T1",
+    "likelylendmoneyt1" = "How likely to lend money at T1",
+    "angryt1" = "How angry are you about the request at T1",
+    "satisfactiont1" = "How satisfied to help at T1",
+    "howsadt1" = "How sad about health problem at T1",
+    "howreasonablet1" = "How is reasonable is the amount requested at T1",
+    "believehealtht1" = "How much do believe the niece is ill at T1",
+    "daughterharmt1" = "How much harm will your daughter suffer at T1",
+    "believeneedt1" = "Suspicion of sister at T1",
+    "sisterbenefitt1" = "Perceived benefit to sister at T1",
+    "trustrepayt1" = "Trust that sister will repay at T1",
+    "comfortablelendingt1" = "Amount conformtable lending at T1 in dollars",
+    "MC1.1_1" = "How close to sister at T1",
+     
+    "delta_needs_money" = "Change in perceived need of money at T2",
+    "likelylendmoneyt2" = "Change in how likely to lend money at T2",
+    "angryt2" = "Change in anger about the request at T2",
+    "satisfactiont2" = "Change in How satisfied to help at T2",
+    "howsadt2" = "Change in How sad about health problem at T2",
+    "howreasonablet2" = "Change in How is reasonable is the amount requested at T2",
+    "believehealtht2" = "Change in How much do believe the niece is ill at T2",
+    "daughterharmt2" = "Change in How much harm will your daughter suffer at T2",
+    "believeneedt2" = "Change in Suspicion of sister at T2",
+    "sisterbenefitt2" = "Change in Perceived benefit to sister at T2",
+    "trustrepayt2" = "Change in Trust that sister will repay at T2",
+    "comfortablelendingt2" = "Change in Amount conformtable lending at T2 in dollars",
+    "MC2.4_1" = "How easy to imagine",
+    
+    "Angry" = "Is sister angry?",
+    "Sad" = "Is sister sad?",
+    "Suicidal" = "Is sister suicidal?",
+    "MentallyIll" = "Is sister mentally ill?",
+    "Depressed" = "Is sister depressed?",
+    "OutOfOptions" = "Is sister out of options?",
+    "Happy" = "Is sister happy?",
+    "Neutral" = "Does sister feel neutral?",
+    "Scared" = "Is sister scared?",
+    "Tired" = "Is sister tired?",
+    "Distressed" = "Is sister distressed?",
+    "NoneOfAbove" = "None of the above"
   )
-
+options(scipen=999)
 kable(
   custom.summarize(d0, demovars),
   caption = 'Summary statistics for all participants who met our inclusion criteria described above. A breakdown of the number of participants by state is availible in appendix 1.'
@@ -354,7 +400,7 @@ Our predicted interactions of signals with private information were:
 > We also predict that when the most severe signals, i.e., depression and suicidality,  are paired with information that the character in the vignette is likely to be lying, responses will be more aversive than when the signal is weaker.
 
 ```{r pinfoInteractions, fig.cap="Signal and information interactions. The effect of the signal, information interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
-(p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
+(p_comfort_signal_pinfo$plot + p_lend_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo$plot + p_money_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))
 ```
 
 Our predicted interactions of signals with conflict were:
@@ -362,7 +408,7 @@ Our predicted interactions of signals with conflict were:
 > We predict the coefficient for signal strength to increase in the conflict condition than in the no conflict condition.
 
 ```{r conflictInteractions, fig.cap="Signal and conflict interactions. The effect of the signal, conflict interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
-(p_comfort_signal_conflict + p_lend_signal_conflict + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict + p_money_signal_conflict + scale_y_continuous(limits = c(-40, 20)))
+(p_comfort_signal_conflict$plot + p_lend_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict$plot + p_money_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))
 ```
 
 ## Exploratory analyses
@@ -382,7 +428,7 @@ Plot_Exploratory
 ```
 
 ```{r expanova}
-kable(tidy(Anova(m_exp)), digits = 1, caption="Anova of interaction model depicted in Figure X.")
+kable(tidy(Anova(m_exp, type = 3)), digits = 1, caption="Anova of interaction model depicted in Figure X.")
 ```
 
 
@@ -475,8 +521,15 @@ p
 
 ## Appendix 4
 
-```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higer values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
-p_ease + p_ease2 + theme(axis.text.y=element_blank())
+```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higher values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
+p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank())
 ```
+
+## Appendix ??
+
+```{r}
+kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of xxx.')
+```
+
 
 # References

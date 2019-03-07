@@ -104,6 +104,10 @@ d0 <-
     signal = factor(signaldict[signal]),
     p_info = ordered(p_info, levels = c('Cheating', 'PrivateInformation', 'Honest')),
     conflict = factor(conflict, levels = c('Conflict', 'Support')),
+    angryt1 = 100 - angryt1,
+    howsadt1 = 100 - howsadt1,
+    daughterharmt1 = 100 - daughterharmt1,
+    believeneedt1 = 100 - believeneedt1,
     needsmoneyt2 = ifelse(is.na(needsmoneyt2), 50, needsmoneyt2),
     likelylendmoneyt2 = ifelse(is.na(likelylendmoneyt2), 50, likelylendmoneyt2),
     angryt2 = ifelse(is.na(angryt2), 50, angryt2),
@@ -111,12 +115,19 @@ d0 <-
     howreasonablet2 = ifelse(is.na(howreasonablet2), 50, howreasonablet2),
     believehealtht2 = ifelse(is.na(believehealtht2), 50, believehealtht2),
     believeneedt2 = ifelse(is.na(believeneedt2), 50, believeneedt2),
+    believeneedt2 = 100 - believeneedt2,
     sisterbenefitt2 = ifelse(is.na(sisterbenefitt2), 50, sisterbenefitt2),
     trustrepayt2 = ifelse(is.na(trustrepayt2), 50, trustrepayt2),
     daughterharmt2 = ifelse(is.na(daughterharmt2), 50, daughterharmt2),
     howsadt2 = ifelse(is.na(howsadt2), 50, howsadt2),
-    delta_needs_money = needsmoneyt2 - 50,
-    delta_lend = likelylendmoneyt2 - 50
+  ) %>% 
+  mutate_at(
+    vars(needsmoneyt2:trustrepayt2),
+    function(x) x - 50
+  ) %>% 
+  mutate(
+    delta_needs_money = needsmoneyt2,
+    delta_lend = likelylendmoneyt2
   )
 
 m <- lm(delta_needs_money ~ signal - 1, d0)
@@ -319,7 +330,7 @@ interactplot <- function(f, trm, ylab, removeLegend = F, removeY = F){
   if (removeY){
     p <- p + theme(axis.title.y = element_blank(), axis.text.y=element_blank())
   }
-  return(p)
+  return(list(plot = p, model = m))
 }
 
 # signal X p_info interactions
@@ -709,10 +720,10 @@ plot(allEffects(c2))
 # Although we did not ask if participants viewed the sister’s request to be manipulative directly, 
 # those in the suicide attempt condition perceived the request as more indicative of an attempt to get 
 # the money for other purposes than those who saw less costly signals.
-bm <- glm(believeneedt2/100 ~ conflict * signal * p_info, family = binomial, data = d0)
-summary(bm)
-Anova(bm, type = 3)
-plot(allEffects(bm))
+# bm <- glm(believeneedt2/100 ~ conflict * signal * p_info, family = binomial, data = d0)
+# summary(bm)
+# Anova(bm, type = 3)
+# plot(allEffects(bm))
 
 #importance of percieved need on instrumental outcomes
 # going for r-squards. Is this viable? Should anything else be included?
@@ -739,16 +750,16 @@ plot(allEffects(mdem))
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
 p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Information', removeY = F)
-p_ease
+p_ease$plot
 
 p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Conflict', removeY = F)
-p_ease2
+p_ease2$plot
 
 p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nB. Ease of putting in scenario Reported ease of imagining (signal by conflict)', removeY = F)
-p_anger
+p_anger$plot
 
 p_believeneed <- interactplot(believeneedt2 ~ believeneedt1 + signal2 * p_info - 1, 'p_info', '\nD. Ease of putting in scenario', removeY = F)
-p_believeneed
+p_believeneed$plot
 
 # for analysis2
 d0$signal <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'Crying', 'Anger', 'Depression', 'Depression&Suicidal', 'Suicide attempt'))
