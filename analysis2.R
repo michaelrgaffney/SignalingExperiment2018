@@ -500,11 +500,11 @@ plot(Effect(c("signal", "conflict", "p_info"), m))
 # signal * conflict interaction
 # p_info main effect only
 
-m <- lm(PC1t2 ~ signal * conflict + p_info, data = d2) #pca after conditions filtered
-summary(m)
-Anova(m, type = 3)
-plot(allEffects(m))
-Plot_Exploratory <- visreg(m, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
+m_exp <- lm(PC1t2 ~ signal * conflict + p_info, data = d2) #pca after conditions filtered
+summary(m_exp)
+Anova(m_exp, type = 3)
+plot(allEffects(m_exp))
+Plot_Exploratory <- visreg(m_exp, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
 
 m <- lm(PC1t2all ~ signal * conflict, data = d2b)
 Anova(m, type = 3)
@@ -738,10 +738,10 @@ summary(mdem)
 plot(allEffects(mdem))
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
-p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Reported ease of imagining (signal by information)', removeY = F)
+p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Information', removeY = F)
 p_ease
 
-p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Signal by conflict', removeY = F)
+p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Conflict', removeY = F)
 p_ease2
 
 p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nB. Ease of putting in scenario Reported ease of imagining (signal by conflict)', removeY = F)
@@ -752,7 +752,7 @@ p_believeneed
 
 # for analysis2
 d0$signal <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'Crying', 'Anger', 'Depression', 'Depression&Suicidal', 'Suicide attempt'))
-full_int_overview <- glm(likelylendmoneyt2 ~ likelylendmoneyt1 + signal * conflict * p_info, data = d0)
+full_int_overview <- glm(delta_lend ~ signal * conflict * p_info, data = d0)
 plot(allEffects(full_int_overview))
 
 
@@ -762,6 +762,34 @@ overviewa <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = lis
 overviewb <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), partial = F, rug = F, gg = T) +
   theme_bw() + labs(y = "Liklihood of lending the money at T2", x = "", title = "B. Support") +coord_flip()
 
+
+# Custom ggplot
+vis_conflict <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), plot = F)
+vis_support <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), plot = F)
+vis_overview <- rbind(vis_conflict$fit, vis_support$fit)
+
+p_overview <- 
+  ggplot(vis_overview, aes(signal, visregFit, colour=p_info)) + 
+  geom_point(position = position_dodge(width = 0.3)) +
+  geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.3)) +
+  geom_hline(yintercept = 0, linetype = 'dotted') +
+  facet_wrap(~conflict) +
+  labs(title = 'Overview', x = '', y = '') +
+  coord_flip() +
+  theme_bw()
+p
+  
+p <- 
+  ggplot(vis_overview, aes(signal, visregFit, colour=p_info, shape=conflict)) + 
+  geom_point(position = position_dodge(width = 0.7), size = 3) +
+  geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.7), size = 1) +
+  geom_hline(yintercept = 0, linetype = 'dotted') +
+  labs(title = 'Overview', x = '', y = '\nLikely to lend money (time 2)') +
+  coord_flip() +
+  theme_bw(15)
+p
+
+  
 #Plot_full_int
 #full_int_overview2 <- glm(likelylendmoneyt2 ~ signal * conflict * p_info, data = d0)
 #plot(allEffects(full_int_overview2))
