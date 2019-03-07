@@ -757,15 +757,16 @@ plot(allEffects(full_int_overview))
 
 
 overviewa <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), partial = F, rug = F, gg = T) +
-  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "A. Conflict") + coord_flip()
+  theme_bw() + labs(y = "", x = "", title = "A. Conflict") + coord_flip()
 
 overviewb <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), partial = F, rug = F, gg = T) +
-  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "B. Support") +coord_flip()
+  theme_bw() + labs(y = "Liklihood of lending the money at T2", x = "", title = "B. Support") +coord_flip()
 
 #Plot_full_int
 #full_int_overview2 <- glm(likelylendmoneyt2 ~ signal * conflict * p_info, data = d0)
 #plot(allEffects(full_int_overview2))
 
+(overviewa + overviewb + plot_layout(ncol = 1))
 # Upset plot
 
 d0 %>%
