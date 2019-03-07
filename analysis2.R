@@ -772,7 +772,7 @@ p <-
   ggplot(vis_overview, aes(signal, visregFit, colour=p_info)) + 
   geom_point(position = position_dodge(width = 0.3)) +
   geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.3)) +
-  # geom_hline(yintercept = 0, linetype = 'dotted') +
+  geom_hline(yintercept = 0, linetype = 'dotted') +
   facet_wrap(~conflict) +
   labs(title = 'Overview', x = '', y = '') +
   coord_flip() +
