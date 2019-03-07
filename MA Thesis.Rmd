@@ -449,15 +449,16 @@ dotchart(sort(table(signalingdata2018$State)))
 
 ## Appendix 3
 
-```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the self-reported liklihood of lending money to the sister. The x-axis is ordered based on our predictions, with signals expected to result in more support as one moves right."}
-plot(allEffects(full_int_overview2))
-Plot_full_int
+```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the self-reported liklihood of lending money to the sister. The y-axis is ordered based on our predictions, with signals expected to result in more support as one moves from bottom to top."}
+# plot(allEffects(full_int_overview2))
+# Plot_full_int
+p_overview
 ```
 
 ## Appendix 4
 
 ```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higer values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
-(p_ease + p_ease2)
+p_ease + p_ease2 + theme(axis.text.y=element_blank())
 ```
 
 # References

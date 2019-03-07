@@ -738,10 +738,10 @@ summary(mdem)
 plot(allEffects(mdem))
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
-p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Reported ease of imagining (signal by information)', removeY = F)
+p_ease <- interactplot(MC2.4_1 ~ signal2 * p_info - 1, 'p_info', '\nA. Information', removeY = F)
 p_ease
 
-p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Signal by conflict', removeY = F)
+p_ease2 <- interactplot(MC2.4_1 ~ signal2 * conflict - 1, 'conflict', '\nB. Conflict', removeY = F)
 p_ease2
 
 p_anger <- interactplot(angryt2 ~ angryt1 + signal2 * p_info - 1, 'p_info', '\nB. Ease of putting in scenario Reported ease of imagining (signal by conflict)', removeY = F)
@@ -768,7 +768,7 @@ vis_conflict <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = 
 vis_support <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), plot = F)
 vis_overview <- rbind(vis_conflict$fit, vis_support$fit)
 
-p <- 
+p_overview <- 
   ggplot(vis_overview, aes(signal, visregFit, colour=p_info)) + 
   geom_point(position = position_dodge(width = 0.3)) +
   geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.3)) +
