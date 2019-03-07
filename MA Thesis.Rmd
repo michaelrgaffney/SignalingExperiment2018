@@ -308,6 +308,16 @@ heatmap(signalmat, scale = 'none')
 
 In addition to allowing us to comfirm that the signals worked as designed, this question also allows for the examination of how the signals affected one's perception of the sister's current state and what baseline assumptions were being made in the control condition. Of particular interest is that those in the control condition often came in with the assumption that the sister was sad, scared, depressed and distressed despite not seeing a signal in the second portion of the vignette, with each of these option being checked by at least half of the participants (fig x).
 
+```{r epc1}
+epc1 
+```
+
+
+```{r mentallyill}
+p_mentallyill
+```
+
+
 ```{r control_MC2.4, fig.cap= "Upset plot showing how participants in the control condition described the emotional state of the imagined sister (check boxes with only none of the above being mutually exclusive with the others.The histogram in the lower left shows the amount of times each box was selected by participants. The plot to the right shows the 10 most common combinations and their frequency"}
 d0 %>%
   dplyr::select(signal, Angry:NoneOfAbove) %>% 

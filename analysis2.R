@@ -628,15 +628,15 @@ emotions <-
   d0 %>% 
   dplyr::select(signal,Angry:NoneOfAbove)
 
-m <- prcomp(emotions[-1], scale. = F)
-emotions$PC1 <- m$x[,1]
-emotions$PC2 <- m$x[,2]
+Epca <- prcomp(emotions[-1], scale. = F)
+emotions$PC1 <- Epca$x[,1]
+emotions$PC2 <- Epca$x[,2]
 
-plot(m)
-pca_loadings_plot(m)
+plot(Epca)
+pca_loadings_plot(Epca)
 
 autoplot(
-  m,
+  Epca,
   loadings = T,
   loadings.label = T,
   data = emotions
@@ -645,19 +645,19 @@ autoplot(
 # Order signals by median of PC1
 emotions$signal <- fct_reorder(emotions$signal, emotions$PC1)
 autoplot(
-  m,
+  Epca,
   data = emotions,
   colour = 'signal',
   frame.type = 'norm'
 ) + facet_wrap(~signal) + theme_bw() + labs(title = 'Ordered by PC1')
 
-ggplot(emotions, aes(signal, PC1)) + geom_boxplot() + geom_point() + theme_bw() + coord_flip()
+epc1 <- ggplot(emotions, aes(signal, PC1)) + geom_boxplot() + geom_point() + theme_bw() + coord_flip()
 
 
 # Order signals by median of PC2
 emotions$signal <- fct_reorder(emotions$signal, emotions$PC2)
 autoplot(
-  m,
+  Epca,
   data = emotions,
   colour = 'signal',
   frame.type = 'norm'
@@ -667,7 +667,7 @@ ggplot(emotions, aes(signal, PC2)) + geom_boxplot() + geom_point() + theme_bw() 
 
 
 autoplot(
-  m, 
+  Epca, 
   loadings = T, 
   loadings.label = T, 
   data = emotions, 
