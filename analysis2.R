@@ -762,6 +762,7 @@ overviewa <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = lis
 overviewb <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), partial = F, rug = F, gg = T) +
   theme_bw() + labs(y = "Liklihood of lending the money at T2", x = "", title = "B. Support") +coord_flip()
 
+(overviewa + overviewb + plot_layout(ncol = 1))
 
 # Custom ggplot
 vis_conflict <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), plot = F)
@@ -794,7 +795,21 @@ p
 #full_int_overview2 <- glm(likelylendmoneyt2 ~ signal * conflict * p_info, data = d0)
 #plot(allEffects(full_int_overview2))
 
-(overviewa + overviewb + plot_layout(ncol = 1))
+# signal vs. mentally ill
+
+p_mentallyill <-
+  emotions %>% 
+  group_by(signal) %>% 
+  summarise(mentallyill = sum(MentallyIll)/n()) %>% 
+  ungroup %>% 
+  mutate(signal = fct_reorder(signal, mentallyill)) %>% 
+  ggplot(aes(mentallyill, signal)) + 
+    geom_point() + 
+    labs(x = '\nProportion categorizing sister as mentally ill') +
+    theme_bw()
+
+p_mentallyill
+
 # Upset plot
 
 d0 %>%
