@@ -299,13 +299,13 @@ Contrary to our prediction, there was no significant interaction between conflic
 
 ## Time 2 Signal Effects
 
-In order to see if our signal manipulations resulted in the desired perceptions (I.E. the depressed manipulation resulted in perceptions of depression), we examined the percent of participants that checked each box of our periceved emotional state manipulaton check sorted by the signal they saw (Visualized in fig x.). 
+In order to see if our signal manipulations resulted in the desired perceptions (I.E. the depressed manipulation resulted in perceptions of depression), we examined the percent of participants that checked each box of our periceved emotional state manipulaton check sorted by the signal they saw (Visualized in fig x.). In doing so it appears that our signal manipulations were largely identified correctly with $`r signalmat[7:3]`$ and $`r signalmat[5:3]`$ of participants reporting the sister as suicidial in the suicide attempt condition and the depression plus display of suicidial ideation respectively. Similarly, xxxx of participants in the depressed condition viewed the sister as depressed and xxxx participants in the schizophrenic condition viewed the sister as mentally ill.
 
 ```{r signalheatmap, fig.cap="How participants in each signal condition rated the sister's mental state. Participants could check any number of conditions. Colors represent the percent of participants that checked each condition. Red = low, Brown = middle, Yellow and White = high."}
 heatmap(signalmat, scale = 'none')
 ```
 
-In addition to allowing us to examine if the signals worked as designed, this question also allows use to see how the signals affected one's perception of the sister's current state and what baseline assumptions were being made in the control condition. Of particular interest is that those in the control condition often came in with the assumption that the sister was depressed, sad, and distressed despite not seeing a signal in the second portion of the vignette (fig x).
+In addition to allowing us to examine if the signals worked as designed, this question also allows use to see how the signals affected one's perception of the sister's current state and what baseline assumptions were being made in the control condition. Of particular interest is that those in the control condition often came in with the assumption that the sister was sad, scared, depressed and distressed despite not seeing a signal in the second portion of the vignette, with each of these option being check by at least half of the participants (fig x).
 
 ```{r control_MC2.4, fig.cap= "Upset plot showing how participants in the control condition described the emotional state of the imagined sister (check boxes with only none of the above being mutually exclusive with the others.The histogram in the lower left shows the amount of times each box was selected by participants. The plot to the right shows the 10 most common combinations and their frequency"}
 d0 %>%
@@ -358,11 +358,13 @@ Our predicted interactions of signals with conflict were:
 
 For our exploratory analyses, we restricted our attention to three signals: verbal request, crying, and depression, which we ranked in that order, and to two information conditions: private information and honest, which we ranked in that order. We then compared the causal effect of the signal on emotional and instrumental responses towards the sister.
 
+To better understand where depression separated itself from the less costly signals we used a loess regression to visualize how PC1 T1 and PC1 T2 varied by signal in both the conflict and supportive manipulations. In doing so, it appears that the depression condition resulted in relatively more beneficial responses on PC1 T2 when participants where intermediate on PC1 T1, with depression not separating itself from the other signals when participants were high or low on PC1 T1 to begin with.
+
 ```{r pc1t1t2, fig.cap="PC1 at time 2 as a function of PC1 at time 1, by signal and conflict condition. Each dot is one participant. Lines fit by loess regression."}
 p_pc1_t1t2
 ```
 
-Our favored exploratory model included an interaction between signal and conflict with the information manipulation having only a main effect on PC1 at time 2.#why chosen?
+We also created an exploratory model based largely on theory but refined by observations of the data that suggested that much of the effect of the information manipulation was through its main effect rather than through its main effect plus the predicted interactions (figure x). Despite this being our favored exploratory model, it is unclear if private information would not interact much with signal type in real situations or if our conflict manipulations were simply more succesful than our information manipulations in activating the relevant mechanisms.  
 
 ```{r exploratory model, fig.cap= "Effects plot showing the interaction between signal type and conflict in our favored exploratory model."}
 Plot_Exploratory
@@ -413,7 +415,7 @@ The final area where our main effects predictions were not borne out regarded th
 
 ### Limitations
 
-The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for any experimental design involving depression and suicide. Although this may have affected any part of this study, it likely had the largest impact with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as they were designed to due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. This being said, signal type interacted with both the conflict and information conditions had no effect on how difficult participants found it to put themselves in the scenarios presented to them, with the means and standard deviations being similar for each signal (Appendix 4). 
+The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for any experimental design involving depression and suicide. Although this may have affected any part of this study, it likely had the largest impact with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as they were designed to due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. This being said, signal type interacted with both the conflict and information conditions had no effect on how difficult participants found it to put themselves in the scenarios presented to them, with the means and 95% confidence intervals being similar for each signal (Appendix 4). 
 
 Although this seems to be evidence in favor of our signal manipulations not biasing our results due to differences in one’s ability to consciously imagine the situations presented, we should not expect such conscious appraisals to have access to the same information that the systems underlying responses to the proposed signals in the real-world use [@NisbettWilson1977; @Nosek2007]. Therefore, despite not differing much in terms of a conscious disconnect from the study, it is likely a safe assumption that certain signals came across better in vignette form than others and biased our results through the nonconscious inferences of participants. 
 
@@ -457,7 +459,7 @@ dotchart(sort(table(signalingdata2018$State)))
 ```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the self-reported liklihood of lending money to the sister. The y-axis is ordered based on our predictions, with signals expected to result in more support as one moves from bottom to top."}
 # plot(allEffects(full_int_overview2))
 # Plot_full_int
-p_overview
+p
 ```
 
 ## Appendix 4

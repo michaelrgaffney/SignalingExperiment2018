@@ -322,7 +322,7 @@ interactplot <- function(f, trm, ylab, removeLegend = F, removeY = F){
   return(p)
 }
 
-# signal X p_info interactios
+# signal X p_info interactions
 p_comfort_signal_pinfo <- 
   interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * p_info - 1, 'p_info', '\nA. Amount comfortable lending at T2', removeLegend=T)
 p_lend_signal_pinfo <- 
@@ -334,7 +334,7 @@ p_money_signal_pinfo <-
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
 
-# signal X conflict interactios
+# signal X conflict interactions
 p_comfort_signal_conflict <- 
   interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * conflict - 1, 'conflict', '\nA. Amount comfortable lending at T2', removeLegend=T)
 p_lend_signal_conflict <- 
@@ -757,11 +757,12 @@ plot(allEffects(full_int_overview))
 
 
 overviewa <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), partial = F, rug = F, gg = T) +
-  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "A. Conflict") + coord_flip()
+  theme_bw() + labs(y = "", x = "", title = "A. Conflict") + coord_flip()
 
 overviewb <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Support"), partial = F, rug = F, gg = T) +
-  theme_bw() + labs(y = "PC1 Time 2", x = "", title = "B. Support") +coord_flip()
+  theme_bw() + labs(y = "Liklihood of lending the money at T2", x = "", title = "B. Support") +coord_flip()
 
+(overviewa + overviewb + plot_layout(ncol = 1))
 
 # Custom ggplot
 vis_conflict <- visreg(full_int_overview, xvar= "signal", by = "p_info", cond = list(conflict = "Conflict"), plot = F)
