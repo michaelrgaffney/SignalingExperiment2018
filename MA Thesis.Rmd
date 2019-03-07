@@ -124,7 +124,7 @@ For the proposed signals of need to be worth the costs, substantial benefits in 
 
 The benefits of the less costly signals are likely to be more varied due to their low costs allowing smaller benefits to make them worthwhile. These benefits may therefore be more short-term in nature and come from relationships without large conflicts of interest. In regard to crying, a demonstration of need beyond a verbal request may increase the chances of short-term changes in resource allocation or interventions into social conflicts outside of the signaler-target relationship. When it comes to illness symptoms, greater symptomology is expected to increase the likelihood of support when one cannot satisfy their own needs [@Steinkopf2015; @Tiokhin2016] and may also decrease the risk of reputation hits that might come from the belief that one is faking illness , both of which might be well worth a minor increase in symptomology which might already exist.
 
-Whether long-term or short-term, social support is often classified as emotional or instrumental (material support), with there currently being little empirical evidence on their relative importance [@Jacobson1986]. However, if emotions are viewed as motivators to guide behavior towards adaptive outcomes [@Nesse1990; @ToobyCosmides2008], it is unlikely emotional support is the end goal. Instead, what appears like emotional support may be the result of achieved support or the promise of future instrumental support. This is especially likely to be the case if such an interaction results in no more need of a signal and, therefore, no more benefit to continuing the negative emotions that had a part in shaping the signal. That being said changes in emotional support may still be informative as they may indicate that an individual believes there is less of a need to signal, either due to support being achieved or indications that signaling need is likely to be ineffective at levels that would result in net benefits.
+Whether long-term or short-term, social support is often classified as emotional or instrumental (material support), with there currently being little empirical evidence on their relative importance (Jacobson, 1986). However, if emotions are viewed as motivators to guide behavior towards adaptive outcomes (Nesse, 1990; Tooby & Cosmides, 2008), it is unlikely emotional support is the ultimate goal. Instead, emotional support may be the desired outcome of proximate mechanisms which favor greater investment in relationships to increase the likelihood of future instrumental support if one needs it (the ultimate benefit). It is also conceivable that emotional support might track achieved support so that emotional support is high when one’s needs are being met. If this is the case, changes in emotional support may still be informative to signaling approaches as achieved support is likely to cause individuals to believe there is less need to signal, assuming an honest display needs to only be made once.
 
 Although less meaningful when examining responses to the proposed signals, the distinction between received and perceived social support is likely more useful when considering how information about social support is stored, with received support being material support and perceived support being one’s perceptions about the likelihood and adequacy of future support [@NorrisKaniasty1996; @WethingtonKessler1986]. Unlike the relative importance of material and emotional support where the evidence is ambiguous, here, the evidence suggests that perceived support is the more powerful of the two in predicting positive outcomes, with the two not being as closely related to each other as often expected [@HaberEtAl2007; @NorrisKaniasty1996]. Although evident in many areas, the disconnect between received and perceived social support is particularly noticeable in the finding that perceived social support often decreases in times of need, even in situations in which one is likely experiencing more material support than in one’s life before the need [@NorrisKaniasty1996].
 
@@ -216,9 +216,34 @@ In addition to this, the amount of money participants were comfortable lending t
 
 Variable | Wording | Coding
 ---------|---------|-------
-How is reasonable is the amount requested at T1 | How reasonable do you think the sister's request is? | 0: Very unreasonable; 100: Very reasonable
-How much harm will your daughter suffer at T1 | How much harm will you daughter suffer if you give your sister the money? | 0: No harm; 100: considerable harm
+Perceived need of money at T1 | How much do you think your sister needs this money? | 0: Not at all; 100: A great deal
+How likely to lend money at T1 | How likely are you to lend the money to your sister? | 0: Very unlikely; 100: Very likely
+How angry are you about the request at T1 | How angry do you feel about this request? | 0: Not at all angry; 100: Extremely angry
+How satisfied to help at T1 | How much satisfaction would you get from helping with this request? | 0: No satisfaction; 100: A great deal of satisfaction
+How sad about health problem at T1 | How sad were you to learn about your sister’s child’s health problem? | 0: Not sad; 100: Devastated
+How reasonable is the amount requested at T1 | How reasonable is the amount of money being requested? | 0: Extremely unreasonable; 100: Extremely reasonable
+How much do believe the niece is ill at T1 | How much do you believe your sister’s child has a health problem? | 0: Extremely unbelieving; 100: Extremely believing
+How much harm will your daughter suffer at T1 | How much harm do you think this would cause to your daughter Sophie? | 0: None at all; 100: A great deal
+Suspicion of sister at T1 | How much do you suspect that this might be an attempt by your sister to get you to lend her money for another purpose? | 0: I'm very suspicious; 100: I'm completely unsuspicious
+Perceived benefit to sister at T1 | How much help would lending the money to your sister help her and her child? | 0: None at all; 100: A great deal
+Trust that sister will repay at T1 | How much do you trust that your sister will pay you back? | 0: Extremely distrustful; 100: Extremely trustful
+Amount conformtable lending at T1 in dollars | What amount of money would you be comfortable with lending to your sister in this scenario in US dollars? | 0 - 50000
+How close to sister at T1 | Having read the story, how close do you feel to your sister? | 0: Extremely distant; 100: Extremely close
 
+Change in perceived need of money at T2 | After going to your sister’s house, has your belief that your sister needs the money increased, decreased, or not changed? | -50: Decreased greatly; 0: No change; 50: Increased greatly
+Change in how likely to lend money at T2 | After going to your sister’s house, are you more willing to lend her the money than before, less willing than before, or no change? | -50: Much less willing; 0: No change; 50: Much more willing
+Change in anger about the request at T2 | After going to your sister’s house, has your sister’s request for money made you more angry than you were, less angry than you were, or no change? | -50: Much less angry; 0: No change; 50: Much more angry
+Change in How satisfied to help at T2 | After going to your sister's house, would you feel more satisfaction from helping your sister, less satisfaction, or no change? | -50: Much less satisfaction; 0: No change; 50: Much more satisfaction
+Change in How sad about health problem at T2 | After going to your sister’s house, are you more sad than you were about your sister’s child’s health problem, less sad than you were, or no change? | -50: Much less sad; 0: No change; 50: Much more sad
+Change in How reasonable is the amount requested at T2 | After going to your sister’s house, do you think the amount of money she requested is more reasonable than before, less reasonable than before, or no change? | -50: Much less reasonable; 0: No change; 50: Much more reasonable
+Change in How much do believe the niece is ill at T2 | After going to your sister’s house, has your belief that your sister’s child has a health problem increased, decreased, or not changed? | -50: Decreased greatly; 0: No change; 50: Increased greatly
+Change in How much harm will your daughter suffer at T2 | After going to your sister’s house, do you now think lending the money to your sister would harm your daughter Sophie more than you thought, less than you thought, or no change? | -50: Cause much less harm; 0: No change; 50: Cause much more harm
+Change in Suspicion of sister at T2 | After going to your sister’s house, are you more suspicious that this might be an attempt to get you to lend her money for another purpose, less suspicious, or no change? | -50: Much less suspicious; 0: No change; 50: Much more suspicious
+Change in Perceived benefit to sister at T2 | After going to your sister’s house, do you think lending the money to your sister would help her child more than you did before, less than before did before, or no change? | -50: Much less help; 0: No change; 50: Much more help
+Change in Trust that sister will repay at T2 | After going to your sister’s house, are you more trusting that your sister will pay you back than you were before, less trusting than you were before, or no change? | -50: Much less trusting ; 0:  No change; 50: Much more trusting
+Change in Amount conformtable lending at T2 in dollars | After going to your sister's house, what amount of money would you now be comfortable with lending to your sister in this scenario in US dollars? | 0 - 50000
+How close to sister at T2 | After going to your sister's house, how close do you feel to your sister? | 0: Extremely distant; 100: Extremely close
+How easy to imagine | How challenging was it to imagine yourself in this scenario? | 0: Extremely difficult; 100: Extremely easy
 
 #### Manipulation check
 
@@ -229,7 +254,7 @@ Beyond a way to determine if participants were responding to the study as desire
 
 The final part of the survey was a brief demographic questionnaire which examined: (1) the age, (2) sex, (3) state of residence, (4) number of children, (5) number of siblings, (6) birth order, (7) current relationship status, and (7) highest level of education of each participant.
 
-###Confirmatory Analyses
+### Confirmatory Analyses
 
 To analyze the effects of conflict and the amount and type of information (hereafter information) on helping behavior, we used a generalized linear model that included conflict and information as independent variables for each initial measure of instrumental support. Although it did not perform too differently from a linear model, a GLM was chosen here and used in all other models due to the prevalence of individuals answering at the extreme ends of the sliders which resulted in error estimates that were not normally distributed.
 
@@ -256,7 +281,7 @@ demovars <-
     "angryt1" = "How angry are you about the request at T1",
     "satisfactiont1" = "How satisfied to help at T1",
     "howsadt1" = "How sad about health problem at T1",
-    "howreasonablet1" = "How is reasonable is the amount requested at T1",
+    "howreasonablet1" = "How reasonable is the amount requested at T1",
     "believehealtht1" = "How much do believe the niece is ill at T1",
     "daughterharmt1" = "How much harm will your daughter suffer at T1",
     "believeneedt1" = "Suspicion of sister at T1",
@@ -270,13 +295,14 @@ demovars <-
     "angryt2" = "Change in anger about the request at T2",
     "satisfactiont2" = "Change in How satisfied to help at T2",
     "howsadt2" = "Change in How sad about health problem at T2",
-    "howreasonablet2" = "Change in How is reasonable is the amount requested at T2",
+    "howreasonablet2" = "Change in How reasonable is the amount requested at T2",
     "believehealtht2" = "Change in How much do believe the niece is ill at T2",
     "daughterharmt2" = "Change in How much harm will your daughter suffer at T2",
     "believeneedt2" = "Change in Suspicion of sister at T2",
     "sisterbenefitt2" = "Change in Perceived benefit to sister at T2",
     "trustrepayt2" = "Change in Trust that sister will repay at T2",
     "comfortablelendingt2" = "Change in Amount conformtable lending at T2 in dollars",
+    "MC1.2_1" = "How close to sister at T2",
     "MC2.4_1" = "How easy to imagine",
     
     "Angry" = "Is sister angry?",
@@ -304,15 +330,9 @@ kable(
 
 At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (conflict vs. support), and 1 of 3 information conditions (cheating, private information, honest), for a total of 6 conditions. Our study was based on the expectation that participants would exhibit less support for the sister in the conflict vs. support conditions, and less support in the cheating vs. private information condition, and more support in the honest vs. private information condition. As we said in our preregistration:
 
-> Amount and type of information:
->
 > We predict that information that the character in the vignette is honest will result in more favorable reactions than the no information condition, which should receive more favorable reactions than conditions where there is information that indicates cheating. 
 >
-> Conflict:
->
 > We also predict that the conflict conditions will result in less favorable reactions than the non-conflict condition.
->
-> Relationship between emotional and instrumental responses:
 >
 > In every condition, we predict that emotional responses will track instrumental responses.
 
