@@ -368,6 +368,11 @@ Our favored exploratory model included an interaction between signal and conflic
 Plot_Exploratory
 ```
 
+```{r expanova}
+kable(tidy(Anova(m_exp)), digits = 1, caption="Anova of interaction model depicted in Figure X.")
+```
+
+
 As changes in perceived need were strongly correlated with our measures of instrumental support, we ran a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. According to this analysis,about two-thirds of the effect of the signal manipulation was mediated by changes in percieved need (ACME), with ADE being the direct effect of signal type. 
 
 ```{r mediation plot, fig.cap= "Mediation of signal effect by change in percieved need  (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect"}

@@ -500,11 +500,11 @@ plot(Effect(c("signal", "conflict", "p_info"), m))
 # signal * conflict interaction
 # p_info main effect only
 
-m <- lm(PC1t2 ~ signal * conflict + p_info, data = d2) #pca after conditions filtered
-summary(m)
-Anova(m, type = 3)
-plot(allEffects(m))
-Plot_Exploratory <- visreg(m, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
+m_exp <- lm(PC1t2 ~ signal * conflict + p_info, data = d2) #pca after conditions filtered
+summary(m_exp)
+Anova(m_exp, type = 3)
+plot(allEffects(m_exp))
+Plot_Exploratory <- visreg(m_exp, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
 
 m <- lm(PC1t2all ~ signal * conflict, data = d2b)
 Anova(m, type = 3)
