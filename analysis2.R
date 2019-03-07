@@ -322,7 +322,7 @@ interactplot <- function(f, trm, ylab, removeLegend = F, removeY = F){
   return(p)
 }
 
-# signal X p_info interactios
+# signal X p_info interactions
 p_comfort_signal_pinfo <- 
   interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * p_info - 1, 'p_info', '\nA. Amount comfortable lending at T2', removeLegend=T)
 p_lend_signal_pinfo <- 
@@ -334,7 +334,7 @@ p_money_signal_pinfo <-
 
 # (p_comfort_signal_pinfo + p_lend_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo + p_money_signal_pinfo + scale_y_continuous(limits = c(-40, 20)))
 
-# signal X conflict interactios
+# signal X conflict interactions
 p_comfort_signal_conflict <- 
   interactplot(comfortablelendingt2 ~ comfortablelendingt1 + signal2 * conflict - 1, 'conflict', '\nA. Amount comfortable lending at T2', removeLegend=T)
 p_lend_signal_conflict <- 
