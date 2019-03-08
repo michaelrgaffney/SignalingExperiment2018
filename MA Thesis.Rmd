@@ -605,6 +605,8 @@ emotions_biplot
 ## Appendix 7
 
 ```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higher values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
+p_ease$plot$layers[[3]] <- NULL
+p_ease2$plot$layers[[3]] <- NULL
 p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank())
 ```
 
