@@ -398,7 +398,7 @@ no signal (control), verbal request, sad face, sad face with crying, depression,
 
 This prediction was not upheld. The Control condition (no signal) was ranked relatively high rather than the lowest, Suicide attempt was ranked relatively low rather than the highest, and Anger was consistently ranked lower than Depression. In partial support, however, Depression was consistently higher than Crying, which was consistently higher than Verbal request. See Figure 7.
 
-```{r T2signaleffects, fig.cap="Figure 7. The effect of the signal manipulations on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
+```{r T2signaleffects, fig.cap="Figure 7. The effect of the signal manipulations on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2, controlling for t1. Effects are averaged across all time 1 conditions."}
 (pT2comfort + pT2lend) / (pT2need + pT2pc1)
 ggsave("Figures/Figure7.pdf", (pT2comfort + pT2lend) / (pT2need + pT2pc1), width = 9, height = 9)
 ```
@@ -415,7 +415,7 @@ Our predicted interactions of signals with private information were:
 >
 > We also predict that when the most severe signals, i.e., depression and suicidality,  are paired with information that the character in the vignette is likely to be lying, responses will be more aversive than when the signal is weaker.
 
-Like with the main effects of signal type, we fit linear models for our four outcome variables: (1) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1, (2) the likelihood of lending the sister money, (3) PC1 of all the outcome variables at T2, and (4) participants' perception of the sister's need for money. Our prediction was only supported when looking at our model with the amount of money participants were comfortable lending at T2 (controlling for T1) ($p = `r signif(int1sig['signal2:p_info', 'Pr(>F)'], 2)`$. See Figure 8 for visualization and Appendix 3 for the corresponding ANOVA tables.
+Like with the main effects of signal type, we fit linear models for our four outcome variables: (1) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1, (2) the likelihood of lending the sister money, (3) PC1 of all the outcome variables at T2 controlling for PC1 at T1, and (4) participants' perception of the sister's need for money. Our prediction was only supported when looking at our model with the amount of money participants were comfortable lending at T2 (controlling for T1) ($p = `r signif(int1sig['signal2:p_info', 'Pr(>F)'], 2)`$. See Figure 8 for effects plot and Appendix 3 for the corresponding ANOVA tables.
 
 ```{r pinfoInteractions, fig.cap="Figure 8. Signal and information interactions. The effect of the signal, information interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
 p_pinfoInteractions <- (p_comfort_signal_pinfo$plot + p_lend_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo$plot + p_money_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))
@@ -431,9 +431,9 @@ Our predicted interactions of signals with conflict were:
 
 > We predict the coefficient for signal strength to increase in the conflict condition than in the no conflict condition.
 
-We also fit linear models for the same outcome variables to examine test our hypothesized interaction. Unlike the predicted signal and information interactions, 3 of the 4 models showed evidence of interactions with the model for change in likelihood of lending T2 being marginally significant ($p = `r signif(int2sig['signal2:conflict', 'Pr(>F)'], 2)`$). See Figure 9 for visualization and Appendix 4 for the corresponding ANOVA tables.
+We also fit linear models for the same outcome variables to examine test our hypothesized interaction. Unlike the predicted signal and information interactions, 3 of the 4 models showed evidence of interactions with the model for change in likelihood of lending T2 being marginally significant ($p = `r signif(int2sig['signal2:conflict', 'Pr(>F)'], 2)`$). See Figure 9 for effects plot and Appendix 4 for the corresponding ANOVA tables.
 
-```{r conflictInteractions, fig.cap="Figure 9. Signal and conflict interactions. The effect of the signal, conflict interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
+```{r conflictInteractions, fig.cap="Figure 9. Signal and conflict interactions. The effect of the signal, conflict interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2 controlling for T1, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
 p_conflictInteractions <- (p_comfort_signal_conflict$plot + p_lend_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict$plot + p_money_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))
 
 p_conflictInteractions
@@ -583,7 +583,7 @@ kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption =
 
 kable(tidy(Anova(p_lend_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
 
-kable(tidy(Anova(p_pc1_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable.')
+kable(tidy(Anova(p_pc1_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
 
 kable(tidy(Anova(p_money_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
 
@@ -598,7 +598,7 @@ kable(tidy(Anova(p_comfort_signal_conflict$model, type = 3)), digits = 1, captio
 
 kable(tidy(Anova(p_lend_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
 
-kable(tidy(Anova(p_pc1_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable.')
+kable(tidy(Anova(p_pc1_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
 
 kable(tidy(Anova(p_money_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
 ```
