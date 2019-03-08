@@ -431,42 +431,6 @@ d2 <-
   ) %>% 
   na.omit
 
-# Retain only Control, Depression
-d2b <-
-  d0 %>%
-  dplyr::select(
-    p_info,
-    conflict,
-    signal,
-    needsmoneyt1,
-    delta_needs_money,
-    delta_lend,
-    PC1t1,
-    PC1t2all
-  ) %>%
-  dplyr::filter(
-    signal %in% c(
-      'VerbalRequest',
-      'Depression')
-  ) %>%
-  mutate(
-    p_info = ordered(as.character(p_info), levels = c('Cheating', 'PrivateInformation', 'Honest')),
-    signal = factor(signal, levels = c('VerbalRequest', 'Depression')),
-    delta_need = case_when(
-      delta_needs_money < -1 ~ -1,
-      delta_needs_money > 1 ~ 1,
-      TRUE ~ 0
-    ),
-    delta_need2 = case_when(
-      PC1t2all < (mean(PC1t2all, na.rm=T) - sd(PC1t2all, na.rm=T)/2) ~ -1,
-      PC1t2all > mean(PC1t2all, na.rm=T) + sd(PC1t2all, na.rm=T)/2 ~ 1,
-      TRUE ~ 0
-    ),
-    delta_need = ordered(delta_need),
-    delta_need2 = ordered(delta_need2)
-  ) %>% 
-  na.omit
-
 # Scatterplots
 
 ggplot(d2, aes(needsmoneyt1, delta_needs_money, colour = signal)) +
@@ -486,7 +450,26 @@ p_pc1_t1t2 <-
 
 # Mediation
 
-## d2b restricted data set
+# Retain only Depression and VerbalRequest as treatment and control, resp.
+d2b <-
+  d0 %>%
+  dplyr::select(
+    signal,
+    needsmoneyt1,
+    delta_needs_money,
+    delta_lend
+  ) %>%
+  dplyr::filter(
+    signal %in% c(
+      'VerbalRequest',
+      'Depression')
+  ) %>%
+  mutate(
+    signal = factor(signal, levels = c('VerbalRequest', 'Depression'))
+  ) %>% 
+  na.omit
+
+## d2b data set restricted to 2 signals
 model.y <- lm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, data = d2b)
 model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2b)
 
@@ -494,13 +477,86 @@ mediation_model <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta
 summary(mediation_model)
 plot(mediation_model)
 
-## d2b flipped
-# model.y <- lm(delta_needs_money ~ needsmoneyt1 + delta_lend + signal, data = d2b)
-# model.m <- lm(delta_lend ~ needsmoneyt1 + signal, data = d2b)
-# 
-# mediation_model2 <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_lend', boot = T)
-# summary(mediation_model2)
-# plot(mediation_model2)
+# Retain only Depression and Crying as treatment and control, resp.
+d2b <-
+  d0 %>%
+  dplyr::select(
+    signal,
+    needsmoneyt1,
+    delta_needs_money,
+    delta_lend
+  ) %>%
+  dplyr::filter(
+    signal %in% c(
+      'Crying',
+      'Depression')
+  ) %>%
+  mutate(
+    signal = factor(signal, levels = c('Crying', 'Depression'))
+  ) %>% 
+  na.omit
+
+## d2b data set restricted to 2 signals
+model.y <- lm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, data = d2b)
+model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2b)
+
+mediation_model2 <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
+summary(mediation_model2)
+plot(mediation_model2)
+
+# Retain only Depression and Control as treatment and control, resp.
+d2b <-
+  d0 %>%
+  dplyr::select(
+    signal,
+    needsmoneyt1,
+    delta_needs_money,
+    delta_lend
+  ) %>%
+  dplyr::filter(
+    signal %in% c(
+      'Control',
+      'Depression')
+  ) %>%
+  mutate(
+    signal = factor(signal, levels = c('Control', 'Depression'))
+  ) %>% 
+  na.omit
+
+## d2b data set restricted to 2 signals
+model.y <- lm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, data = d2b)
+model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2b)
+
+mediation_model3 <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
+summary(mediation_model3)
+plot(mediation_model3)
+
+# Retain only Depression and Suicide as treatment and control, resp.
+d2b <-
+  d0 %>%
+  dplyr::select(
+    signal,
+    needsmoneyt1,
+    delta_needs_money,
+    delta_lend
+  ) %>%
+  dplyr::filter(
+    signal %in% c(
+      'Suicide attempt',
+      'Depression')
+  ) %>%
+  mutate(
+    signal = factor(signal, levels = c('Suicide attempt', 'Depression'))
+  ) %>% 
+  na.omit
+
+## d2b data set restricted to 2 signals
+model.y <- lm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, data = d2b)
+model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2b)
+
+mediation_model4 <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
+summary(mediation_model4)
+plot(mediation_model4)
 
 # Exploratory models
 
