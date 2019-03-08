@@ -11,6 +11,7 @@ csl: "apa.csl"
 knitr::opts_chunk$set(echo = FALSE, message=F, error=F, warning=F, fig.width = 10, fig.height = 6)
 source('analysis2.R')
 library(patchwork)
+library(DiagrammeR)
 ```
 
 # Abstract
@@ -208,15 +209,18 @@ Although all participants who passed the attention checks and finished the surve
 
 ## Survey
 
-Although distributed through MTurk, every participant took the survey using Qualtrics. In every instance, the elements of the survey were laid out in the following order: 1) the consent form, 2) the main body of the vignette, 3) the first set of outcome measures (pre-signal), 4) the first set of manipulation checks, 5) the attention checks, 6) the signal portion of the vignette, 7) the second set of outcome measures (post-signal), 8) the second set of manipulation checks, 9) a set of demographic questions, and 10) an open feedback prompt.
+Although distributed through MTurk, every participant took the survey using Qualtrics. In every instance, the elements of the survey were laid out in the following order: 1) the consent form, 2) the main body of the vignette, 3) the first set of outcome measures (pre-signal), 4) the first set of manipulation checks, 5) the attention checks, 6) the signal portion of the vignette, 7) the second set of outcome measures (post-signal), 8) the second set of manipulation checks, 9) a set of demographic questions, and 10) an open feedback prompt. See Appendix 8 for the complete survey.
 
 ### Outcome measures
 
-Both emotional and instrumental responses were measured in the survey portion of the study. In a small pilot study, we initially asked the same questions before and after the signal was shown to measure how the signal affected one’s responses. However, due to the prevalence of ceiling and floor effects, the majority of the questions following the signal in this study were revised to ask if and how one’s likelihood of helping or feeling certain emotions changed. This resulted in 22 outcome measures with 11 being asked before the signal and 11 after. In both instances, the order of the questions was randomized to avoid order effects [@KrosnickAlwin1987].
+Both emotional and instrumental responses were measured in the survey portion of the study. In a small pilot study, we initially asked the same questions before and after the signal was shown to measure how the signal affected one’s responses. However, due to the prevalence of ceiling and floor effects, the majority of the questions following the signal in this study were revised to ask if and how one’s likelihood of helping or feeling certain emotions changed. This resulted in 22 outcome measures, with 11 being asked before the signal and 11 after (See Table 1 for the full list and Table 2 for summary statistics). In both instances, the order of the questions was randomized to avoid order effects [@KrosnickAlwin1987].
 
-To measure these responses, sliders which functioned as visual analogue scales were used due to the fact they allow for finer grained changes than categorical scales and provide a continuum of scores [@KlimekEtAl2017]. For the pre-signal set of questions, only the ends of each continuum were labeled with some variant of extremely likely and extremely unlikely being used for each measure. For the second set, the center was labelled no change, and the ends of each continuum were labelled as some variant of much more likely and much less likely. Of these 22 variables, 2 are used as a dependent variable in confirmatory analyses here, the self-reported likelihood that participants would help before and after being exposed to the signal.
+To measure these responses, sliders which functioned largely as visual analogue scales were used due to the fact they allow for finer grained changes than categorical scales and provide a continuum of scores [@KlimekEtAl2017]. For the pre-signal set of questions, only the ends of each continuum were labeled with some variant of extremely likely and extremely unlikely being used for each measure. For the second set, the center was labelled no change, and the ends of each continuum were labelled as some variant of much more likely and much less likely. 
 
-In addition to this, the amount of money participants were comfortable lending to their imagined sisters was also used as a dependent variable and was measured with a slider which ranged from $0 to $50,000 and allowed the participant to see the amount they were selecting. Unlike the previously described measures, it was repeated identically at both time periods and asked on its own page due to the desire to save the only question that allowed for partial support for after those with less flexibility were asked.
+In addition to this, the amount of money participants were comfortable lending to their imagined sisters was asked and was measured with a slider which ranged from $0 to $50,000 and allowed the participant to see the amount they were selecting. Unlike the previously described measures, it was repeated identically at both time periods and asked on its own page due to the desire to save the only question that allowed for partial support for after those with less flexibility were asked.
+
+Of these variables, 3 post-signal measures (Time 2) are used as dependent variables in confirmatory analyses, (1) the amount the sister needed the money as percieved by the participants, (2) the likelihood that participants would lend the money, and (3) the amount of money participants would be comfortable lending in this sceario.
+
 
 Variable | Wording | Coding
 ---------|---------|-------
@@ -250,8 +254,9 @@ How easy to imagine | How challenging was it to imagine yourself in this scenari
 
 ### Manipulation checks
 
-To understand if our manipulations had the desired effect two brief manipulation checks were also included, one before the signal and one following it. The first set of checks involved a question about how close participants felt to the one requesting the help in the imagined scenario and a question about how significant of a request the $50,000 was perceived to be. The second set of checks also had these questions plus one examining what emotional state they thought the imagined signaler was experiencing.
-Beyond a way to determine if participants were responding to the study as desired, these questions are also likely meaningful as outcome measures as one’s perception of another’s subjective experience is likely to play a role in their decision making. As such, they are only used in exploratory analysis portion of this study.
+To understand if our manipulations had the desired effect two brief manipulation checks were also included, one before the signal and one following it. The first set of checks involved a question about how close participants felt to the one requesting the help in the imagined scenario and a question about how significant of a request the $50,000 was perceived to be. The second set of checks also had these questions plus one examining what emotional state they thought the imagined signaler was experiencing, in which participants could select from a number of boxes.
+
+Beyond a way to determine if participants were responding to the study as desired, these questions are also likely meaningful as outcome measures as one’s perception of another’s subjective experience is likely to play a role in their decision making. As such, they are only used in exploratory analysis portion of this study and in principle component analyses.
 
 ### Demographic Questions
 
@@ -259,9 +264,11 @@ The final part of the survey was a brief demographic questionnaire which examine
 
 ## Confirmatory Analyses
 
-To analyze the effects of conflict and the amount and type of information (hereafter information) on helping behavior, we used a generalized linear model that included conflict and information as independent variables for each initial measure of instrumental support. Although it did not perform too differently from a linear model, a GLM was chosen here and used in all other models due to the prevalence of individuals answering at the extreme ends of the sliders which resulted in error estimates that were not normally distributed.
+To analyze the effects of conflict and the amount and type of information (hereafter information) on helping behavior, we used a linear model that included conflict and information as independent variables with PCA1 from our pre-signal principle components analysis T1 as the dependent variable. See figures 1, 2, and 3. We also fit a model in which information interacted with conflict, with PCA1 as the outcome variable.
 
-To understand the effects of the signals, we fit a main effects model with no interactions. Here, the manipulated variables included the signals and the amount of help given before the signal, thereby controlling for sampling error while also including the effects of conflict and information that impacted help before the signal. We also fit an interaction model for the two outcome variables in an examination of a smaller subset of signals including depression, crying, and verbal request. This involved the same predictors included in the main effects model in addition to interactions between 1) signal strength and information, 2) conflict and private information, 3) and conflict and signal strength. 
+To understand the effects of the signals, we fit linear models for each of our four dependent variables. For the models of change in perceived need of money and change in likelihood of lending money, each was modeled with signal type as the sole independent variable. For the model looking at change in the amount of money participants were willing to lend, the same measure pre-signal was controlled for. And in the PCA model, PC1 post-signal was modeled controlling for PC1 pre-signal. 
+
+We also fit interaction models for the same outcome variables post-signal, with each being the independent variable for model that interacted signal with information and signal with conflict. 
 
 # Results
 
@@ -328,6 +335,13 @@ kable(
 )
 
 ```
+
+
+```{r, compact table}
+kable(
+  df_t1t2_sum)
+```
+
 
 ## Time 1 manipulation checks
 
@@ -451,10 +465,33 @@ Plot_Exploratory
 kable(tidy(Anova(m_exp, type = 3)), digits = 1, caption="Table 4. Anova of interaction model depicted in Figure X.")
 ```
 
+### Mediation model
 
-As changes in perceived need were strongly correlated with our measures of instrumental support, we also ran a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. According to this analysis,about two-thirds of the effect of the signal manipulation was mediated by changes in percieved need (ACME), with ADE being the direct effect of signal type. See Figure 12.
+As changes in perceived need were strongly correlated with our measures of instrumental support, we fit a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. See Figure 12.
 
-```{r mediation plot, fig.cap= "Figure 12. Mediation of signal effect by change in percieved need  (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect"}
+```{r mediationmodel, fig.cap="Figure 12. Mediation model of causal effect of depression signal on change in likelihood of lending money, relative to verbal control."}
+grViz(
+  "digraph {
+  
+graph [layout = neato]
+node [shape = rectangle]
+
+a [pos = '-2, 0!', label = 'Signal\n(Depression vs Verbal)']
+b [pos = '0, 1!', label = 'ΔNeeds money']
+c [pos = '2, 0!', label = 'ΔLend money']
+
+a->b
+a->c
+b->c
+
+}"
+)
+```
+
+
+According to this analysis, the total effect of the depression signal was to increase the likelihood of lending money by `r signif(mediation_model$tau.coef, 3)` points, relative to a verbal request; `r 100*signif(mediation_model$n0, 2)`% of this effect was mediated by the increased perception that the sister needed money. See Figure 13.
+
+```{r mediation plot, fig.cap= "Figure 13. Mediation of signal effect on likelihood of lending money by change in percieved need (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect."}
 plot(mediation_model)
 ```
 
@@ -584,4 +621,5 @@ emotions_biplot
 p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank())
 ```
 
+## Appendix 8
 # References

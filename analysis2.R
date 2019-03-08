@@ -436,14 +436,13 @@ d2b <-
     PC1t2all
   ) %>%
   dplyr::filter(
-    # p_info != 'Cheating',
     signal %in% c(
-      'Control',
+      'VerbalRequest',
       'Depression')
   ) %>%
   mutate(
     p_info = ordered(as.character(p_info), levels = c('Cheating', 'PrivateInformation', 'Honest')),
-    signal = factor(signal, levels = c('Control', 'Depression')),
+    signal = factor(signal, levels = c('VerbalRequest', 'Depression')),
     delta_need = case_when(
       delta_needs_money < -1 ~ -1,
       delta_needs_money > 1 ~ 1,
@@ -478,11 +477,21 @@ p_pc1_t1t2 <-
 
 # Mediation
 
-model.y <- glm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, family = gaussian, data = d2)
-model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2)
+## d2b restricted data set
+model.y <- lm(delta_lend ~ needsmoneyt1 + delta_needs_money + signal, data = d2b)
+model.m <- lm(delta_needs_money ~ needsmoneyt1 + signal, data = d2b)
 
 mediation_model <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_needs_money', boot = T)
+summary(mediation_model)
 plot(mediation_model)
+
+## d2b flipped
+# model.y <- lm(delta_needs_money ~ needsmoneyt1 + delta_lend + signal, data = d2b)
+# model.m <- lm(delta_lend ~ needsmoneyt1 + signal, data = d2b)
+# 
+# mediation_model2 <- mediate(model.m, model.y, treat = 'signal', mediator = 'delta_lend', boot = T)
+# summary(mediation_model2)
+# plot(mediation_model2)
 
 # Exploratory models
 
@@ -844,7 +853,44 @@ d0 %>%
   upset(order.by = 'freq', nsets = 12, nintersect = 10)
 
 # Anovas to draw p-values from for Rmd
+
 int1sig <- Anova(p_comfort_signal_pinfo$model, type = 3)
 
 int2sig <- Anova(p_lend_signal_conflict$model, type = 3)
 
+# Summary table of only T1 and T2 vars
+
+dft1 <-
+  d0 %>% 
+  dplyr::select(needsmoneyt1:comfortablelendingt1, MC1.1_1) %>%
+  rename(MC1 = MC1.1_1) %>% 
+  rename_all(function(x)str_replace(x, 't1', '')) %>% 
+  mutate(Time = 'T1')
+
+dft2 <-
+  d0 %>% 
+  dplyr::select(needsmoneyt2:angryt2, satisfactiont2, howsadt2, howreasonablet2:comfortablelendingt2, MC1.2_1) %>%
+  rename(MC1 = MC1.2_1) %>% 
+  rename_all(function(x)str_replace(x, 't2', '')) %>% 
+  mutate(Time = 'T2')
+
+dft12 <- rbind(dft1, dft2)
+
+demovars <-
+  c(
+    "needsmoney" = "Perceived need of money",
+    "likelylendmoney" = "How likely to lend money",
+    "angry" = "How angry are you about the request",
+    "satisfaction" = "How satisfied to help",
+    "howsad" = "How sad about health problem",
+    "howreasonable" = "How reasonable is the amount requested",
+    "believehealth" = "How much do believe the niece is ill",
+    "daughterharm" = "How much harm will your daughter suffer",
+    "believeneed" = "Suspicion of sister",
+    "sisterbenefit" = "Perceived benefit to sister",
+    "trustrepay" = "Trust that sister will repay",
+    "comfortablelending" = "Amount conformtable lending in dollars",
+    "MC1" = "How close to sister"
+  )
+
+df_t1t2_sum <- custom.summarize(dft12, vars = demovars, facvar = 'Time', statscol = F)
