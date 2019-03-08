@@ -268,7 +268,7 @@ To understand the effects of the signals, we fit a main effects model with no in
 
 Our total sample size was $N = 1878$. After removal of participants who either did not complete the study or who failed our pre-registered attention checks, our sample size was reduced to $N = `r nrow(signalingdata2018)`$. A further `r sum(signalingdata2018$exclusionopt1)` participants were removed either because they shared an IP address with more than 5 other participants, and were therefore suspected of being a single person, or who finished the survey in less than 215 seconds (the shortest time we were able to complete the survey ourselves) and gave a short, perfunctory response to a free-response item. All such participants were removed prior to any further anayses of the data. Basic demographic information on the remaining $N = `r sum(!signalingdata2018$exclusionopt1)`$ participants (Male = `r sum(d0$Sex == 'Male', na.rm=T)`, Female = `r sum(d0$Sex == 'Female', na.rm=T)`, unspecified = `r sum(is.na(d0$Sex))`) is in Table X. For the number of participants from each US State, see Figure SX.
 
-```{r summarystats}
+```{r summarystats1}
 
 library(hagenutils)
 library(knitr)
@@ -280,35 +280,7 @@ demovars <-
     'Siblings2' = 'Number of siblings',
     'Children' = 'Number of children',
     "Duration (in seconds)" = 'Time to complete survey (seconds)',
-    "needsmoneyt1" = "Perceived need of money at T1",
-    "likelylendmoneyt1" = "How likely to lend money at T1",
-    "angryt1" = "How angry are you about the request at T1",
-    "satisfactiont1" = "How satisfied to help at T1",
-    "howsadt1" = "How sad about health problem at T1",
-    "howreasonablet1" = "How reasonable is the amount requested at T1",
-    "believehealtht1" = "How much do believe the niece is ill at T1",
-    "daughterharmt1" = "How much harm will your daughter suffer at T1",
-    "believeneedt1" = "Suspicion of sister at T1",
-    "sisterbenefitt1" = "Perceived benefit to sister at T1",
-    "trustrepayt1" = "Trust that sister will repay at T1",
-    "comfortablelendingt1" = "Amount conformtable lending at T1 in dollars",
-    "MC1.1_1" = "How close to sister at T1",
-     
-    "delta_needs_money" = "Change in perceived need of money at T2",
-    "likelylendmoneyt2" = "Change in how likely to lend money at T2",
-    "angryt2" = "Change in anger about the request at T2",
-    "satisfactiont2" = "Change in How satisfied to help at T2",
-    "howsadt2" = "Change in How sad about health problem at T2",
-    "howreasonablet2" = "Change in How reasonable is the amount requested at T2",
-    "believehealtht2" = "Change in How much do believe the niece is ill at T2",
-    "daughterharmt2" = "Change in How much harm will your daughter suffer at T2",
-    "believeneedt2" = "Change in Suspicion of sister at T2",
-    "sisterbenefitt2" = "Change in Perceived benefit to sister at T2",
-    "trustrepayt2" = "Change in Trust that sister will repay at T2",
-    "comfortablelendingt2" = "Change in Amount conformtable lending at T2 in dollars",
-    "MC1.2_1" = "How close to sister at T2",
     "MC2.4_1" = "How easy to imagine",
-    
     "Angry" = "Is sister angry?",
     "Sad" = "Is sister sad?",
     "Suicidal" = "Is sister suicidal?",
@@ -327,8 +299,9 @@ kable(
   custom.summarize(d0, demovars),
   caption = 'Table 2. Summary statistics for all participants who met our inclusion criteria described above. A breakdown of the number of participants by state is availible in Appendix 1.'
 )
-
 ```
+
+
 
 ## Time 1 manipulation checks
 
