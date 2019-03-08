@@ -222,7 +222,7 @@ To measure these responses, sliders which functioned largely as visual analogue 
 
 Compared to our pre-signal measures, we had more missing values in the post-signal questions. We attributed this to the fact that Qualtrics only records responses if the slider is touched, which most participants probably did not realize. Since the slider was preset at the center at Time 2, we assumed that the missing values were largely due to participants meaning to report no change. We therefore replaced the missing values with the middle value for Time 2 variables only. The maximum number of missing values replaced was xxx% (Appendix ?? for details). We did not replace missing values for Time 1 because the slider was preset to the far left (e.g. 0 percieved need).
 
-# reminder appendix
+# reminder appendix line 132
 
 In addition to this, the amount of money participants were comfortable lending to their imagined sisters was asked and was measured with a slider which ranged from $0 to $50,000 and allowed the participant to see the amount they were selecting. Unlike the previously described measures, it was repeated identically at both time periods and asked on its own page due to the desire to save the only question that allowed for partial support for after those with less flexibility were asked.
 
