@@ -843,3 +843,23 @@ d0 %>%
   mutate_if(is.numeric, as.integer) %>% 
   as.data.frame %>%
   upset(order.by = 'freq', nsets = 12, nintersect = 10)
+
+# Summary table of only T1 and T2 vars
+
+dft1 <-
+  d0 %>% 
+  dplyr::select(needsmoneyt1:comfortablelendingt1) %>% 
+  rename_all(function(x)str_replace(x, 't1', '')) %>% 
+  mutate(Time = 'T1')
+
+dft2 <-
+  d0 %>% 
+  dplyr::select(needsmoneyt2:angryt2, satisfactiont2, howsadt2, howreasonablet2:comfortablelendingt2) %>% 
+  rename_all(function(x)str_replace(x, 't2', '')) %>% 
+  mutate(Time = 'T2')
+
+dft12 <- rbind(dft1, dft2)
+
+vars <- names(dft12)[1:12]
+names(vars) <- vars[1:12]
+custom.summarize(dft12, vars = vars, facvar = 'Time')
