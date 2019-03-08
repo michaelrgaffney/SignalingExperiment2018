@@ -590,9 +590,9 @@ Anova(m_exp, type = 3)
 plot(allEffects(m_exp))
 Plot_Exploratory <- visreg(m_exp, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
 
-m <- lm(PC1t2all ~ signal * conflict, data = d2b)
-Anova(m, type = 3)
-plot(allEffects(m))
+# m <- lm(PC1t2all ~ signal * conflict, data = d2b)
+# Anova(m, type = 3)
+# plot(allEffects(m))
 
 # Ordinal logistic of delta_need (based on needsmoneyt2)
 
