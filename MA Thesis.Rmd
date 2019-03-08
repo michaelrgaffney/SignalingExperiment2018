@@ -3,8 +3,8 @@ title: "Master's Thesis"
 author: "Michael Gaffney"
 date: "January 26, 2019"
 output:
-  word_document: default
   html_document: default
+  word_document: default
 bibliography: MTBib.bib
 csl: apa.csl
 always_allow_html: yes
