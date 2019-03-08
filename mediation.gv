@@ -1,0 +1,14 @@
+digraph {
+  
+graph [layout = neato]
+node [shape = rectangle]
+
+a [pos = '-2, 0!', label = 'Signal\n(Depression vs Verbal)']
+b [pos = '0, 1!', label = 'ΔNeeds money']
+c [pos = '2, 0!', label = 'ΔLend money']
+
+a->b
+a->c
+b->c
+
+}
