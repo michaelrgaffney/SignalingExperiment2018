@@ -229,7 +229,6 @@ Perceived benefit to sister at T1 | How much help would lending the money to you
 Trust that sister will repay at T1 | How much do you trust that your sister will pay you back? | 0: Extremely distrustful; 100: Extremely trustful
 Amount conformtable lending at T1 in dollars | What amount of money would you be comfortable with lending to your sister in this scenario in US dollars? | 0 - 50000
 How close to sister at T1 | Having read the story, how close do you feel to your sister? | 0: Extremely distant; 100: Extremely close
-
 Change in perceived need of money at T2 | After going to your sister’s house, has your belief that your sister needs the money increased, decreased, or not changed? | -50: Decreased greatly; 0: No change; 50: Increased greatly
 Change in how likely to lend money at T2 | After going to your sister’s house, are you more willing to lend her the money than before, less willing than before, or no change? | -50: Much less willing; 0: No change; 50: Much more willing
 Change in anger about the request at T2 | After going to your sister’s house, has your sister’s request for money made you more angry than you were, less angry than you were, or no change? | -50: Much less angry; 0: No change; 50: Much more angry
