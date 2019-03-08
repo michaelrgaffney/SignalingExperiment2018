@@ -303,13 +303,15 @@ demovars <-
 options(scipen=999)
 kable(
   custom.summarize(d0, demovars),
-  caption = 'Table 2. Summary statistics for all participants who met our inclusion criteria described above. A breakdown of the number of participants by state is availible in Appendix 1.'
+  caption = 'Table 2a. Summary statistics for variables measured at time 2 only. Includes only participants who met our inclusion criteria described above. A breakdown of the number of participants by state is availible in Appendix 1.'
 )
 ```
 
-```{r, compact table}
+```{r, summarystats2}
 kable(
-  df_t1t2_sum)
+  df_t1t2_sum,
+  caption = "Table 2b. Summary statistics for variables measured at both time 1 and time 2. Includes only participants who met our inclusion criteria described above."
+  )
 ```
 
 ## Time 1 manipulation checks
@@ -325,18 +327,22 @@ At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (co
 To confirm that our manipulations had the desired effects, we analyzed our T1 outcome variables. All 11 T1 outcome variables regarding the sister were strongly positively correlated with each other, except for anger, which was negatively correlated, and sadness about the niece's health problem, which was about the niece and not the sister (and was weakly positively correlated). Among the positively correlated sister variables, correlation coefficients ranged from `r signif(min(cmu), 2)` to `r signif(max(cmu), 2)`, with a mean of `r signif(mean(cmu), 2)`. We therefore conducted a Principle Components Analysis (PCA) of our T1 vars. PC1 accounted for `r signif(100*summary(pcaT1)$importance[2,1], 2)`% of the variance, and all T1 variables loaded equally on this component except for sadness about the sister's daughter's health problem, which loaded primarily on PC2. See figures 1 and 2 (A Table showing the loadings for our PCA can be found in Appendix 2).
 
 ```{r pcaT1Loadings, fig.cap= "Figure 1. Loadings plot showing how each of the variables included in our T1 PCA load on the first two principle components."}
-pca_loadings_plot(pcaT1, components = 1:2)
+p_pcaT1Loadings <- pca_loadings_plot(pcaT1, components = 1:2)
+ggsave("Figures/Figure1.pdf", p_pcaT1Loadings, width = 9, height = 6)
+p_pcaT1Loadings
 ```
 
 
 ```{r biplotT1, fig.cap= "Figure 2. Biplot of PC1 and PC2 at T1. The arrows represent the loadings of each variable on the first two prinicpal components. Each dot is one participant."}
 biplotT1
+ggsave("Figures/Figure2.pdf", biplotT1, width = 9, height = 6)
 ```
 
 We then confirmed that our T1 manipulations had the predicted effect on these outcome variables by fitting a linear regression model of PC1 as a function of the conflict and information conditions. As predicted, PC1 was higher (i.e., more positive toward the sister) in the support vs. conflict condition, and PC1 was also higher in the honest vs. private vs. cheating conditions. See Figure 3 and Table 3.
 
 ```{r manipulations, fig.cap="Figure 3. Manipulation checks: the effects of conflict and information conditions on reactions to helping the sister."}
 pT1a + pT1b
+ggsave("Figures/Figure3.pdf", pT1a + pT1b, width = 9, height = 6)
 ```
 
 ```{r T1Anova}
@@ -356,6 +362,9 @@ In order to see if our signal manipulations resulted in the desired perceptions 
 
 ```{r signalheatmap, fig.cap=" Figure 4. How participants in each signal condition rated the sister's mental state. Participants could check any number of conditions. Colors represent the percent of participants that checked each condition. Red = low, Brown = middle, Yellow and White = high."}
 heatmap(signalmat, scale = 'none')
+pdf(file = "Figures/Figure4.pdf", width = 9)
+heatmap(signalmat, scale = 'none', margins = c(8,5))
+dev.off()
 ```
 
 In addition to allowing us to confirm that the signals worked as designed, this question also allows for the examination of how the signals affected one's perception of the sister's current state and what baseline assumptions were being made in the control condition. Of particular interest is that those in the control condition often came in with the assumption that the sister was sad, scared, depressed and distressed despite not seeing a signal in the second portion of the vignette, with each of these option being checked by at least half of the participants.
@@ -363,12 +372,14 @@ In addition to allowing us to confirm that the signals worked as designed, this 
 To better understand which combinations of responses were most meaningufl, we also ran a PCA on all the variables that recorded if participants percieved the imagined sister to be in the emotional states listed above. PC1 seems to capture perceptions of sadness, fear, depression, and distress (Figure 5), while PC2 is heavily influenced by perceptions of mental illness (Figure 6). See appendix x for the loadings plot and biplot. 
 
 ```{r epc1, fig.cap= "Figure 5. Boxplot showing the loadings on PC1 for each of the signals for our second PCA looking at perceptions of the sister's emotional state."}
-epc1 
+epc1
+ggsave("Figures/Figure5.pdf", epc1, width = 9, height = 6)
 ```
 
 
 ```{r mentallyill, fig.cap= "Figure 6. Plot showing the proportion of participants who percieved their imagined sister to be mentally ill. Perceptions of mentall illness is plotted on the x-axis instead of PC2 due to both PC2 appearing to represent primariliy percpetions of mentall illness and because perceptions of mental illness are the more theoretically relvant variable."}
 p_mentallyill
+ggsave("Figures/Figure6.pdf", p_mentallyill, width = 9, height = 6)
 ```
 
 ## Preregistered tests
@@ -382,6 +393,7 @@ This prediction was not upheld. The Control condition (no signal) was ranked rel
 
 ```{r T2signaleffects, fig.cap="Figure 7. The effect of the signal manipulations on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
 (pT2comfort + pT2lend) / (pT2need + pT2pc1)
+ggsave("Figures/Figure7.pdf", (pT2comfort + pT2lend) / (pT2need + pT2pc1), width = 9, height = 9)
 ```
 
 We also predicted:
@@ -399,7 +411,13 @@ Our predicted interactions of signals with private information were:
 Like with the main effects of signal type, we fit linear models for our four outcome variables: (1) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1, (2) the likelihood of lending the sister money, (3) PC1 of all the outcome variables at T2, and (4) participants' perception of the sister's need for money. Our prediction was only supported when looking at our model with the amount of money participants were comfortable lending at T2 (controlling for T1) ($p = `r signif(int1sig['signal2:p_info', 'Pr(>F)'], 2)`$. See Figure 8 for visualization and Appendix 3 for the corresponding ANOVA tables.
 
 ```{r pinfoInteractions, fig.cap="Figure 8. Signal and information interactions. The effect of the signal, information interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
-(p_comfort_signal_pinfo$plot + p_lend_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo$plot + p_money_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))
+p_pinfoInteractions <- (p_comfort_signal_pinfo$plot + p_lend_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo$plot + p_money_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))
+
+p_pinfoInteractions
+
+ggsave("Figures/Figure8.pdf", p_pinfoInteractions, width = 9, height = 9)
+
+
 ```
 
 Our predicted interactions of signals with conflict were:
@@ -409,7 +427,11 @@ Our predicted interactions of signals with conflict were:
 We also fit linear models for the same outcome variables to examine test our hypothesized interaction. Unlike the predicted signal and information interactions, 3 of the 4 models showed evidence of interactions with the model for change in likelihood of lending T2 being marginally significant ($p = `r signif(int2sig['signal2:conflict', 'Pr(>F)'], 2)`$). See Figure 9 for visualization and Appendix 4 for the corresponding ANOVA tables.
 
 ```{r conflictInteractions, fig.cap="Figure 9. Signal and conflict interactions. The effect of the signal, conflict interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
-(p_comfort_signal_conflict$plot + p_lend_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict$plot + p_money_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))
+p_conflictInteractions <- (p_comfort_signal_conflict$plot + p_lend_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict$plot + p_money_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))
+
+p_conflictInteractions
+
+ggsave("Figures/Figure9.pdf", p_conflictInteractions, width = 9, height = 9)
 ```
 
 See Appendix 5 for a full overview of the full 2x3 interaction with change in perceived need at time 2 as the outcome variable.
@@ -422,12 +444,14 @@ To better understand where depression separated itself from the less costly sign
 
 ```{r pc1t1t2, fig.cap=" Figure 10. PC1 at time 2 as a function of PC1 at time 1, by signal and conflict condition. Each dot is one participant. Lines fit by loess regression."}
 p_pc1_t1t2
+ggsave("Figures/Figure10.pdf", p_pc1_t1t2, width = 9, height = 6)
 ```
 
 We also created an exploratory model based largely on theory but refined by observations of the data that suggested that much of the effect of the information manipulation was through its main effect rather than through its main effect plus the predicted interactions (Figure 11 and Table 4). Despite this being our favored exploratory model, it is unclear if private information would not interact much with signal type in real situations or if our conflict manipulations were simply more succesful than our information manipulations in activating the relevant mechanisms.  
 
 ```{r exploratory model, fig.cap= "Figure 11. Effects plot showing the interaction between signal type and conflict in our favored exploratory model."}
 Plot_Exploratory
+ggsave("Figures/Figure11.pdf", Plot_Exploratory, width = 9, height = 9)
 ```
 
 ```{r expanova}
@@ -461,7 +485,9 @@ b->c
 According to this analysis, the total effect of the depression signal was to increase the likelihood of lending money by `r signif(mediation_model$tau.coef, 3)` points, relative to a verbal request; `r 100*signif(mediation_model$n0, 2)`% of this effect was mediated by the increased perception that the sister needed money. See Figure 13.
 
 ```{r mediation plot, fig.cap= "Figure 13. Mediation of signal effect on likelihood of lending money by change in percieved need (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect."}
+pdf("Figures/Figure13.pdf", width = 9, height = 6)
 plot(mediation_model)
+dev.off()
 ```
 
 # Discussion
@@ -523,7 +549,9 @@ This study also highlights a few possible directions for the signals outside of 
 ## Appendix 1
 
 ```{r numbersbystate, fig.height=10, fig.cap= "Numbers of participants by state. Note the east coast bias caused by the study being completed much sooner than expected."}
+pdf("Figures/Appendix1.pdf", width = 9, height = 12)
 dotchart(sort(table(signalingdata2018$State)))
+dev.off()
 ```
 
 ## Appendix 2
@@ -571,13 +599,15 @@ kable(tidy(Anova(p_money_signal_conflict$model, type = 3)), digits = 1, caption 
 ```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the change in the perceived need of the sister at time 2. The y-axis is ordered based on our predictions, with signals expected to result in more support as one moves from bottom to top."}
 # plot(allEffects(full_int_overview2))
 # Plot_full_int
-p
+p_overview
+ggsave("Figures/Appendix5.pdf", p_overview, width = 9, height = 6)
 ```
 
 ## Appendix 6
 
 ```{r emotionPCAloadings, fig.cap= "Loadings plot showing how each of the variables included in our sister's emotions PCA load on the first two principle components."}
 pca_loadings_plot(Epca)#, components = 1:2)
+ggsave("Figures/Appendix6.pdf", pca_loadings_plot(Epca), width = 9, height = 6)
 ```
 
 ```{r emotionPCAbiplot, fig.cap= "Biplot of PC1 and PC2 for the sister's percieved emotional states. The arrows represent the loadings of each variable on the first two prinicpal components. Each dot is one participant."}
@@ -590,6 +620,7 @@ emotions_biplot
 p_ease$plot$layers[[3]] <- NULL
 p_ease2$plot$layers[[3]] <- NULL
 p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank())
+ggsave("Figures/Appendix7.pdf", p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank()), width = 9, height = 6)
 ```
 
 ## Appendix 8
