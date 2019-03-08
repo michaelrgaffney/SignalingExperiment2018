@@ -104,10 +104,9 @@ d0 <-
     signal = factor(signaldict[signal]),
     p_info = ordered(p_info, levels = c('Cheating', 'PrivateInformation', 'Honest')),
     conflict = factor(conflict, levels = c('Conflict', 'Support')),
-    angryt1 = 100 - angryt1,
+    #angryt1 = 100 - angryt1,
     howsadt1 = 100 - howsadt1,
     daughterharmt1 = 100 - daughterharmt1,
-    believeneedt1 = 100 - believeneedt1,
     needsmoneyt2 = ifelse(is.na(needsmoneyt2), 50, needsmoneyt2),
     likelylendmoneyt2 = ifelse(is.na(likelylendmoneyt2), 50, likelylendmoneyt2),
     angryt2 = ifelse(is.na(angryt2), 50, angryt2),
@@ -646,7 +645,7 @@ emotions$PC2 <- Epca$x[,2]
 plot(Epca)
 pca_loadings_plot(Epca)
 
-autoplot(
+emotions_biplot <- autoplot(
   Epca,
   loadings = T,
   loadings.label = T,
@@ -763,7 +762,7 @@ p_believeneed$plot
 
 # for analysis2
 d0$signal <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'Crying', 'Anger', 'Depression', 'Depression&Suicidal', 'Suicide attempt'))
-full_int_overview <- glm(delta_lend ~ signal * conflict * p_info, data = d0)
+full_int_overview <- glm(needsmoneyt2/100 ~ signal * conflict * p_info, data = d0) #changed from delta_lend
 plot(allEffects(full_int_overview))
 
 
@@ -796,7 +795,7 @@ p <-
   geom_point(position = position_dodge(width = 0.7), size = 3) +
   geom_linerange(aes(ymin = visregLwr, ymax = visregUpr), position = position_dodge(width = 0.7), size = 1) +
   geom_hline(yintercept = 0, linetype = 'dotted') +
-  labs(title = 'Overview', x = '', y = '\nLikely to lend money (time 2)') +
+  labs(title = 'Overview', x = '', y = '\nChange in perceived need (time 2)') +
   coord_flip() +
   theme_bw(15)
 p
@@ -843,3 +842,8 @@ d0 %>%
   mutate_if(is.numeric, as.integer) %>% 
   as.data.frame %>%
   upset(order.by = 'freq', nsets = 12, nintersect = 10)
+
+int1sig <- Anova(p_comfort_signal_pinfo$model, type = 3)
+
+int2sig <- Anova(p_lend_signal_conflict$model, type = 3)
+

@@ -13,7 +13,11 @@ source('analysis2.R')
 library(patchwork)
 ```
 
-## Introduction
+# Abstract
+
+Due to the fact much of major depression research often focuses on methods of treatment or causal explanations emphasizing the role of psychological malfunctions, the responses of others to the depressed are largely overlooked.  Although such responses are of little use to such explanations, the potential ability for depression to elicit positive changes in social relationships through signaling honest need has been suggested as way depression could be adaptive, making responses to it a critical piece of evidence. To examine if depression often comes with social benefits, we compared it to other proposed signals of need in a vignette study that also manipulated the amount and type of information about whether one’s need was honest and the presence of conflict within an imagined relationship. Overall, we found evidence for the predicted interaction between signal type and conflict on relationship outcomes as well as the predicted main effects of information and conflict. Contrary to our predictions, costlier signals did not result in more positive responses across signal types, with there also being little evidence in favor of the predicted signal by information interaction. However, depression outperformed all the other proposed signals of need on our four outcome measures across social circumstances, and our predicted relationships for the signals as a whole were largely supported when looking solely at the verbal request, crying, and depression manipulations. This suggests that depression is a relatively successful way of demonstrating honest need and eliciting support, consistent with signaling explanations.
+
+# Introduction
 
 Long considered pathological sadness, depression has gained increased attention for its potential to function as a signal of need capable of bringing about positive changes in social relationships [@Hagen2002; @Hagen2003]. Referred to as the bargaining model of depression, this view shares much in common with signaling explanations for crying [@Hasson2009; @HendriksEtAl2008], self-harm [@HagenEtAl2008], suicide attempts [@Rosenthal1993; @SymeEtAl2016], and illness symptoms [@Steinkopf2015; @Tiokhin2016], all of which view the costs involved as a key component of eliciting important social support. Based mainly in signaling theory, such approaches have all benefited greatly from economics and game theory, with the result being explanations for the existence of such states that emphasize the causal role of one’s social environment rather than simply focusing on one’s internal state. 
 
@@ -21,11 +25,11 @@ Due to the similarities between the ways in which they are suggested to achieve 
 
 Of all their similarities, the most basic is that positive responses are frequently expected so that the benefits received outweigh the costs involved on average. However, such responses are underexamined relative to the predictors of the symptoms involved and potential treatments, something which is especially true of depression [@BillingsMoos1985] due to the suffering it causes to those who have it. The result of this is that one of the most important lines of evidence for an oftentimes adaptive explanation for depression and the other proposed signals of need is largely missing.
 
-## Thesis Outline
+# Thesis Outline
 
 In this thesis, I briefly review the evidence for why the proposed signals of need are unlikely to solely be the result of malfunctions before reviewing the basics of signaling theory that tie them all together. I then review depression and how adaptive and nonadaptive approaches differ in their casual explanations. After examining the other proposed signals of need, I explore the empirical work that has been done on responses to the proposed signals before examining what should be expected from signaling theory. Lastly, I report the findings of a vignette study conducted with Edward Hagen examining if the proposed signals of need result in positive responses in the situations predicted by the previously mentioned signaling explanations. 
 
-## Opposition to adaptive explanations and initial indications they are adaptive
+# Opposition to adaptive explanations and initial indications they are adaptive
 
 In general, the dominant view of the proposed signals of need is that they are symptoms of harmful byproducts or malfunctions. Likely the main reason for this is the harm they cause the one experiencing them, which can be quite severe with the costlier signals [@Kessler2012]. However, subjective suffering and negative fitness outcomes are not inextricably linked. This is most obviously seen with negative emotions motivating fitness enhancing behavioral shifts, as is widely recognized to be the case with hunger, thirst, or pain [@Nesse1990; @ToobyCosmides2008]. Just as these explanations attribute a functional role to negative experiences, the costs of proposed signals of need are suggested to be adaptive for their ability to increase the confidence of others who may be motivated to help that one’s need is genuine in ways non-costly displays could not [@Hagen2003; @Rosenthal1993; @SymeEtAl2016].
 
@@ -33,7 +37,7 @@ However, to this point, the evidence suggesting that the proposed signals of nee
 
 Another important indication that the proposed signals of need are often the result of the result of functional mechanisms is the fact they tend occur when individuals are in need and can benefit from others. This is seen in both depression and suicide attempts occurring most frequently in times of social adversity in which individuals are experiencing costs due to the actions of others or the loss of existing social relationships [@Hammen2005; @Mazure1998; @SymeEtAl2016]. Likewise, placebo responses, which have been proposed to be the downregulation of signaling through increased illness symptom severity [@Steinkopf2015; @Tiokhin2016], often happen in response to individuals receiving support after feeling a lack of it in conjunction with perceived need [@Humphrey2002]. Although not evidence of increased support, this connection between the proposed signals of need and times of need suggests that malfunction cannot be safely assumed as long as there are those around who would be motivated to help.
 
-## Social support in humans
+# Social support in humans
 
 Such a scenario in which costly emotional states lead to increased benefits is possible due to the degree to which humans cooperate with another, something which was necessary for our survival over much of our evolutionary history and is reflected in our adaptations today [@SugiyamaSugiyama2003]. Unlike most species, this support can often come from a wide range of individuals in humans, with kin beyond parents playing an important role in childcare across generations [@KaplanEtAl2009; @Meehan2005; @SearMace2008] and unrelated individuals often helping in a wide range of situations due to the benefits of both direct and indirect reciprocity as well as reputation gains [@Alexander1987; @Barclay2013; @JaeggiGurven2013]. The result of these benefits is a situation in which many individuals may be potential targets of a costly signaling strategy.
 
@@ -42,7 +46,7 @@ While important at almost any time, cooperation is especially important in times
 However, despite the likelihood of individuals benefiting from increasing their support of others in times of need and the widespread evidence that it often happens, devoting a large amount of resources to another is only likely to be worth it if the need is genuine. It is in these instances when the proposed signals of need are expected to be adaptive, as long as the result is an increase in the likelihood of support due to the signal enhancing one’s appearance of need and the benefits outweighing the costs of producing the signal [@Zahavi1993]. Although this limitation precludes the costlier signals from being adaptive in relatively minor instances of need, it does rule out adaptive explanations in times when one’s need is great and unlikely to be believed.
 
 
-## Costly Signaling
+# Costly Signaling
 
 All organisms can benefit from altering the behavior, physiology, and psychological states of others, something which is seen from single celled organisms to social animals [@Dawkins1982]. Such changes can be accomplished through chemical or behavioral means, with information flowing from the signaler to the receiver in ways meant to benefit the one sending the message, regardless of whether or not it benefits the one receiving it [@Dawkins1976]. In social animals, members of one’s own species are often the target, with sexual selection and intrasexual competition creating many situations in which one’s reproductive success depends greatly on the responses of others [@Clutton-BrockHuchard2013; @DalyWilson1983]. The results of this are strong selection pressures favoring those who can make the most of these opportunities to outcompete others and receive the largest benefits through both cooperation and competition. 
 
@@ -51,7 +55,7 @@ Of the strategies used to influence the behavior of conspecifics, costly signali
 To overcome such counter-adaptations to cheating, an organism may produce a signal that cannot be achieved without meaningful costs in order to increase the believability of the signal [@Zahavi1975]. The result of such signals are relatively honest displays compared to those which involve lesser costs so long as the costs involved with the signal make the signal only worth producing for those who have the underlying qualities associated with the signal [@Zahavi1993]. Although originally formulated as an explanation for the role of costly traits in attracting mates (i.e. colorful plumage or large physical weaponry) [@GangestadScheyd2005; @Zahavi1975], there is no reason why it cannot be applied to the proposed signals of need as long as their costs are prohibitively high for those who are not in need. 
  
 
-## Depression
+# Depression
 
 Of all the proposed signals of need, major depression has received the most attention and likely causes the most suffering. Although often overlooked due to its indirect connection with mortality [@PatelEtAl2004], it is the leading cause of nonfatal disease burden in the world and the second greatest contributor to global years lost to disability [@FerrariEtAl2013; @SlavichIrwin2014]. Around 8% of people in the U.S. experience major depression each year, and almost 20% will experience major depression in their lifetime [@KesslerEtAl2010]. In general, similar prevalences are often reported for depression as a whole, with there being some evidence that it is more often diagnosed in developed countries [@BrometEtAl2011]. However, in no country is there a good understanding about how people respond to the depressed.
 
@@ -67,13 +71,13 @@ Of the many types of negative life events associated with depression, those whic
 
 Except for the loss of a loved one, conflict is likely to often be present in all the previously mentioned forms of social adversity and may be one of the most meaningful aspects in bringing about depression. For example, breakups in both romantic and cooperative relationships are often preceded by conflict [@AmatoHohmann-Marriott2007], and surely contain it when one side wants reconciliation and the other does not. Likewise, abusive relationships are bound to be conflictual, with one side holding the power to harm the other and doing so. When looking solely at conflict as a predictor, it is often reported to be linked with depression [@AsgeirsdottirEtAl2011], with both conflict without abuse and conflict among family members also being strong predictors of depression in Western societies [@KendlerEtAl1995]. Although too few studies exist outside of Western societies to be sure of the generalizability of this, initial studies are consistent with this, with conflict outside of the family being a predictor of depression among the Tsimané [@StieglitzEtAl2015]. 
 
-## Nonadaptive explanations
+# Nonadaptive explanations
 
 Explanations for the relationship between social adversity and depression often involve the malfunction of mechanisms relating to low mood, which is almost universally considered adaptive when it functions properly [@Hagen2003; @Nesse1999; @WakefieldFirst2012]. One influential version of this is the stress-diathesis model , which suggests that stressful situations interact with one’s predisposition to depression to bring about depressive symptoms [@MonroeSimons1991]. In general, such approaches do not make distinctions between different types of stress and their effects on risk of depression nor do they predict different outcomes based on variables outside of stress levels and personality differences. From this perspective, the social adversity often associated with depression may simply be one way for extreme levels of stress to accumulate thereby turning what would normally be short-term sadness into long-term depression. 
 
 Such approaches also generally do not make predictions on the types of responses the depressed are likely to receive, although there are exceptions. This is due in large part to the previously mentioned costs involved, which shift the focus of most research towards treatment [@PatelEtAl2004] and increases the size of the benefits needed for it to adaptive. When predictions are made about responses, they tend to involve depression resulting in negative responses due to strain the depressed’s anhedonia and impaired social functioning puts on relationships [@Coyne1976]. From these perspectives, the costs of depression are simply too great to warrant a focus on the positive responses or too unexpected to be examined.
 
-## The bargaining model of depression
+# The bargaining model of depression
 
 Unlike these approaches, the bargaining model of depression emphasizes both the roles of social adversity and potential benefits in its explanation for why most instances of depression happen [@Hagen2002 ;@Hagen2003]. It views depression as an oftentimes adaptive response to social adversity or other hardships in which support from others or more beneficial cooperative relationships can be gained. Since any biological mechanism can fail, maladaptive cases of depression are still expected to exist under this model [@Hagen2011]. However, in many instances, it is expected to serve as a viable option to elicit more social support for those who may have few other options.
 
@@ -83,7 +87,7 @@ Like with the other proposed signals, the costs experienced by the depressed pla
 
 Despite predicting many cases of depression to stem from situations in which it was adaptive ancestrally, the bargaining model does not suggest that depression should go untreated. This is because adaptation is not to be confused with subjective wellbeing, which is a much more important concern in every area except for explanations of why depression exists [@CosmidesTooby1999]. However, it does suggest an explanation for why most medical treatments perform similarly to cognitive therapy [@HollonEtAl2005] and placebos [@WalshEtAl2002] in that all three methods demonstrate the existence of a knowledgeable medical professional giving active support to the depressed. In other words, such treatments may provide sufficient cues that the signal has worked, even though none may treat the underlying cause. 
 
-## Other proposed costly signals of need
+# Other proposed costly signals of need
 
 As previously mentioned, the bargaining model of depression is not unique as an oftentimes adaptive explanation for harmful symptoms, with crying [@Hasson1994; @HendriksEtAl2008], self-harm [@HagenEtAl2008], suicide attempts [@Rosenthal1993; @SymeEtAl2016], and illness symptoms [@Steinkopf2015; @Tiokhin2016] having all been argued to signal need. 
 
@@ -104,7 +108,7 @@ Although tied to a different type of need and not included in the study presente
 Formulated as an explanation for placebo responses, the best evidence in favor of the signaling theory of symptoms comes from the observation that placebo responses tend to occur after signs that care has been given, with the placebo response simply being viewed as the return to symptom levels appropriate for disease fighting without the added signaling component [@Steinkopf2015]. Therefore, like the other proposed signals of need, its occurrence is expected to be highly dependent on social context in both predicting its occurrence and its cessation. This is seen experimentally in that placebo responses which often work in the presence of healthcare providers can be completely negated if the person is instructed to complete their treatment alone [@HashishEtAl1988]. However, presence alone is also not enough, as should be expected of a signaling explanation. Instead, demeanor is also highly important, with facial expression indicating care and concern resulting in more placebo responses than neutral or disinterested faces [@Benedetti2009; @Steinkopf2015]. 
 
 
-## Key similarities shared by the proposed costly signals of need
+# Key similarities shared by the proposed costly signals of need
 
 Viewed collectively, the proposed signals of need clearly share some important similarities which can allow for generalizations about when they should be most common and under which situations they are most likely to be adaptive. When it comes to prevalence, their hypothesized functions as signals suggests they should all be more common when there is a high degree of private information held by the signaler (i.e. when the targets of the signal do not have information about the honesty of need) [@Hagen2003]. This is due to the previously mentioned ubiquity of conflicts of interest, which incentivizes deception and favors strategies in which individuals are only likely to increase their support of others if their counter-cheating adaptations are satisfied. For this reason, signals should be more common when the target has little information to confirm the signaler is in need and less common when such information exists as the signaling component of any trait or state is created primarily to provide another organism with information. Indeed, in instances of public information, the expectation is that both parties should be able to bargain quickly as there is nothing in the way of both sides figuring out how the benefits should be divided [@KennanWilson1993].
 
@@ -118,7 +122,7 @@ In addition to not engaging in a signaling strategy that is likely to result in 
 
 Although not derived from the similarities of the theories explored here in the same way as the previous traits, a key similarity shared by the signals is that the costs associated with signaling will almost always be less than the costs of the symptoms themselves since some level of symptomology is likely to be present that is not tied to a signaling function. In other words, the cost of engaging in a costly signal of need is often going to be less than the symptoms the recipient sees. This is clearly seen with illness symptoms if the signaling theory of symptoms is correct, in that much of one’s symptoms will be the result the body’s defense mechanisms or a pathogens circumvention of these defenses even in instances in which they are upregulated for a signaling function [@Steinkopf2015; @Tiokhin2016]. Therefore, the costs of signaling may only be a small part of the totality of the symptom. Although such a situation is harder to imagine with depression or suicide attempts, extreme cases of conflict or abuse may result in situations in which the difference between a depressed and a nondepressed state may be much closer than normal [@Hagen2003].  
 
-## Benefits
+# Benefits
 
 For the proposed signals of need to be worth the costs, substantial benefits in terms of social support are expected by their corresponding theories, either in the form of support or renegotiated social relationships. When it comes to depression, self-harm, and suicide, the most likely benefits are expected to be long-term changes in how one is treated [@Hagen2003; @HagenEtAl2008; @SymeEtAl2016]. This can take the form of reconciliations in failing relationships, increased fairness in cooperative relationships, or an increase of resources being directed towards an individual. Of all the benefits, a reduction in physical abuse may be one of the most important, with physical abuse likely being a common occurrence over our evolutionary history based on the high prevalence of it in traditional societies [@StieglitzEtAl2011]. 
 
@@ -130,7 +134,7 @@ Although less meaningful when examining responses to the proposed signals, the d
 
 When examining the costly signals of need, the gap between current levels of received social support and the potential support that could be gained through a signaling strategy is likely to be the most important measure as this is what defines the size of the benefits. As this would involve information about both one’s level of need as well as information about the likelihood and size of potential help, it may essentially be a measure of perceived support as defined above. Therefore, perceived social support might form an important link between the severity of one’s situation and the amount of help deemed sufficient to avoid or stop a signaling strategy. In connecting the two, this conceptualization has the potential to explain why low levels of perceived social support are a strong predictor of depression [@KendlerGardner2014; @LeskelaEtAl2008; @ParkEtAl2016] and a potential predictor of the symptom upregulation found in placebo responses [@Humphrey2002].
 
-## Responses to the proposed costly signals of need	
+# Responses to the proposed costly signals of need	
 
 Most studies examining responses to depression have been observational and focused on responses outside of changes in social support. In general, most report aversive responses and high levels of rejection towards the depressed, and depressed individuals are often linked to impaired social functioning [@EvraireDozois2011; @GotlibLee1989; @HirschfeldEtAl2000]. One explanation for this is that depressed individuals engage in behaviors that drive others away. In line with this reasoning, both excessive reassurance seeking and negative feedback seeking, which often accompany depression, have been shown to elicit negative emotional responses from others and increase the chance of rejection from others [@JoinerMetalsky1995; @StarrDavila2008]. Negative interactions are also seen in families as depressed children tend to report less support and more negative responses from parents than non-depressed children, although it has not been demonstrated that such interactions did not lead to depression in the first place [@MesserGross1995; @SchwartzEtAl2012]. 
 
@@ -146,7 +150,7 @@ Although negative responses to suicide survivors are more often studied and repo
 
 Unfortunately, the evidence regarding responses to suicide in traditional societies is indirect or anecdotal. Unlike Western countries, where suicide is often viewed as pathological [@Hidaka2012], members of traditional societies have been reported to view suicide attempts as cries for help rather than mental illness [@Shostak1981], suggesting that help is at least occasionally provided or reliably expected. Further evidence for this comes primarily from the situations in which suicide attempts are made, with suicide attempts often being described as ways of escaping unwanted marriage arrangements, persistent abuse, or a lack of support in obtaining mates [@GutierrezdePinedaMuirden1948; @Hilger1957; @Karsten1935; @Tessmann1930; @Wilson1960]. Although most reports focus mainly on suicide attempts that result in death, there is some indication that the threat of it or a survived attempt can result in increased support, as was the case with the threat of suicide helping a !Kung woman escape an arranged marriage [@Shostak1981].
 
-## Why responses differ
+# Why responses differ
 
 Compared to the empirical examinations of the responses of others to the proposed signals of need, the theory is much more advanced and responsible for several testable hypotheses. Likely the most basic is that costlier signals will elicit greater benefits all else being equal. This is mainly due to the previously mentioned relationship between the costs of a signal and its honesty, which results in costlier signals better satisfying the anti-cheating adaptations of others than less costly alternatives [@Zahavi1993]. In addition to this, the requirement that the benefits received need to outweigh the costs of producing the signals on average also suggests that the costlier signals will often result in more substantial support as increased costs must be met by increased benefits for them to be adaptive. 
 
@@ -161,7 +165,7 @@ It is important to note that the relative importance of relational level differe
 
 Beyond one’s social environment, individual differences may also result in differences in how effective various signals and their alternatives are, thereby influencing how one is responded to. Although not a costly signal as envisioned here, anger is clearly involved with signaling displays and should be expected to work better for those with more formidability [@HagenRosenstrom2016]. As previously mentioned, this has been suggested to explain the sex difference in depression, with women being less likely to effectively bargain through aggression. However, if depression and anger from complementary bargaining strategies, it is also conceivable that men may have more to lose from depression. Although speculative with depression, this appears to be the case with crying, with men often being responded to less favorably to than women [@CretserEtAl1982; @Jesser1989] although this is not a universal finding [@HendriksEtAl2008].
 
-## Study Aims and Predictions
+# Study Aims and Predictions
 
 The relative lack of studies on responses to the proposed signals of need thus far has meant that a key line of evidence regarding the plausibility of their adaptive nature is underdeveloped, something which is compounded by the fact that many of the studies examining the costlier signals are focused solely on negative responses. In this study, we examine responses to many of the proposed signals of need in response to different social circumstances (i.e. high or low conflict and the amount and direction of information about honest need). Although this is done for all the signals in the confirmatory portion of the study, we turn our focus to depression and the less costly signals in our exploratory analyses.
 
@@ -173,13 +177,13 @@ In addition to these main effects we also predict several interactions. Regardin
 
 Due to the same reason underlying our prediction for the main effect of conflict, we also predict two interactions with conflict. The first is that the effect of signal strength will be larger in the conflict condition compared to no conflict condition. The second is that private information will have a greater negative impact on helping in the conflict condition than the no conflict condition.
 
-## Materials and methods
+# Materials and methods
 
-### Vignettes
+## Vignettes
 
 The vignettes for this study were designed to result in a situation in which requested support was costly but worth providing if the requester was truly in need. In this study, this took the form of having participants put themselves in situations in which an imagined sister was requesting a loan of $50,000 from them that was originally saved for their imagined daughter’s college education. Regardless of the manipulations, each vignette consisted of two parts, the main storyline which included the conflict and information manipulations and a signal portion that was presented after the participants answered the first set of main outcome questions and the only attention check.
 
-### Factorial Design
+## Factorial Design
 
 The design of this study was a between-subject full factorial design in which three theoretically relevant variables were manipulated: (1) the level of conflict in the relationship, (2) the degree to which one had information about whether or not the person in the vignette is genuinely in need, and (3) the type of signal (or control).  
 
@@ -190,23 +194,23 @@ For our signal manipulation, six types of signals accompanying verbal requests w
 Unfortunately, it became clear after the study was completed that our no signal control was flawed due to the fact that a verbal request was always included in the main part of the vignette. Therefore, although the control had no signal after the main vignette, there was still a signal present before. For this reason, verbal request may be the closest condition to a control we have, with our original control simply being a one-time verbal request.
 
 
-### Sampling
+## Sampling
 
 Participants for this study were recruited from Amazon Mechanical Turk, a crowdsourcing platform that allows for the creation of Human Intelligence Tasks (HITs) that workers can complete for pay. As Amazon provides the infrastructure, it allows for a relatively low-cost way of collecting data for academic research at the cost of the data not being representative of any real population. Despite this limitation, it is more diverse than most convenience samples [@KennedyEtAl2018; @DworkinEtAl2016], with turkers in the U.S. mainly differing in being younger, more educated, lower income, and more female biased than the greater U.S. population [@RossEtAl2010]. 
 	
 Overall, the quality of data provided by MTurk workers tends to resemble that of university sample pools, with there being some indication that it might outperform university samples in a few important areas. This is seen in that while both MTurk workers and university students engage in problematic behaviors that might lessen data quality to similar amounts [@NeckaEtAl2016], workers on MTurk have been shown to be more attentive than samples of university students [@HauserSchwarz2016]. For this reason, concerns about data quality come primarily from potential bot use and respondents faking their location to take surveys in a language they do not understand well, with the former concern being largely unfounded and the latter able to be corrected for with the tools used in this study [@KennedyEtAl2018]
 	
-### Sample
+## Sample
 
 All participants were over 18, located in the United States, had a HIT approval rate of over 95%, and had successfully completed at least 100 HITs as anything less results in approval rates of 100% [@KennedyEtAl2018]. To ensure participants were paying attention to the vignette, a 5-question attention check was included which involved questions addressing the topics of manipulations as well as who was making the request and how much money was saved for the daughter. Informed consent was given by proceeding with the study after reading the consent form, and all participants who passed at least 4 of the 5 attention checks were paid $1 for their time.
 
 Although all participants who passed the attention checks and finished the survey were paid, additional exclusions were made to reduce the noise from low quality data.  This involved removing data with response times under 215 seconds unless the participant provided a comment of over 10 words in response to the open-ended feedback prompt, with the time cutoff being selected for being as fast as one could complete the study while paying attention to the relevant parts based on trial runs and the word cutoff being based on the likelihood that someone rushing through the study would not spend the extra time to fill in an optional section. In addition to this, participants were also excluded for either having identical GeoIP addresses to at least six other survey completions or an IP address flagged as suspicious of VPS use by the R package rIP. This was due to the reported association between fraudulent, low quality responses to both VPS use and multiple responses [@KennedyEtAl2018]. The cutoff of 6 was chosen through the use of regression trees which indicated an attention check failure rate of almost 64% for individuals whose GeoIP matched at least 6 other responses.
 
-### Survey
+## Survey
 
 Although distributed through MTurk, every participant took the survey using Qualtrics. In every instance, the elements of the survey were laid out in the following order: 1) the consent form, 2) the main body of the vignette, 3) the first set of outcome measures (pre-signal), 4) the first set of manipulation checks, 5) the attention checks, 6) the signal portion of the vignette, 7) the second set of outcome measures (post-signal), 8) the second set of manipulation checks, 9) a set of demographic questions, and 10) an open feedback prompt.
 
-#### Outcome measures
+### Outcome measures
 
 Both emotional and instrumental responses were measured in the survey portion of the study. In a small pilot study, we initially asked the same questions before and after the signal was shown to measure how the signal affected one’s responses. However, due to the prevalence of ceiling and floor effects, the majority of the questions following the signal in this study were revised to ask if and how one’s likelihood of helping or feeling certain emotions changed. This resulted in 22 outcome measures with 11 being asked before the signal and 11 after. In both instances, the order of the questions was randomized to avoid order effects [@KrosnickAlwin1987].
 
@@ -229,7 +233,6 @@ Perceived benefit to sister at T1 | How much help would lending the money to you
 Trust that sister will repay at T1 | How much do you trust that your sister will pay you back? | 0: Extremely distrustful; 100: Extremely trustful
 Amount conformtable lending at T1 in dollars | What amount of money would you be comfortable with lending to your sister in this scenario in US dollars? | 0 - 50000
 How close to sister at T1 | Having read the story, how close do you feel to your sister? | 0: Extremely distant; 100: Extremely close
-
 Change in perceived need of money at T2 | After going to your sister’s house, has your belief that your sister needs the money increased, decreased, or not changed? | -50: Decreased greatly; 0: No change; 50: Increased greatly
 Change in how likely to lend money at T2 | After going to your sister’s house, are you more willing to lend her the money than before, less willing than before, or no change? | -50: Much less willing; 0: No change; 50: Much more willing
 Change in anger about the request at T2 | After going to your sister’s house, has your sister’s request for money made you more angry than you were, less angry than you were, or no change? | -50: Much less angry; 0: No change; 50: Much more angry
@@ -245,22 +248,22 @@ Change in Amount conformtable lending at T2 in dollars | After going to your sis
 How close to sister at T2 | After going to your sister's house, how close do you feel to your sister? | 0: Extremely distant; 100: Extremely close
 How easy to imagine | How challenging was it to imagine yourself in this scenario? | 0: Extremely difficult; 100: Extremely easy
 
-#### Manipulation check
+### Manipulation checks
 
 To understand if our manipulations had the desired effect two brief manipulation checks were also included, one before the signal and one following it. The first set of checks involved a question about how close participants felt to the one requesting the help in the imagined scenario and a question about how significant of a request the $50,000 was perceived to be. The second set of checks also had these questions plus one examining what emotional state they thought the imagined signaler was experiencing.
 Beyond a way to determine if participants were responding to the study as desired, these questions are also likely meaningful as outcome measures as one’s perception of another’s subjective experience is likely to play a role in their decision making. As such, they are only used in exploratory analysis portion of this study.
 
-#### Demographic Questions
+### Demographic Questions
 
 The final part of the survey was a brief demographic questionnaire which examined: (1) the age, (2) sex, (3) state of residence, (4) number of children, (5) number of siblings, (6) birth order, (7) current relationship status, and (7) highest level of education of each participant.
 
-### Confirmatory Analyses
+## Confirmatory Analyses
 
 To analyze the effects of conflict and the amount and type of information (hereafter information) on helping behavior, we used a generalized linear model that included conflict and information as independent variables for each initial measure of instrumental support. Although it did not perform too differently from a linear model, a GLM was chosen here and used in all other models due to the prevalence of individuals answering at the extreme ends of the sliders which resulted in error estimates that were not normally distributed.
 
 To understand the effects of the signals, we fit a main effects model with no interactions. Here, the manipulated variables included the signals and the amount of help given before the signal, thereby controlling for sampling error while also including the effects of conflict and information that impacted help before the signal. We also fit an interaction model for the two outcome variables in an examination of a smaller subset of signals including depression, crying, and verbal request. This involved the same predictors included in the main effects model in addition to interactions between 1) signal strength and information, 2) conflict and private information, 3) and conflict and signal strength. 
 
-## Results
+# Results
 
 Our total sample size was $N = 1878$. After removal of participants who either did not complete the study or who failed our pre-registered attention checks, our sample size was reduced to $N = `r nrow(signalingdata2018)`$. A further `r sum(signalingdata2018$exclusionopt1)` participants were removed either because they shared an IP address with more than 5 other participants, and were therefore suspected of being a single person, or who finished the survey in less than 215 seconds (the shortest time we were able to complete the survey ourselves) and gave a short, perfunctory response to a free-response item. All such participants were removed prior to any further anayses of the data. Basic demographic information on the remaining $N = `r sum(!signalingdata2018$exclusionopt1)`$ participants (Male = `r sum(d0$Sex == 'Male', na.rm=T)`, Female = `r sum(d0$Sex == 'Female', na.rm=T)`, unspecified = `r sum(is.na(d0$Sex))`) is in Table X. For the number of participants from each US State, see Figure SX.
 
@@ -321,12 +324,12 @@ demovars <-
 options(scipen=999)
 kable(
   custom.summarize(d0, demovars),
-  caption = 'Summary statistics for all participants who met our inclusion criteria described above. A breakdown of the number of participants by state is availible in appendix 1.'
+  caption = 'Table 2. Summary statistics for all participants who met our inclusion criteria described above. A breakdown of the number of participants by state is availible in Appendix 1.'
 )
 
 ```
 
-### Time 1 manipulation checks
+## Time 1 manipulation checks
 
 At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (conflict vs. support), and 1 of 3 information conditions (cheating, private information, honest), for a total of 6 conditions. Our study was based on the expectation that participants would exhibit less support for the sister in the conflict vs. support conditions, and less support in the cheating vs. private information condition, and more support in the honest vs. private information condition. As we said in our preregistration:
 
@@ -336,25 +339,25 @@ At time 1 (T1), participants were randomized into 1 of 2 conflict conditions (co
 >
 > In every condition, we predict that emotional responses will track instrumental responses.
 
-To confirm that our manipulations had the desired effects, we analyzed our T1 outcome variables. All 11 T1 outcome variables regarding the sister were strongly positively correlated with each other, except for anger, which was negatively correlated, and sadness about the niece's health problem, which was about the niece and not the sister (and was weakly positively correlated). Among the positively correlated sister variables, correlation coefficients ranged from `r signif(min(cmu), 2)` to `r signif(max(cmu), 2)`, with a mean of `r signif(mean(cmu), 2)`. We therefore conducted a Principle Components Analysis (PCA) of our T1 vars. PC1 accounted for `r signif(100*summary(pcaT1)$importance[2,1], 2)`% of the variance, and all T1 variables loaded equally on this component except for sadness about the sister's daughter's health problem, which loaded primarily on PC2. See Table X and Figure X.
+To confirm that our manipulations had the desired effects, we analyzed our T1 outcome variables. All 11 T1 outcome variables regarding the sister were strongly positively correlated with each other, except for anger, which was negatively correlated, and sadness about the niece's health problem, which was about the niece and not the sister (and was weakly positively correlated). Among the positively correlated sister variables, correlation coefficients ranged from `r signif(min(cmu), 2)` to `r signif(max(cmu), 2)`, with a mean of `r signif(mean(cmu), 2)`. We therefore conducted a Principle Components Analysis (PCA) of our T1 vars. PC1 accounted for `r signif(100*summary(pcaT1)$importance[2,1], 2)`% of the variance, and all T1 variables loaded equally on this component except for sadness about the sister's daughter's health problem, which loaded primarily on PC2. See figures 1 and 2 (A Table showing the loadings for our PCA can be found in Appendix 2).
 
-```{r pcaT1Loadings, fig.cap= "Loadings plot showing how each of the variables included in our T1 PCA load on the first two principle components."}
+```{r pcaT1Loadings, fig.cap= "Figure 1. Loadings plot showing how each of the variables included in our T1 PCA load on the first two principle components."}
 pca_loadings_plot(pcaT1, components = 1:2)
 ```
 
 
-```{r biplotT1, fig.cap= "Biplot of PC1 and PC2 at T1. The arrows represent the loadings of each variable on the first two prinicpal components. Each dot is one participant."}
+```{r biplotT1, fig.cap= "Figure 2. Biplot of PC1 and PC2 at T1. The arrows represent the loadings of each variable on the first two prinicpal components. Each dot is one participant."}
 biplotT1
 ```
 
-We then confirmed that our T1 manipulations had the predicted effect on these outcome variables by fitting a linear regression model of PC1 as a function of the conflict and information conditions. As predicted, PC1 was higher (i.e., more positive toward the sister) in the support vs. conflict condition, and PC1 was also higher in the honest vs. private vs. cheating conditions. See Table X and Figure X.
+We then confirmed that our T1 manipulations had the predicted effect on these outcome variables by fitting a linear regression model of PC1 as a function of the conflict and information conditions. As predicted, PC1 was higher (i.e., more positive toward the sister) in the support vs. conflict condition, and PC1 was also higher in the honest vs. private vs. cheating conditions. See Figure 3 and Table 3.
 
-```{r manipulations, fig.cap="Manipulation checks: the effects of conflict and information conditions on reactions to helping the sister."}
+```{r manipulations, fig.cap="Figure 3. Manipulation checks: the effects of conflict and information conditions on reactions to helping the sister."}
 pT1a + pT1b
 ```
 
 ```{r T1Anova}
-kable(tidy(Anova(mT1manipulation)), digits = 1, caption="Anova of linear regression of PC1 as a function of the conflict and information conditions.")
+kable(tidy(Anova(mT1manipulation)), digits = 1, caption="Table 3. Anova of linear regression of PC1 as a function of the conflict and information conditions.")
 ```
 
 We predicted the following interaction between conflict and information:
@@ -365,45 +368,36 @@ Contrary to our prediction, there was no significant interaction between conflic
 
 ## Time 2 Signal Effects
 
-In order to see if our signal manipulations resulted in the desired perceptions (I.E. the depressed manipulation resulted in perceptions of depression), we examined the percent of participants that checked each box of our periceved emotional state manipulaton check sorted by the signal they saw (Visualized in fig x.). In doing so it appears that our signal manipulations were largely identified correctly, with $`r signif(signalmat[7,3] * 100, 2)`$% and $`r signif(signalmat[5,3] * 100, 2)`$% of participants reporting the sister as suicidial in the suicide attempt condition and the depression plus display of suicidial ideation respectively. Similarly, $`r signif(signalmat[4,5] * 100, 2)`$% of participants in the depressed condition viewed the sister as depressed, and $`r signif(signalmat[6,4] * 100, 2)`$% participants in the schizophrenic condition viewed the sister as mentally ill.
+In order to see if our signal manipulations resulted in the desired perceptions (I.E. the depressed manipulation resulted in perceptions of depression), we examined the percent of participants that checked each box of our periceved emotional state manipulaton check sorted by the signal they saw (Visualized in Figure 4). In doing so it appears that our signal manipulations were largely identified correctly, with $`r signif(signalmat[7,3] * 100, 2)`$% and $`r signif(signalmat[5,3] * 100, 2)`$% of participants reporting the sister as suicidial in the suicide attempt condition and the depression plus display of suicidial ideation respectively. Similarly, $`r signif(signalmat[4,5] * 100, 2)`$% of participants in the depressed condition viewed the sister as depressed, and $`r signif(signalmat[6,4] * 100, 2)`$% participants in the schizophrenic condition viewed the sister as mentally ill.
 
 
-```{r signalheatmap, fig.cap="How participants in each signal condition rated the sister's mental state. Participants could check any number of conditions. Colors represent the percent of participants that checked each condition. Red = low, Brown = middle, Yellow and White = high."}
+```{r signalheatmap, fig.cap=" Figure 4. How participants in each signal condition rated the sister's mental state. Participants could check any number of conditions. Colors represent the percent of participants that checked each condition. Red = low, Brown = middle, Yellow and White = high."}
 heatmap(signalmat, scale = 'none')
 ```
 
-In addition to allowing us to comfirm that the signals worked as designed, this question also allows for the examination of how the signals affected one's perception of the sister's current state and what baseline assumptions were being made in the control condition. Of particular interest is that those in the control condition often came in with the assumption that the sister was sad, scared, depressed and distressed despite not seeing a signal in the second portion of the vignette, with each of these option being checked by at least half of the participants (fig x).
+In addition to allowing us to confirm that the signals worked as designed, this question also allows for the examination of how the signals affected one's perception of the sister's current state and what baseline assumptions were being made in the control condition. Of particular interest is that those in the control condition often came in with the assumption that the sister was sad, scared, depressed and distressed despite not seeing a signal in the second portion of the vignette, with each of these option being checked by at least half of the participants.
 
-```{r epc1}
+To better understand which combinations of responses were most meaningufl, we also ran a PCA on all the variables that recorded if participants percieved the imagined sister to be in the emotional states listed above. PC1 seems to capture perceptions of sadness, fear, depression, and distress (Figure 5), while PC2 is heavily influenced by perceptions of mental illness (Figure 6). See appendix x for the loadings plot and biplot. 
+
+```{r epc1, fig.cap= "Figure 5. Boxplot showing the loadings on PC1 for each of the signals for our second PCA looking at perceptions of the sister's emotional state."}
 epc1 
 ```
 
 
-```{r mentallyill}
+```{r mentallyill, fig.cap= "Figure 6. Plot showing the proportion of participants who percieved their imagined sister to be mentally ill. Perceptions of mentall illness is plotted on the x-axis instead of PC2 due to both PC2 appearing to represent primariliy percpetions of mentall illness and because perceptions of mental illness are the more theoretically relvant variable."}
 p_mentallyill
 ```
 
-
-```{r control_MC2.4, fig.cap= "Upset plot showing how participants in the control condition described the emotional state of the imagined sister (check boxes with only none of the above being mutually exclusive with the others.The histogram in the lower left shows the amount of times each box was selected by participants. The plot to the right shows the 10 most common combinations and their frequency"}
-d0 %>%
-  dplyr::select(signal, Angry:NoneOfAbove) %>% 
-  dplyr::filter(signal == 'Control') %>% 
-  mutate_if(is.numeric, as.integer) %>% 
-  as.data.frame %>%
-  upset(order.by = 'freq', nsets = 12, nintersect = 10)
-```
-
-
-### Preregistered tests
+## Preregistered tests
 
 Our predicted main effects of signals were:
 
 > We predict that stronger signals  will result in higher levels of both emotional and instrumental social support towards the signaler. Specifically,  we predict that the signals have the following rank order form low to high: 
 no signal (control), verbal request, sad face, sad face with crying, depression, depression with display of suicidal ideation, and suicide attempt. We also predict that anger will have a positive impact on helping with a similar magnitude to the depression condition.
 
-This prediction was not upheld. The Control condition (no signal) was ranked relatively high rather than the lowest, Suicide attempt was ranked relatively low rather than the highest, and Anger was consistently ranked lower than Depression. In partial support, however, Depression was consistently higher than Crying, which was consistently higher than Verbal request. See Figure X.
+This prediction was not upheld. The Control condition (no signal) was ranked relatively high rather than the lowest, Suicide attempt was ranked relatively low rather than the highest, and Anger was consistently ranked lower than Depression. In partial support, however, Depression was consistently higher than Crying, which was consistently higher than Verbal request. See Figure 7.
 
-```{r T2signaleffects, fig.cap="Signal effects. The effect of signals on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
+```{r T2signaleffects, fig.cap="Figure 7. The effect of the signal manipulations on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2. Effects are averaged across all time 1 conditions."}
 (pT2comfort + pT2lend) / (pT2need + pT2pc1)
 ```
 
@@ -419,7 +413,9 @@ Our predicted interactions of signals with private information were:
 >
 > We also predict that when the most severe signals, i.e., depression and suicidality,  are paired with information that the character in the vignette is likely to be lying, responses will be more aversive than when the signal is weaker.
 
-```{r pinfoInteractions, fig.cap="Signal and information interactions. The effect of the signal, information interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
+Like with the main effects of signal type, we fit linear models for our four outcome variables: (1) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1, (2) the likelihood of lending the sister money, (3) PC1 of all the outcome variables at T2, and (4) participants' perception of the sister's need for money. Our prediction was only supported when looking at our model with the amount of money participants were comfortable lending at T2 (controlling for T1) ($p = `r signif(int1sig['signal2:p_info', 'Pr(>F)'], 2)`$. See Figure 8 for visualization and Appendix 3 for the corresponding ANOVA tables.
+
+```{r pinfoInteractions, fig.cap="Figure 8. Signal and information interactions. The effect of the signal, information interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
 (p_comfort_signal_pinfo$plot + p_lend_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo$plot + p_money_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))
 ```
 
@@ -427,38 +423,42 @@ Our predicted interactions of signals with conflict were:
 
 > We predict the coefficient for signal strength to increase in the conflict condition than in the no conflict condition.
 
-```{r conflictInteractions, fig.cap="Signal and conflict interactions. The effect of the signal, conflict interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
+We also fit linear models for the same outcome variables to examine test our hypothesized interaction. Unlike the predicted signal and information interactions, 3 of the 4 models showed evidence of interactions with the model for change in likelihood of lending T2 being marginally significant ($p = `r signif(int2sig['signal2:conflict', 'Pr(>F)'], 2)`$). See Figure 9 for visualization and Appendix 4 for the corresponding ANOVA tables.
+
+```{r conflictInteractions, fig.cap="Figure 9. Signal and conflict interactions. The effect of the signal, conflict interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
 (p_comfort_signal_conflict$plot + p_lend_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict$plot + p_money_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))
 ```
+
+See Appendix 5 for a full overview of the full 2x3 interaction with change in perceived need at time 2 as the outcome variable.
 
 ## Exploratory analyses
 
 For our exploratory analyses, we restricted our attention to three signals: verbal request, crying, and depression, which we ranked in that order, and to two information conditions: private information and honest, which we ranked in that order. We then compared the causal effect of the signal on emotional and instrumental responses towards the sister.
 
-To better understand where depression separated itself from the less costly signals we used a loess regression to visualize how PC1 T1 and PC1 T2 varied by signal in both the conflict and supportive manipulations. In doing so, it appears that the depression condition resulted in relatively more beneficial responses on PC1 T2 when participants saw the conflcit manipualtion and were intermediate on PC1 T1, with depression not separating itself from the other signals when participants were high or low on PC1 T1 to begin with or when the relationship with the sister was supportive.
+To better understand where depression separated itself from the less costly signals we used a loess regression to visualize how PC1 T1 and PC1 T2 varied by signal in both the conflict and supportive manipulations (Figure 10). In doing so, it appears that the depression condition resulted in relatively more beneficial responses on PC1 T2 when participants saw the conflcit manipualtion and were intermediate on PC1 T1, with depression not separating itself from the other signals when participants were high or low on PC1 T1 to begin with or when the relationship with the sister was supportive.
 
-```{r pc1t1t2, fig.cap="PC1 at time 2 as a function of PC1 at time 1, by signal and conflict condition. Each dot is one participant. Lines fit by loess regression."}
+```{r pc1t1t2, fig.cap=" Figure 10. PC1 at time 2 as a function of PC1 at time 1, by signal and conflict condition. Each dot is one participant. Lines fit by loess regression."}
 p_pc1_t1t2
 ```
 
-We also created an exploratory model based largely on theory but refined by observations of the data that suggested that much of the effect of the information manipulation was through its main effect rather than through its main effect plus the predicted interactions (figure x). Despite this being our favored exploratory model, it is unclear if private information would not interact much with signal type in real situations or if our conflict manipulations were simply more succesful than our information manipulations in activating the relevant mechanisms.  
+We also created an exploratory model based largely on theory but refined by observations of the data that suggested that much of the effect of the information manipulation was through its main effect rather than through its main effect plus the predicted interactions (Figure 11 and Table 4). Despite this being our favored exploratory model, it is unclear if private information would not interact much with signal type in real situations or if our conflict manipulations were simply more succesful than our information manipulations in activating the relevant mechanisms.  
 
-```{r exploratory model, fig.cap= "Effects plot showing the interaction between signal type and conflict in our favored exploratory model."}
+```{r exploratory model, fig.cap= "Figure 11. Effects plot showing the interaction between signal type and conflict in our favored exploratory model."}
 Plot_Exploratory
 ```
 
 ```{r expanova}
-kable(tidy(Anova(m_exp, type = 3)), digits = 1, caption="Anova of interaction model depicted in Figure X.")
+kable(tidy(Anova(m_exp, type = 3)), digits = 1, caption="Table 4. Anova of interaction model depicted in Figure X.")
 ```
 
 
-As changes in perceived need were strongly correlated with our measures of instrumental support, we also ran a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. According to this analysis,about two-thirds of the effect of the signal manipulation was mediated by changes in percieved need (ACME), with ADE being the direct effect of signal type. 
+As changes in perceived need were strongly correlated with our measures of instrumental support, we also ran a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. According to this analysis,about two-thirds of the effect of the signal manipulation was mediated by changes in percieved need (ACME), with ADE being the direct effect of signal type. See Figure 12.
 
-```{r mediation plot, fig.cap= "Mediation of signal effect by change in percieved need  (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect"}
+```{r mediation plot, fig.cap= "Figure 12. Mediation of signal effect by change in percieved need  (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect"}
 plot(mediation_model)
 ```
 
-## Discussion
+# Discussion
 
 Due to the theoretical and empirical similarities between the proposed signals of need, this study sought to test for the existence of important trends that transcend signal type. In particular, costlier signals were expected to result in more beneficial responses than less costly signals, with signal strength being predicted to matter most in times of private information or conflict. However, when the signals were viewed as a continuum based on costliness, the results of this study were mixed in relation to our hypotheses drawn from signaling theory with some signals fitting our predictions better than others.
 
@@ -490,9 +490,9 @@ It is also conceivable that crying may be an honest display for reasons outside 
 
 The final area where our main effects predictions were not borne out regarded the anger condition. As aggression and depression have been suggested to be alternative ways to accomplish similar bargaining outcomes [@HagenRosenstrom2016], we predicted anger to have a similar effect to depression on helping behavior. However, anger resulted in less help in both measures. Unfortunately, the fact that the signaler was always a woman means that this study is an insufficient test of this hypothesis as formidability is strongly confounded with sex [@SellEtAl2009]. Therefore, the results of the anger condition may be driven by displays of anger being a less effective signal in women as they are unlikely to bargain as well through aggression. In addition to this, the likelihood that anger also serves as a way to downregulate one’s welfare tradeoff ratio with another further limits the ability of this study to evaluate anger as a signal of aggression as this was not controlled for [@SellEtAl2009]. 
 
-### Limitations
+## Limitations
 
-The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for any experimental design involving depression and suicide. Although this may have affected any part of this study, it likely had the largest impact with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as they were designed to due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. This being said, signal type interacted with both the conflict and information conditions had no effect on how difficult participants found it to put themselves in the scenarios presented to them, with the means and 95% confidence intervals being similar for each signal (Appendix 4). 
+The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for any experimental design involving depression and suicide. Although this may have affected any part of this study, it likely had the largest impact with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as they were designed to due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. This being said, signal type interacted with both the conflict and information conditions had no effect on how difficult participants found it to put themselves in the scenarios presented to them, with the means and 95% confidence intervals being similar for each signal (Appendix 7). 
 
 Although this seems to be evidence in favor of our signal manipulations not biasing our results due to differences in one’s ability to consciously imagine the situations presented, we should not expect such conscious appraisals to have access to the same information that the systems underlying responses to the proposed signals in the real-world use [@NisbettWilson1977; @Nosek2007]. Therefore, despite not differing much in terms of a conscious disconnect from the study, it is likely a safe assumption that certain signals came across better in vignette form than others and biased our results through the nonconscious inferences of participants. 
 
@@ -506,7 +506,7 @@ However, when looking at the proposed signals as a continuum, our hypotheses wer
 
 Despite these outcomes, our predictions from signaling theory fit the depression condition reasonably well. While often by a small margin, depression resulted in the most helping behavior being directed towards the signaler and the highest levels of perceived need when averaged across conditions and separated itself from the less costly signals in the condition in which signaling was expected to be the most important. In addition to this, our predictions were largely met when looking solely at depression and the two weaker signals of need (verbal request and crying), suggesting that it may be the costlier signals that are not fitting the theory rather than the proposed signals as a whole.
 
-### Future directions
+## Future directions
 
 The results of this study suggest a handful of directions future research should take when examining depression as a costly signal of need. As the predicted relationship between signal strength and support was found when examining depression and the less costly signals, the first step would be to replicate these results in a second, more efficient study focusing solely on these signals due to the problems of accepting these findings after one study. Assuming similar results are found, attempting a replication outside of a Western population would be an important next step as if responses to depression are shaped in part by adaptations sensitive to cheating attempts, the underlying mechanisms responsible for our findings should be shared cross-culturally [@Williams1966].
 
@@ -516,40 +516,72 @@ This study also highlights a few possible directions for the signals outside of 
 
 ## Appendix 1
 
+```{r numbersbystate, fig.height=10, fig.cap= "Numbers of participants by state. Note the east coast bias caused by the study being completed much sooner than expected."}
+dotchart(sort(table(signalingdata2018$State)))
+```
+
+## Appendix 2
+
 ```{r pcaT1, fig.cap= "Table showing the loadings for our PCA at time 1 for both PCA1 and PCA2."}
 mat <- pcaT1$rotation[,1:2]
 kable(
   mat, 
   digits = 2,
-  caption = 'Variables loadings for PCA of  T1 support and emotion variables'
+  caption = 'Variable loadings for PCA of  T1 support and emotion variables'
   )
-```
-
-## Appendix 2
-
-```{r numbersbystate, fig.height=10, fig.cap= "Numbers of participants by state. Note the east coast bias caused by the study being completed much sooner than expected."}
-dotchart(sort(table(signalingdata2018$State)))
 ```
 
 ## Appendix 3
 
-```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the self-reported liklihood of lending money to the sister. The y-axis is ordered based on our predictions, with signals expected to result in more support as one moves from bottom to top."}
+Anovas of linear regressions of for the signal and information interactions for our four outcome variables.
+
+```{r}
+kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
+
+kable(tidy(Anova(p_lend_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
+
+kable(tidy(Anova(p_pc1_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable.')
+
+kable(tidy(Anova(p_money_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
+
+```
+
+## Appendix 4
+
+Anovas of linear regressions of for the signal and conflict interactions for our four outcome variables.
+
+```{r}
+kable(tidy(Anova(p_comfort_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
+
+kable(tidy(Anova(p_lend_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
+
+kable(tidy(Anova(p_pc1_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable.')
+
+kable(tidy(Anova(p_money_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
+```
+
+## Appendix 5
+
+```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the change in the perceived need of the sister at time 2. The y-axis is ordered based on our predictions, with signals expected to result in more support as one moves from bottom to top."}
 # plot(allEffects(full_int_overview2))
 # Plot_full_int
 p
 ```
 
-## Appendix 4
+## Appendix 6
+
+```{r emotionPCAloadings, fig.cap= "Loadings plot showing how each of the variables included in our sister's emotions PCA load on the first two principle components."}
+pca_loadings_plot(Epca)#, components = 1:2)
+```
+
+```{r emotionPCAbiplot, fig.cap= "Biplot of PC1 and PC2 for the sister's percieved emotional states. The arrows represent the loadings of each variable on the first two prinicpal components. Each dot is one participant."}
+emotions_biplot
+```
+
+## Appendix 7
 
 ```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higher values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
 p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank())
 ```
-
-## Appendix ??
-
-```{r}
-kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of xxx.')
-```
-
 
 # References
