@@ -11,6 +11,7 @@ csl: "apa.csl"
 knitr::opts_chunk$set(echo = FALSE, message=F, error=F, warning=F, fig.width = 10, fig.height = 6)
 source('analysis2.R')
 library(patchwork)
+library(DiagrammeR)
 ```
 
 ## Introduction
@@ -450,10 +451,35 @@ Plot_Exploratory
 kable(tidy(Anova(m_exp, type = 3)), digits = 1, caption="Anova of interaction model depicted in Figure X.")
 ```
 
+### Mediation model
 
-As changes in perceived need were strongly correlated with our measures of instrumental support, we also ran a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. According to this analysis,about two-thirds of the effect of the signal manipulation was mediated by changes in percieved need (ACME), with ADE being the direct effect of signal type. 
+As changes in perceived need were strongly correlated with our measures of instrumental support, we fit a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. 
 
-```{r mediation plot, fig.cap= "Mediation of signal effect by change in percieved need  (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect"}
+```{r mediationmodel, fig.cap="Mediation model of causal effect of depression signal on change in likelihood of lending money, relative to verbal control."}
+grViz(
+  "digraph {
+  
+graph [layout = neato]
+node [shape = rectangle]
+
+a [pos = '-2, 0!', label = 'Signal\n(Depression vs Verbal)']
+b [pos = '0, 1!', label = 'ΔNeeds money']
+c [pos = '2, 0!', label = 'ΔLend money']
+
+a->b
+a->c
+b->c
+
+}"
+)
+```
+
+
+According to this analysis, the total effect of the depression signal was to increase the likelihood of lending money by `signif(mediation_model$tau.coef, 3)` points, relative to a verbal request; `r 100*signif(mediation_model$n0, 2)`% of this effect was mediated by the increased perception that the sister needed money.
+
+about two-thirds of the effect of the signal manipulation was mediated by changes in percieved need (ACME), with ADE being the direct effect of signal type. 
+
+```{r mediation plot, fig.cap= "Mediation of signal effect on likelihood of lending money by change in percieved need (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect."}
 plot(mediation_model)
 ```
 
