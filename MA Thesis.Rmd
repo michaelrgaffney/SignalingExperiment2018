@@ -583,6 +583,8 @@ kable(tidy(p_comfort_signal_pinfo$model), digits = 2, caption = 'Coefficients of
 
 kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
 
+kable(glance(p_comfort_signal_pinfo$model))
+
 kable(tidy(Anova(p_lend_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
 
 kable(tidy(Anova(p_pc1_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
