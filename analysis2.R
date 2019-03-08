@@ -852,6 +852,7 @@ d0 %>%
   as.data.frame %>%
   upset(order.by = 'freq', nsets = 12, nintersect = 10)
 
+# Anovas to draw p-values from for Rmd
 
 int1sig <- Anova(p_comfort_signal_pinfo$model, type = 3)
 
