@@ -129,6 +129,15 @@ d0 <-
     delta_lend = likelylendmoneyt2
   )
 
+df_na <-
+  signalingdata2018 %>%
+  filter(!exclusionopt1) %>%
+  dplyr::select(needsmoneyt2:trustrepayt2) %>% 
+  summarise_all(function(x) signif(100*sum(is.na(x))/length(x), 2)) %>% 
+  gather(key = 'Variable', value = "Percent missing")
+
+summary(df_na$`Percent missing`)
+
 m <- lm(delta_needs_money ~ signal - 1, d0)
 mc <- names(sort(coef(m)))
 mc <- str_replace(mc, 'signal', '')
