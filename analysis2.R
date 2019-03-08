@@ -771,7 +771,7 @@ p_believeneed$plot
 
 # for analysis2
 d0$signal <- factor(d0$signal, levels = c('Schizophrenia', 'Control', 'VerbalRequest', 'Crying', 'Anger', 'Depression', 'Depression&Suicidal', 'Suicide attempt'))
-full_int_overview <- glm(needsmoneyt2/100 ~ signal * conflict * p_info, data = d0) #changed from delta_lend
+full_int_overview <- lm(needsmoneyt2 ~ signal * conflict * p_info, data = d0) #changed from delta_lend
 plot(allEffects(full_int_overview))
 
 

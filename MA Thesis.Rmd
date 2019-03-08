@@ -2,9 +2,12 @@
 title: "Master's Thesis"
 author: "Michael Gaffney"
 date: "January 26, 2019"
-output: html_document
-bibliography: "MTBib.bib"
-csl: "apa.csl"
+output:
+  word_document: default
+  html_document: default
+bibliography: MTBib.bib
+csl: apa.csl
+always_allow_html: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -216,6 +219,10 @@ Although distributed through MTurk, every participant took the survey using Qual
 Both emotional and instrumental responses were measured in the survey portion of the study. In a small pilot study, we initially asked the same questions before and after the signal was shown to measure how the signal affected one’s responses. However, due to the prevalence of ceiling and floor effects, the majority of the questions following the signal in this study were revised to ask if and how one’s likelihood of helping or feeling certain emotions changed. This resulted in 22 outcome measures, with 11 being asked before the signal and 11 after (See Table 1 for the full list and Table 2 for summary statistics). In both instances, the order of the questions was randomized to avoid order effects [@KrosnickAlwin1987].
 
 To measure these responses, sliders which functioned largely as visual analogue scales were used due to the fact they allow for finer grained changes than categorical scales and provide a continuum of scores [@KlimekEtAl2017]. For the pre-signal set of questions, only the ends of each continuum were labeled with some variant of extremely likely and extremely unlikely being used for each measure. For the second set, the center was labelled no change, and the ends of each continuum were labelled as some variant of much more likely and much less likely. 
+
+Compared to our pre-signal measures, we had more missing values in the post-signal questions. We attributed this to the fact that Qualtrics only records responses if the slider is touched, which most participants probably did not realize. Since the slider was preset at the center at Time 2, we assumed that the missing values were largely due to participants meaning to report no change. We therefore replaced the missing values with the middle value for Time 2 variables only. The maximum number of missing values replaced was xxx% (Appendix ?? for details). We did not replace missing values for Time 1 because the slider was preset to the far left (e.g. 0 percieved need).
+
+# reminder appendix
 
 In addition to this, the amount of money participants were comfortable lending to their imagined sisters was asked and was measured with a slider which ranged from $0 to $50,000 and allowed the participant to see the amount they were selecting. Unlike the previously described measures, it was repeated identically at both time periods and asked on its own page due to the desire to save the only question that allowed for partial support for after those with less flexibility were asked.
 
@@ -511,7 +518,9 @@ Since our predicted rank order was not met, our results are likely best interpre
 
 Although depression outperformed the other signals when averaged across conditions, it did not outperform the less costly signals by much, something which makes it reasonable to question if the extra costs involved were worth the increased benefits on average. Unfortunately, this cannot be addressed directly with the data we collected. However, it is important to note that looking at the responses collectively masks both the fact that depression separated itself from the less costly signals in instances of conflict  and the fact that it still performed close to more appropriate signals when it was less than ideal. This suggests that in similar scenarios, most of the costs of an unnecessary attempt at signaling likely come through the costs of signaling rather than aversive responses, something which likely reduces the risk of depressive displays in times of extreme need. 
 
-Although not explicitly predicted as part of our preregistration and examined only in exploratory analyses, it appears that part of depression’s success in eliciting positive responses relative to the less costly signals came from its ability to increase the perception of honest need in others. This is seen in both the strong correlation  between perceived need and our measures of instrumental support across signals and the finding that about two-thirds of the effect of signal on helping was through signal type’s effect on perceived need in our mediation analysis on depression and the less costly signals. However, the fact that one third of the effect of signal type had a direct effect on the amount participants were willing to lend is not entirely consistent with costly signaling theory, which tends to view the costs involved with a signal solely as a way to increase the perception of honest need in others. This suggests that either the signals may be doing something else or, more likely, that our measure of need is imperfect. 
+Although not explicitly predicted as part of our preregistration and examined only in exploratory analyses, it appears that part of depression’s success in eliciting positive responses relative to the less costly signals came from its ability to increase the perception of honest need in others. This is seen in both the strong correlation between perceived need and our measures of instrumental support across signals and the finding that 98% of the effect of depression on helping relative to verbal request was through depressions effect on change perceived need. Although not predictied in our preregistration, this finding is consistent with costly signaling theory, which views the costs involved with a signal solely as a way to increase the perception of honest need in others
+
+<!-- in our mediation analysis on depression and the less costly signals. However, the fact that one third of the effect of signal type had a direct effect on the amount participants were willing to lend is not entirely consistent with costly signaling theory, which tends to view the costs involved with a signal solely as a way to increase the perception of honest need in others. This suggests that either the signals may be doing something else or, more likely, that our measure of need is imperfect. -->
 
 Despite depression’s relative success in eliciting positive responses relative to the other signals, it did not result in large increases in either our emotional are instrumental outcomes, nor did any other signal. Although we made no predictions to the contrary, this finding is surprising as the perceived likelihood of another’s need being honest (of which costly signals are expected to increase) is expected to play a large role in how one responds to requests for more support [@Hagen2003]. Among the reasons this happened, the most likely is that participants expected depression symptoms before the signal in response to the severity of the imagined sister’s need. Consistent with this, the most common combinations of responses to our question about how participants in the control perceived the sister’s emotional state included depression and the other emotions that loaded similarly on PC1, suggesting that depression symptoms here largely served to corroborate rather than enhance one’s appearance of need.
 
@@ -607,7 +616,7 @@ p
 
 ## Appendix 6
 
-```{r emotionPCAloadings, fig.cap= "Loadings plot showing how each of the variables included in our sister's emotions PCA load on the first two principle components."}
+```{r emotionPCAloadings, fig.cap= "Loadings plot showing how each of the variables included in our sister's emotions PCA load on the first three principle components."}
 pca_loadings_plot(Epca)#, components = 1:2)
 ```
 
