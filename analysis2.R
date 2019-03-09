@@ -136,7 +136,8 @@ df_na <-
   summarise_all(function(x) signif(100*sum(is.na(x))/length(x), 2)) %>% 
   gather(key = 'Variable', value = "Percent missing")
 
-summary(df_na$`Percent missing`)
+df_na_sum <- summary(df_na$`Percent missing`)
+df_na_sum
 
 m <- lm(delta_needs_money ~ signal - 1, d0)
 mc <- names(sort(coef(m)))

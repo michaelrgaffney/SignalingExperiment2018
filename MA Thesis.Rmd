@@ -220,9 +220,7 @@ Both emotional and instrumental responses were measured in the survey portion of
 
 To measure these responses, sliders which functioned largely as visual analogue scales were used due to the fact they allow for finer grained changes than categorical scales and provide a continuum of scores [@KlimekEtAl2017]. For the pre-signal set of questions, only the ends of each continuum were labeled with some variant of extremely likely and extremely unlikely being used for each measure. For the second set, the center was labelled no change, and the ends of each continuum were labelled as some variant of much more likely and much less likely. 
 
-Compared to our pre-signal measures, we had more missing values in the post-signal questions. We attributed this to the fact that Qualtrics only records responses if the slider is touched, which most participants probably did not realize. Since the slider was preset at the center at Time 2, we assumed that the missing values were largely due to participants meaning to report no change. We therefore replaced the missing values with the middle value for Time 2 variables only. The maximum number of missing values replaced was xxx% (Appendix ?? for details). We did not replace missing values for Time 1 because the slider was preset to the far left (e.g. 0 percieved need).
-
-# reminder appendix line 132
+Compared to our pre-signal measures, we had more missing values in the post-signal questions. We attributed this to the fact that Qualtrics only records responses if the slider is touched, which most participants probably did not realize. Since the slider was preset at the center at Time 2, we assumed that the missing values were largely due to participants meaning to report no change. We therefore replaced the missing values with the middle value for Time 2 variables only. The minimum perent of a entries replaced was $`r signif(df_na_sum["Min."], 2)`$%, and the maximum was $`r signif(df_na_sum["Max."], 2)`$%, with the mean percentage of missing values replaced being $`r signif(df_na_sum["Mean"], 2)`$%. We did not replace missing values for Time 1 because the slider was preset to the far left (e.g. 0 percieved need).
 
 In addition to this, the amount of money participants were comfortable lending to their imagined sisters was asked and was measured with a slider which ranged from $0 to $50,000 and allowed the participant to see the amount they were selecting. Unlike the previously described measures, it was repeated identically at both time periods and asked on its own page due to the desire to save the only question that allowed for partial support for after those with less flexibility were asked.
 
@@ -467,7 +465,7 @@ kable(tidy(Anova(m_exp, type = 3)), digits = 1, caption="Table 4. Anova of inter
 
 ### Mediation model
 
-As changes in perceived need were strongly correlated with our measures of instrumental support, we fit a mediation model to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. See Figure 12.
+As changes in perceived need were strongly correlated with our measures of instrumental support, we fit multiple mediation models to see how this was influenced by signal type using the ‘mediation’ package in R [@ImaiEtAl2010]. See Figure 12.
 
 ```{r mediationmodel, fig.cap="Figure 12. Mediation model of causal effect of depression signal on change in likelihood of lending money, relative to verbal control."}
 grViz(
@@ -488,14 +486,19 @@ b->c
 )
 ```
 
-
-According to this analysis, the total effect of the depression signal was to increase the likelihood of lending money by `r signif(mediation_model$tau.coef, 3)` points, relative to a verbal request; `r 100*signif(mediation_model$n0, 2)`% of this effect was mediated by the increased perception that the sister needed money. See Figure 13.
+Our first model compared the depression to the verbal reuqest condition. According to this analysis, the total effect of the depression signal was to increase the likelihood of lending money by `r signif(mediation_model$tau.coef, 3)` points, relative to a verbal request; `r 100*signif(mediation_model$n0, 2)`% of this effect was mediated by the increased perception that the sister needed money. See Figure 13.
 
 ```{r mediation plot, fig.cap= "Figure 13. Mediation of signal effect on likelihood of lending money by change in percieved need (controlling for percieved need at time 1). ACME is the average causal mediation effect; ADE is the average direct effect."}
 pdf("Figures/Figure13.pdf", width = 9, height = 6)
 plot(mediation_model)
 dev.off()
 ```
+
+In the model comparing depression to crying, the direct effect of the depression signal was to decrease the likelihood of lending money by<!-- `r signif(mediation_model2$tau.coef, 3)` --> points relative to a verbal request, while the mediated effect increased the liklihood of lending money by xxxx points.
+
+Lastly, in the model comparing depression to the control, the direct effect of the depression signal was to decrease the likelihood of lending money by <!--`r signif(mediation_model2$tau.coef, 3)` --> points relative to a verbal request, while the mediated effect increased the liklihood of lending money by xxxx points.
+
+Unlike the depression and verbal request model, the proportion of the relationship that was mediated by changes to perception of need was not reported for the follwoing models due to the changes in sign between the direct and mediated effects making such estimates meaningless [@HayesRockwood2017]
 
 # Discussion
 
@@ -574,38 +577,155 @@ kable(
   )
 ```
 
-## Appendix 3
+## Appendix ??
 
-Anovas of linear regressions of for the signal and information interactions for our four outcome variables.
+```{r, mT1manipulationSummary}
+
+kable(tidy(mT1manipulation), digits = 2, caption = 'Coefficients of the linear regression model of PCA1 T1 as a function of information and conflict.')
+
+kable(glance(mT1manipulation), caption = 'Table showing additional summary statistics for the model.')
+```
+
+## Appendix ??
+
+### ??A Amount comfortable lending T2 (controlling for T1)
 
 ```{r}
-kable(tidy(p_comfort_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of amount confortable lending as a function of signaling condition, information, and their interaction.')
+kable(tidy(mT2comfort), digits = 2, caption = 'Coefficients of the linear regression model of the amount of money comfortable lending T2 (controlling for T1) as a function of signal manipulation.')
+
+kable(glance(mT2comfort), caption = 'Table showing additional summary statistics for the model.')
+```
+
+### ??B Change in likelihood of lending money T2
+
+```{r}
+kable(tidy(mT2lend), digits = 2, caption = 'Coefficients of the linear regression model of the likelihood participants would lend the money at T2 as a function of signal manipulation.')
+
+kable(glance(mT2lend), caption = 'Table showing additional summary statistics for the model.')
+```
+
+### ??C Change in percieved need T2
+
+```{r}
+kable(tidy(mT2need), digits = 2, caption = 'Coefficients of the linear regression model of change in percieved need T2 as a function of signal manipulation.')
+
+kable(glance(mT2need), caption = 'Table showing additional summary statistics for the model.')
+```
+
+### ??D PC1 T2 (Controlling for PC1 at T1)
+
+```{r}
+kable(tidy(mT2pc1), digits = 2, caption = 'Coefficients of the linear regression model of PC1 T2 (controlling for T1) as a function of signal manipulation.')
+
+kable(glance(mT2pc1), caption = 'Table showing additional summary statistics for the model.')
+```
+
+Signal main effects
+
+## Appendix 3
+
+Regression statistics and Anovas of our linear regressions for our four outcome variables as a function of signaling condition, information, and their interaction.
+
+### 3A Amount comfortable lending T2 (controlling for T1)
+
+```{r}
+kable(tidy(p_comfort_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of amount comfortable lending as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_comfort_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
 
 kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
 
-kable(glance(p_comfort_signal_pinfo$model))
+```
+
+### 3B Change in likelihood of lending money T2
+
+```{r}
+
+kable(tidy(p_lend_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of likelihood of lending as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_lend_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
 
 kable(tidy(Anova(p_lend_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
 
+
+```
+
+### 3C PC1 T2 (Controlling for PC1 at T1)
+
+```{r}
+kable(tidy(p_pc1_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of PC1 as a function of signaling condition, information, and their interaction, controlling for T1.')
+
+kable(glance(p_pc1_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
+
 kable(tidy(Anova(p_pc1_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
 
+
+```
+
+### 3D Change in percieved need T2
+
+```{r}
+kable(tidy(p_money_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of perceived need of money as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_money_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
+
 kable(tidy(Anova(p_money_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
+
 
 ```
 
 ## Appendix 4
 
-Anovas of linear regressions of for the signal and conflict interactions for our four outcome variables.
+Regression statistics and Anovas of our linear regressions for our four outcome variables as a function of signaling condition, conflict, and their interaction.
+
+### 4A Amount comfortable lending T2 (controlling for T1)
 
 ```{r}
+kable(tidy(p_comfort_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of amount comfortable lending as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_comfort_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
+
 kable(tidy(Anova(p_comfort_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
+
+```
+
+### 4B Change in likelihood of lending money
+
+```{r}
+kable(tidy(p_lend_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of likelihood of lending as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_lend_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
 
 kable(tidy(Anova(p_lend_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
 
+
+```
+
+### 4C PC1 T2 (Controlling for PC1 at T1)
+
+```{r}
+kable(tidy(p_pc1_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of PC1 as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_pc1_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
+
 kable(tidy(Anova(p_pc1_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
+
+
+```
+
+### 4D Change in percieved need
+
+```{r}
+kable(tidy(p_money_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of perceived need of money as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_money_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
 
 kable(tidy(Anova(p_money_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
 ```
+
+
+
+
 
 ## Appendix 5
 
@@ -637,4 +757,9 @@ ggsave("Figures/Appendix7.pdf", p_ease$plot + p_ease2$plot + theme(axis.text.y=e
 ```
 
 ## Appendix 8
+
+Survey
+
+
+
 # References
