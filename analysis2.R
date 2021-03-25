@@ -559,6 +559,47 @@ mediation_model4 <- mediate(model.m, model.y, treat = 'signal', mediator = 'delt
 summary(mediation_model4)
 plot(mediation_model4)
 
+# d2, but with cheating
+
+# Retain only VerbalRequest, Crying, Depression
+d2c <-
+  d %>%
+  dplyr::select(
+    p_info,
+    conflict,
+    signal,
+    needsmoneyt1,
+    delta_needs_money,
+    delta_lend,
+    PC1t1,
+    PC1t2
+  ) %>%
+  dplyr::filter(
+    signal %in% c(
+      'VerbalRequest',
+      'Crying',
+      'Depression')
+  ) %>%
+  mutate(
+    p_info = ordered(as.character(p_info), levels = c('Cheating', 'PrivateInformation', 'Honest')),
+    signal = ordered(signal, levels = c('VerbalRequest', 'Crying', 'Depression')),
+    delta_need = case_when(
+      delta_needs_money < -1 ~ -1,
+      delta_needs_money > 1 ~ 1,
+      TRUE ~ 0
+    ),
+    delta_need2 = case_when(
+      PC1t2 < (mean(PC1t2, na.rm=T) - sd(PC1t2, na.rm=T)/2) ~ -1,
+      PC1t2 > mean(PC1t2, na.rm=T) + sd(PC1t2, na.rm=T)/2 ~ 1,
+      TRUE ~ 0
+    ),
+    delta_need = ordered(delta_need),
+    delta_need2 = ordered(delta_need2)
+  ) %>% 
+  na.omit
+
+
+
 # Exploratory models
 
 # Main effects on PC1t2 only
@@ -586,6 +627,13 @@ plot(Effect(c("signal", "conflict", "p_info"), m))
 # p_info main effect only
 
 m_exp <- lm(PC1t2 ~ signal * conflict + p_info, data = d2) #pca after conditions filtered
+summary(m_exp)
+Anova(m_exp, type = 3)
+plot(allEffects(m_exp))
+Plot_Exploratory <- visreg(m_exp, xvar= "signal", by = "conflict", partial = F, rug = F, gg = T) + theme_bw() + labs(y = "PC1 Time 2", x = "")
+
+# With cheating too
+m_exp <- lm(delta_needs_money ~ signal * p_info + conflict, data = d2c)
 summary(m_exp)
 Anova(m_exp, type = 3)
 plot(allEffects(m_exp))
