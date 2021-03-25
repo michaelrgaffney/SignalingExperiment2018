@@ -3,8 +3,8 @@ title: "Master's Thesis"
 author: "Michael Gaffney"
 date: "January 26, 2019"
 output:
-  html_document: default
   word_document: default
+  html_document: default
 bibliography: MTBib.bib
 csl: apa.csl
 always_allow_html: yes
@@ -212,7 +212,7 @@ Although all participants who passed the attention checks and finished the surve
 
 ## Survey
 
-Although distributed through MTurk, every participant took the survey using Qualtrics. In every instance, the elements of the survey were laid out in the following order: 1) the consent form, 2) the main body of the vignette, 3) the first set of outcome measures (pre-signal), 4) the first set of manipulation checks, 5) the attention checks, 6) the signal portion of the vignette, 7) the second set of outcome measures (post-signal), 8) the second set of manipulation checks, 9) a set of demographic questions, and 10) an open feedback prompt. See Appendix 8 for the complete survey.
+Although distributed through MTurk, every participant took the survey using Qualtrics. In every instance, the elements of the survey were laid out in the following order: 1) the consent form, 2) the main body of the vignette, 3) the first set of outcome measures (pre-signal), 4) the first set of manipulation checks, 5) the attention checks, 6) the signal portion of the vignette, 7) the second set of outcome measures (post-signal), 8) the second set of manipulation checks, 9) a set of demographic questions, and 10) an open feedback prompt. See Appendix 10 for the complete survey.
 
 ### Outcome measures
 
@@ -277,7 +277,7 @@ We also fit interaction models for the same outcome variables post-signal, with 
 
 # Results
 
-Our total sample size was $N = 1878$. After removal of participants who either did not complete the study or who failed our pre-registered attention checks, our sample size was reduced to $N = `r nrow(signalingdata2018)`$. A further `r sum(signalingdata2018$exclusionopt1)` participants were removed either because they shared an IP address with more than 5 other participants, and were therefore suspected of being a single person, or who finished the survey in less than 215 seconds (the shortest time we were able to complete the survey ourselves) and gave a short, perfunctory response to a free-response item. All such participants were removed prior to any further anayses of the data. Basic demographic information on the remaining $N = `r sum(!signalingdata2018$exclusionopt1)`$ participants (Male = `r sum(d0$Sex == 'Male', na.rm=T)`, Female = `r sum(d0$Sex == 'Female', na.rm=T)`, unspecified = `r sum(is.na(d0$Sex))`) is in Table X. For the number of participants from each US State, see Figure SX.
+Our total sample size was $N = 1878$. After removal of participants who either did not complete the study or who failed our pre-registered attention checks, our sample size was reduced to $N = `r nrow(signalingdata2018)`$. A further `r sum(signalingdata2018$exclusionopt1)` participants were removed either because they shared an IP address with more than 5 other participants, and were therefore suspected of being a single person, or who finished the survey in less than 215 seconds (the shortest time we were able to complete the survey ourselves) and gave a short, perfunctory response to a free-response item. All such participants were removed prior to any further anayses of the data. Basic demographic information on the remaining $N = `r sum(!signalingdata2018$exclusionopt1)`$ participants (Male = `r sum(d0$Sex == 'Male', na.rm=T)`, Female = `r sum(d0$Sex == 'Female', na.rm=T)`, unspecified = `r sum(is.na(d0$Sex))`) is in Table X. For the number of participants from each US State, see Appendix 1.
 
 ```{r summarystats1}
 
@@ -345,7 +345,7 @@ ggsave("Figures/Figure2.pdf", biplotT1, width = 9, height = 6)
 
 We then confirmed that our T1 manipulations had the predicted effect on these outcome variables by fitting a linear regression model of PC1 as a function of the conflict and information conditions. As predicted, PC1 was higher (i.e., more positive toward the sister) in the support vs. conflict condition, and PC1 was also higher in the honest vs. private vs. cheating conditions. See Figure 3 and Table 3.
 
-```{r manipulations, fig.cap="Figure 3. Manipulation checks: the effects of conflict and information conditions on reactions to helping the sister."}
+```{r manipulations, fig.cap="Figure 3. Manipulation checks: the effects of conflict and information conditions on reactions to helping the sister. See Appendix 3 for regression table."}
 pT1a + pT1b
 ggsave("Figures/Figure3.pdf", pT1a + pT1b, width = 9, height = 6)
 ```
@@ -374,7 +374,7 @@ dev.off()
 
 In addition to allowing us to confirm that the signals worked as designed, this question also allows for the examination of how the signals affected one's perception of the sister's current state and what baseline assumptions were being made in the control condition. Of particular interest is that those in the control condition often came in with the assumption that the sister was sad, scared, depressed and distressed despite not seeing a signal in the second portion of the vignette, with each of these option being checked by at least half of the participants.
 
-To better understand which combinations of responses were most meaningufl, we also ran a PCA on all the variables that recorded if participants percieved the imagined sister to be in the emotional states listed above. PC1 seems to capture perceptions of sadness, fear, depression, and distress (Figure 5), while PC2 is heavily influenced by perceptions of mental illness (Figure 6). See appendix x for the loadings plot and biplot. 
+To better understand which combinations of responses were most meaningufl, we also ran a PCA on all the variables that recorded if participants percieved the imagined sister to be in the emotional states listed above. PC1 seems to capture perceptions of sadness, fear, depression, and distress (Figure 5), while PC2 is heavily influenced by perceptions of mental illness (Figure 6). See Appendix 4 for the loadings plot and biplot. 
 
 ```{r epc1, fig.cap= "Figure 5. Boxplot showing the loadings on PC1 for each of the signals for our second PCA looking at perceptions of the sister's emotional state."}
 epc1
@@ -394,7 +394,7 @@ Our predicted main effects of signals were:
 > We predict that stronger signals  will result in higher levels of both emotional and instrumental social support towards the signaler. Specifically,  we predict that the signals have the following rank order form low to high: 
 no signal (control), verbal request, sad face, sad face with crying, depression, depression with display of suicidal ideation, and suicide attempt. We also predict that anger will have a positive impact on helping with a similar magnitude to the depression condition.
 
-This prediction was not upheld. The Control condition (no signal) was ranked relatively high rather than the lowest, Suicide attempt was ranked relatively low rather than the highest, and Anger was consistently ranked lower than Depression. In partial support, however, Depression was consistently higher than Crying, which was consistently higher than Verbal request. See Figure 7.
+This prediction was not upheld. The Control condition (no signal) was ranked relatively high rather than the lowest, Suicide attempt was ranked relatively low rather than the highest, and Anger was consistently ranked lower than Depression. In partial support, however, Depression was consistently higher than Crying, which was consistently higher than Verbal request. See Figure 7 and Appendix 5.
 
 ```{r T2signaleffects, fig.cap="Figure 7. The effect of the signal manipulations on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) participants' perception of the sister's need for money, and (D) the effect of the signal on PC1 of all the outcome variables at T2, controlling for t1. Effects are averaged across all time 1 conditions."}
 (pT2comfort + pT2lend) / (pT2need + pT2pc1)
@@ -413,7 +413,7 @@ Our predicted interactions of signals with private information were:
 >
 > We also predict that when the most severe signals, i.e., depression and suicidality,  are paired with information that the character in the vignette is likely to be lying, responses will be more aversive than when the signal is weaker.
 
-Like with the main effects of signal type, we fit linear models for our four outcome variables: (1) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1, (2) the likelihood of lending the sister money, (3) PC1 of all the outcome variables at T2 controlling for PC1 at T1, and (4) participants' perception of the sister's need for money. Our prediction was only supported when looking at our model with the amount of money participants were comfortable lending at T2 (controlling for T1) ($p = `r signif(int1sig['signal2:p_info', 'Pr(>F)'], 2)`$. See Figure 8 for effects plot and Appendix 3 for the corresponding ANOVA tables.
+Like with the main effects of signal type, we fit linear models for our four outcome variables: (1) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1, (2) the likelihood of lending the sister money, (3) PC1 of all the outcome variables at T2 controlling for PC1 at T1, and (4) participants' perception of the sister's need for money. Our prediction was only supported when looking at our model with the amount of money participants were comfortable lending at T2 (controlling for T1) ($p = `r signif(int1sig['signal2:p_info', 'Pr(>F)'], 2)`$. See Figure 8 for effects plot and Appendix 6 for the corresponding ANOVA tables.
 
 ```{r pinfoInteractions, fig.cap="Figure 8. Signal and information interactions. The effect of the signal, information interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
 p_pinfoInteractions <- (p_comfort_signal_pinfo$plot + p_lend_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_pinfo$plot + p_money_signal_pinfo$plot + scale_y_continuous(limits = c(-40, 20)))
@@ -429,7 +429,7 @@ Our predicted interactions of signals with conflict were:
 
 > We predict the coefficient for signal strength to increase in the conflict condition than in the no conflict condition.
 
-We also fit linear models for the same outcome variables to examine test our hypothesized interaction. Unlike the predicted signal and information interactions, 3 of the 4 models showed evidence of interactions with the model for change in likelihood of lending T2 being marginally significant ($p = `r signif(int2sig['signal2:conflict', 'Pr(>F)'], 2)`$). See Figure 9 for effects plot and Appendix 4 for the corresponding ANOVA tables.
+We also fit linear models for the same outcome variables to examine test the hypothesized signal by conflict interaction. Unlike the predicted signal and information interactions, 3 of the 4 models showed evidence of interactions with the model for change in likelihood of lending T2 being marginally significant ($p = `r signif(int2sig['signal2:conflict', 'Pr(>F)'], 2)`$). See Figure 9 for effects plot and Appendix 7 for the corresponding ANOVA tables.
 
 ```{r conflictInteractions, fig.cap="Figure 9. Signal and conflict interactions. The effect of the signal, conflict interaction on changes in (A) the amount of money the participant is comfortable lending the sister at T2, controlling for the amount at T1 (dotted line indicates mean amount at T1), (B) the likelihood of lending the sister money, (C) PC1 of all the outcome variables at T2 controlling for T1, and (D) participants' perception of the sister's need for money.  Effects are averaged across all time 1 conditions."}
 p_conflictInteractions <- (p_comfort_signal_conflict$plot + p_lend_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))/(p_pc1_signal_conflict$plot + p_money_signal_conflict$plot + scale_y_continuous(limits = c(-40, 20)))
@@ -439,7 +439,7 @@ p_conflictInteractions
 ggsave("Figures/Figure9.pdf", p_conflictInteractions, width = 9, height = 9)
 ```
 
-See Appendix 5 for a full overview of the full 2x3 interaction with change in perceived need at time 2 as the outcome variable.
+See Appendix 8 for a full overview of the full 2x3 interaction with change in perceived need at time 2 as the outcome variable.
 
 ## Exploratory analyses
 
@@ -494,9 +494,9 @@ plot(mediation_model)
 dev.off()
 ```
 
-In the model comparing depression to crying, the direct effect of the depression signal was to decrease the likelihood of lending money by<!-- `r signif(mediation_model2$tau.coef, 3)` --> points relative to a verbal request, while the mediated effect increased the liklihood of lending money by xxxx points.
+In the model comparing depression to crying, the direct effect of the depression signal was to decrease the likelihood of lending money by `r signif(mediation_model2$z.avg * -1, 3)` points relative to a verbal request, while the mediated effect increased the liklihood of lending money by `r signif(mediation_model2$d.avg, 3)` points. The total effect of depresion relative to crying was an increase of `r signif(mediation_model2$tau.coef, 3)` points.
 
-Lastly, in the model comparing depression to the control, the direct effect of the depression signal was to decrease the likelihood of lending money by <!--`r signif(mediation_model2$tau.coef, 3)` --> points relative to a verbal request, while the mediated effect increased the liklihood of lending money by xxxx points.
+Lastly, in the model comparing depression to the control, the direct effect of the depression signal was to decrease the likelihood of lending money by `r signif(mediation_model3$z.avg * -1, 3)` points relative to a verbal request, while the mediated effect increased the liklihood of lending money by `r signif(mediation_model3$d.avg, 3)` points. The total effect of depresion relative to the control was an increase of `r signif(mediation_model3$tau.coef, 3)` points.
 
 Unlike the depression and verbal request model, the proportion of the relationship that was mediated by changes to perception of need was not reported for the follwoing models due to the changes in sign between the direct and mediated effects making such estimates meaningless [@HayesRockwood2017]
 
@@ -536,7 +536,7 @@ The final area where our main effects predictions were not borne out regarded th
 
 ## Limitations
 
-The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for any experimental design involving depression and suicide. Although this may have affected any part of this study, it likely had the largest impact with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as they were designed to due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. This being said, signal type interacted with both the conflict and information conditions had no effect on how difficult participants found it to put themselves in the scenarios presented to them, with the means and 95% confidence intervals being similar for each signal (Appendix 7). 
+The key limitation of this study is its lack of ecological validity, something which had to be sacrificed for any experimental design involving depression and suicide. Although this may have affected any part of this study, it likely had the largest impact with the signal manipulation. Unlike the conflict and private information manipulations, which appeared to work based on our manipulation checks, there is no way to evaluate if the signals worked as they were designed to due to our lack of understanding on how they relate to the responses of others, something which this study was designed to address. This being said, signal type interacted with both the conflict and information conditions had no effect on how difficult participants found it to put themselves in the scenarios presented to them, with the means and 95% confidence intervals being similar for each signal (Appendix 9). 
 
 Although this seems to be evidence in favor of our signal manipulations not biasing our results due to differences in one’s ability to consciously imagine the situations presented, we should not expect such conscious appraisals to have access to the same information that the systems underlying responses to the proposed signals in the real-world use [@NisbettWilson1977; @Nosek2007]. Therefore, despite not differing much in terms of a conscious disconnect from the study, it is likely a safe assumption that certain signals came across better in vignette form than others and biased our results through the nonconscious inferences of participants. 
 
@@ -577,7 +577,7 @@ kable(
   )
 ```
 
-## Appendix ??
+## Appendix 3
 
 ```{r, mT1manipulationSummary}
 
@@ -586,157 +586,7 @@ kable(tidy(mT1manipulation), digits = 2, caption = 'Coefficients of the linear r
 kable(glance(mT1manipulation), caption = 'Table showing additional summary statistics for the model.')
 ```
 
-## Appendix ??
-
-### ??A Amount comfortable lending T2 (controlling for T1)
-
-```{r}
-kable(tidy(mT2comfort), digits = 2, caption = 'Coefficients of the linear regression model of the amount of money comfortable lending T2 (controlling for T1) as a function of signal manipulation.')
-
-kable(glance(mT2comfort), caption = 'Table showing additional summary statistics for the model.')
-```
-
-### ??B Change in likelihood of lending money T2
-
-```{r}
-kable(tidy(mT2lend), digits = 2, caption = 'Coefficients of the linear regression model of the likelihood participants would lend the money at T2 as a function of signal manipulation.')
-
-kable(glance(mT2lend), caption = 'Table showing additional summary statistics for the model.')
-```
-
-### ??C Change in percieved need T2
-
-```{r}
-kable(tidy(mT2need), digits = 2, caption = 'Coefficients of the linear regression model of change in percieved need T2 as a function of signal manipulation.')
-
-kable(glance(mT2need), caption = 'Table showing additional summary statistics for the model.')
-```
-
-### ??D PC1 T2 (Controlling for PC1 at T1)
-
-```{r}
-kable(tidy(mT2pc1), digits = 2, caption = 'Coefficients of the linear regression model of PC1 T2 (controlling for T1) as a function of signal manipulation.')
-
-kable(glance(mT2pc1), caption = 'Table showing additional summary statistics for the model.')
-```
-
-Signal main effects
-
-## Appendix 3
-
-Regression statistics and Anovas of our linear regressions for our four outcome variables as a function of signaling condition, information, and their interaction.
-
-### 3A Amount comfortable lending T2 (controlling for T1)
-
-```{r}
-kable(tidy(p_comfort_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of amount comfortable lending as a function of signaling condition, information, and their interaction.')
-
-kable(glance(p_comfort_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
-
-```
-
-### 3B Change in likelihood of lending money T2
-
-```{r}
-
-kable(tidy(p_lend_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of likelihood of lending as a function of signaling condition, information, and their interaction.')
-
-kable(glance(p_lend_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_lend_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
-
-
-```
-
-### 3C PC1 T2 (Controlling for PC1 at T1)
-
-```{r}
-kable(tidy(p_pc1_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of PC1 as a function of signaling condition, information, and their interaction, controlling for T1.')
-
-kable(glance(p_pc1_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_pc1_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
-
-
-```
-
-### 3D Change in percieved need T2
-
-```{r}
-kable(tidy(p_money_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of perceived need of money as a function of signaling condition, information, and their interaction.')
-
-kable(glance(p_money_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_money_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
-
-
-```
-
 ## Appendix 4
-
-Regression statistics and Anovas of our linear regressions for our four outcome variables as a function of signaling condition, conflict, and their interaction.
-
-### 4A Amount comfortable lending T2 (controlling for T1)
-
-```{r}
-kable(tidy(p_comfort_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of amount comfortable lending as a function of signaling condition, information, and their interaction.')
-
-kable(glance(p_comfort_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_comfort_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
-
-```
-
-### 4B Change in likelihood of lending money
-
-```{r}
-kable(tidy(p_lend_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of likelihood of lending as a function of signaling condition, information, and their interaction.')
-
-kable(glance(p_lend_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_lend_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
-
-
-```
-
-### 4C PC1 T2 (Controlling for PC1 at T1)
-
-```{r}
-kable(tidy(p_pc1_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of PC1 as a function of signaling condition, information, and their interaction.')
-
-kable(glance(p_pc1_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_pc1_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
-
-
-```
-
-### 4D Change in percieved need
-
-```{r}
-kable(tidy(p_money_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of perceived need of money as a function of signaling condition, information, and their interaction.')
-
-kable(glance(p_money_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
-
-kable(tidy(Anova(p_money_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with percieved need of money as the outcome variable.')
-```
-
-
-
-
-
-## Appendix 5
-
-```{r Full Interaction Overview, fig.cap= "Effects plot showing the effects of each manipulation on the change in the perceived need of the sister at time 2. The y-axis is ordered based on our predictions, with signals expected to result in more support as one moves from bottom to top."}
-# plot(allEffects(full_int_overview2))
-# Plot_full_int
-p_overview
-ggsave("Figures/Appendix5.pdf", p_overview, width = 9, height = 6)
-```
-
-## Appendix 6
 
 ```{r emotionPCAloadings, fig.cap= "Loadings plot showing how each of the variables included in our sister's emotions PCA load on the first three principle components."}
 pca_loadings_plot(Epca)#, components = 1:2)
@@ -747,16 +597,162 @@ ggsave("Figures/Appendix6.pdf", pca_loadings_plot(Epca), width = 9, height = 6)
 emotions_biplot
 ```
 
+## Appendix 5
+
+Regression statistics and ANOVAs of our linear regressions for our four outcome variables as a function of signaling condition.
+
+### 5A Amount comfortable lending T2 (controlling for T1)
+
+```{r signalA}
+kable(tidy(mT2comfort), digits = 2, caption = 'Coefficients of the linear regression model of the amount of money comfortable lending T2 (controlling for T1) as a function of signal manipulation.')
+
+kable(glance(mT2comfort), caption = 'Table showing additional summary statistics for the model.')
+```
+
+### 5B Change in likelihood of lending money T2
+
+```{r signalB}
+kable(tidy(mT2lend), digits = 2, caption = 'Coefficients of the linear regression model of the change in likelihood participants would lend the money at T2 as a function of signal manipulation.')
+
+kable(glance(mT2lend), caption = 'Table showing additional summary statistics for the model.')
+```
+
+### 5C Change in percieved need T2
+
+```{r signalC}
+kable(tidy(mT2need), digits = 2, caption = 'Coefficients of the linear regression model of change in percieved need T2 as a function of signal manipulation.')
+
+kable(glance(mT2need), caption = 'Table showing additional summary statistics for the model.')
+```
+
+### 5D PC1 T2 (Controlling for PC1 at T1)
+
+```{r signalD}
+kable(tidy(mT2pc1), digits = 2, caption = 'Coefficients of the linear regression model of PC1 T2 (controlling for T1) as a function of signal manipulation.')
+
+kable(glance(mT2pc1), caption = 'Table showing additional summary statistics for the model.')
+```
+
+## Appendix 6
+
+Regression statistics and ANOVAs of our linear regressions for our four outcome variables as a function of signaling condition, information, and their interaction.
+
+### 6A Amount comfortable lending T2 (controlling for T1)
+
+```{r signalinfA}
+kable(tidy(p_comfort_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of amount comfortable lending T2 (controlling for T1) as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_comfort_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_comfort_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
+
+```
+
+### 6B Change in likelihood of lending money T2
+
+```{r signalinfB}
+
+kable(tidy(p_lend_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of change in likelihood of lending as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_lend_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_lend_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
+
+
+```
+
+### 6C PC1 T2 (Controlling for PC1 at T1)
+
+```{r signalinfC}
+kable(tidy(p_pc1_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of PC1 as a function of signaling condition, information, and their interaction, controlling for T1.')
+
+kable(glance(p_pc1_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_pc1_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
+
+
+```
+
+### 6D Change in percieved need T2
+
+```{r signalinfD}
+kable(tidy(p_money_signal_pinfo$model), digits = 2, caption = 'Coefficients of a linear regression model of change in perceived need of money as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_money_signal_pinfo$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_money_signal_pinfo$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in percieved need of money as the outcome variable.')
+
+
+```
+
 ## Appendix 7
 
-```{r ease of putting oneself in the scenario, fig.cap= "How easy participants percieved imagining themselves in this situation based on manipulation seen. (A) signal by information. (B) signal by conflict. Higher values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
+Regression statistics and ANOVAs of our linear regressions for our four outcome variables as a function of signaling condition, conflict, and their interaction.
+
+### 7A Amount comfortable lending T2 (controlling for T1)
+
+```{r signalconfA}
+kable(tidy(p_comfort_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of amount comfortable lending (controlling for T1) as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_comfort_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_comfort_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with amount comfortable lending T2 (controlling for T1) as the outcome variable.')
+
+```
+
+### 7B Change in likelihood of lending money
+
+```{r signalconfB}
+kable(tidy(p_lend_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of change in likelihood of lending as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_lend_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_lend_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in likelihood of lending T2 as the outcome variable.')
+
+
+```
+
+### 7C PC1 T2 (Controlling for PC1 at T1)
+
+```{r signalconfC}
+kable(tidy(p_pc1_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of PC1 T2 (controlling for T1) as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_pc1_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_pc1_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with PC1 as the outcome variable, controlling for t1.')
+
+
+```
+
+### 7D Change in percieved need
+
+```{r signalconfD}
+kable(tidy(p_money_signal_conflict$model), digits = 2, caption = 'Coefficients of a linear regression model of change in perceived need of money as a function of signaling condition, information, and their interaction.')
+
+kable(glance(p_money_signal_conflict$model), caption = 'Table showing additional summary statistics for the model.')
+
+kable(tidy(Anova(p_money_signal_conflict$model, type = 3)), digits = 1, caption = 'ANOVA of model with change in percieved need of money as the outcome variable.')
+```
+
+## Appendix 8
+
+```{r Full Interaction Overview, fig.cap= "Effects plots showing changes in perceived need from T1 to T2 as a function of the interaction between the information and conflict manipulations. The y-axis is ordered based on our predictions, with signals expected to result in more support as one moves from bottom to top."}
+# plot(allEffects(full_int_overview2))
+# Plot_full_int
+p_overview
+ggsave("Figures/Appendix5.pdf", p_overview, width = 9, height = 6)
+```
+
+## Appendix 9
+
+```{r ease of putting oneself in the scenario, fig.cap= "Effects plot showing how easily participants percieved imagining themselves in this situation based on manipulation seen as a function of: (A) signal by information, and (B) signal by conflict. Higher values indicate greater ease (0 = Extremely difficult; 100 = Extremely easy)." }
 p_ease$plot$layers[[3]] <- NULL
 p_ease2$plot$layers[[3]] <- NULL
 p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank())
 ggsave("Figures/Appendix7.pdf", p_ease$plot + p_ease2$plot + theme(axis.text.y=element_blank()), width = 9, height = 6)
 ```
 
-## Appendix 8
+## Appendix 10
 
 Survey
 
